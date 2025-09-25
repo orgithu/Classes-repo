@@ -1,0 +1,234 @@
+<!doctype html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<style>
+		* {
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			box-sizing: border-box;
+		}
+		body {
+			background-color: #fff;
+			font-size: 14px;
+			margin: 0;
+			font-family: Arial;
+		}
+		a {
+			text-decoration: none;
+		}
+		.on_mobile {
+			display: none;
+		}
+		.container {
+			width: 1000px;
+			display: flex;
+			flex-wrap: wrap;
+		}
+		#header {
+			background-color: #c00;
+			color: #fff;
+			font-family: "Times New Roman", Times, serif;
+		}
+		#header a {
+			color: #fff;
+			font-size: 1.3em;
+			text-transform: uppercase;
+		}
+		#header h1 {
+			padding-left: 10px;
+		}
+		#header span {
+			display: block;
+			font-size: 0.42em;
+			font-weight: normal;
+		}
+		.menu {
+			margin: 0;
+			padding: 0 0 0 10px;
+			overflow: hidden;
+		}
+		.menu li {
+			float: left;
+			list-style: none;
+			padding: 10px 20px;
+		}
+		#nav {
+			background: #b00;
+			border-bottom: 5px solid #ddd;
+		}
+		#nav li {
+			color: white;
+		}
+		#nav li:hover {
+			background-color: #a00;
+		}
+		#nav li.active {
+			color: #b00;
+			background-color: #ddd;
+		}
+		#left {
+      flex: 1 1 25%;
+      padding: 10px 5px 5px;
+    }
+		#right {
+			flex: 1 1 25%;
+      padding: 10px 5px 5px;
+		}
+		#main {
+			flex: 2 1 50%;
+      padding: 10px 5px 5px;
+		}
+		#left > div,
+		#right > div {
+			height: 250px;
+			margin-bottom: 10px;
+		}
+		#widget_1 { background-color: #ccc }
+		#widget_2 { background-color: #bbc }
+		#widget_3 { background-color: #aac }
+		#widget_4 { background-color: #99c }
+		#widget_5 { background-color: #88c }
+		#widget_6 { background-color: #cbb }
+		#widget_7 { background-color: #caa }
+		#widget_8 { background-color: #c99 }
+		#widget_9 { background-color: #c88 }
+
+		#content {
+			background-color: #eee;
+			padding: 10px;
+			overflow: hidden;
+		}
+		.post {
+			padding: 10px;
+			overflow: hidden;
+			border-bottom: 1px solid #ccc;
+		}
+		.post .media {
+			width: 100%;
+			height: 200px;
+			background-color: #ccc;
+			line-height: 200px;
+			color: #bbb;
+			text-align: center;
+			font-size: 2em;
+		}
+		.post h3 { margin: 10px 0; }
+		.post p { margin: 0; }
+		#footer {
+			background-color: #333;
+			color: #ccc;
+			text-align: center;
+		}
+		#footer .menu {
+			border-bottom: 1px solid #999;
+		}
+    @media (max-width: 999px) and (min-width: 800px) {
+      .container {
+        width: 800px;
+      }
+    }
+    @media (max-width: 799px) and (min-width: 721px) {
+      .container {
+        width: 720px;
+      }
+      #left {
+        display: none;
+      }
+    }
+     @media (max-width: 720px) {
+      .container {
+        width: 100%;
+      }
+    }
+	</style>
+</head>
+<body>
+	<div id="header">
+		<div class="container">
+			<h1>
+				<a href="#">Мэдээлэл <span>Мэдээ мэдээллийн сайт</span></a>
+			</h1>
+		</div>
+	</div>
+	<div id="nav">
+		<div class="container">
+			<ul class="menu">
+				<li class="on_mobile">Цэс</li>
+				<li class="active">Эхлэл</li>
+				<li>Улс төр</li>
+				<li>Эдийн засаг</li>
+				<li>Нийгэм</li>
+				<li>Дэлхий</li>
+				<li>Спорт</li>
+				<li>Соёл урлаг</li>
+				<li>Дэлхий</li>
+			</ul>
+		</div>
+	</div>
+	<div class="container">
+		<div id="left">
+			<div id="widget_1"></div>
+			<div id="widget_2"></div>
+			<div id="widget_3"></div>
+			<div id="widget_4"></div>
+			<div id="widget_5"></div>
+		</div>
+		<div id="main">
+			<div id="content">
+				<div class="post">
+					<div class="media">Зураг</div>
+					<h3>Импортыг орлох бүтээгдэхүүн үйлдвэрлэв</h3>
+					<p>Импортыг орлох үндэсний бүтээгдэхүүн болох хуурай сүүг
+					эх орондоо хийж эхэллээ</p>
+				</div>
+				<div class="post">
+					<div class="media">Зураг</div>
+					<h3>Импортыг орлох бүтээгдэхүүн үйлдвэрлэв</h3>
+					<p>Импортыг орлох үндэсний бүтээгдэхүүн болох хуурай сүүг
+					эх орондоо хийж эхэллээ</p>
+				</div>
+				<div class="post">
+					<div class="media">Зураг</div>
+					<h3>Импортыг орлох бүтээгдэхүүн үйлдвэрлэв</h3>
+					<p>Импортыг орлох үндэсний бүтээгдэхүүн болох хуурай сүүг
+					эх орондоо хийж эхэллээ</p>
+				</div>
+				<div class="post">
+					<div class="media">Зураг</div>
+					<h3>Импортыг орлох бүтээгдэхүүн үйлдвэрлэв</h3>
+					<p>Импортыг орлох үндэсний бүтээгдэхүүн болох хуурай сүүг
+					эх орондоо хийж эхэллээ</p>
+				</div>
+				<div class="post">
+					<div class="media">Зураг</div>
+					<h3>Импортыг орлох бүтээгдэхүүн үйлдвэрлэв</h3>
+					<p>Импортыг орлох үндэсний бүтээгдэхүүн болох хуурай сүүг
+					эх орондоо хийж эхэллээ</p>
+				</div>
+			</div>
+		</div>
+		<div id="right">
+			<div id="widget_6"></div>
+			<div id="widget_7"></div>
+			<div id="widget_8"></div>
+			<div id="widget_9"></div>
+		</div>
+	</div>
+	<div id="footer">
+		<div class="container">
+			<ul class="menu">
+				<li>Эхлэл</li>
+				<li>Улс төр</li>
+				<li>Эдийн засаг</li>
+				<li>Нийгэм</li>
+				<li>Дэлхий</li>
+				<li>Спорт</li>
+				<li>Соёл урлаг</li>
+				<li>Дэлхий</li>
+			</ul>
+			<p>Зохиогчийн эрх хуулиар хамгаалагдсан. Мэдээлэл хуулбарлах хориотой</p>
+		</div>
+	</div>
+</body>
+</html>

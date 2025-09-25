@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  	<meta charset="UTF-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  	<title>Мэдээний сайт</title>
+  	<style>
+      /*Header*/
+      #header {
+        background-color: #c00;
+        color: #fff;
+        font-family: 'Times New Roman', Times, serif;
+        padding: 20px;
+      } 
+      #header a {
+        color: #fff;
+      }
+      #header h1 {
+        padding-left: 10px;
+      }
+      #header span {
+        display: block;
+        font-size: 0.42em;
+        font-weight: normal;
+      }
+      /*nav*/
+      #nav {
+        background: #611d1d;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      #nav a {
+        color: white;
+        text-decoration: none;
+        padding: 10px 15px;
+        display: block;
+      }
+      #nav a:hover {
+        background-color: #a00;
+      }
+      #nav a:active {
+        color: #b00;
+        background-color: #ddd;
+      }
+      /* Layout container */
+      .container {
+        display: flex;
+        gap: 10px;
+        padding: 10px;
+      }
+      /* Sidebar + content */
+      .sidebar, .rightbar {
+        flex: 1;
+        background: #c9c9c9;
+        min-height: 200px;
+      }
+      .content {
+        flex: 2;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+      .article {
+        display: flex;
+        background: #eee;
+        padding: 10px;
+        gap: 10px;
+      }
+      /*article = post
+      img = media*/
+      .article .img {
+        flex: 1;
+        background: #b0b0b0;
+        display: flex;
+        align-items: center;
+      }
+      .article .text {
+        flex: 2;
+      }
+      .on_mobile {
+        display: none;
+      }
+      
+      * {
+        box-sizing: border-box;
+      }
+    	body {
+			  background-color: #fff;
+        font-size: 14px;
+      	margin: 0;
+      	font-family: Arial, sans-serif;
+    	}
+      a {
+        text-decoration: none;
+      }
+      #footer {
+        background: #333;
+        color: white;
+        text-align: center;
+        padding: 15px;
+        margin-top: 20px;
+      }
+    /* --- Responsive breakpoints --- */
+    /* Tablet (2-column) */
+    @media (max-width: 1024px) {
+      .container {
+        flex-direction: row;
+      }
+      .sidebar {
+        display: none;
+      }
+    }
+    /* Mobile (1-column stacked) */
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+      }
+      .container {
+        flex-direction: column;
+      }
+      .rightbar {
+        display: none;
+      }
+      .article {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="header">
+    <div class="container">
+      <h1>
+        <a href="#">Мэдээлэл <span>Мэдээ мэдээллийн сайт</span></a>
+      </h1>
+    </div>
+  </div>
+
+  <div id="nav">
+    <a href="#">Эхлэл</a>
+    <a href="#">Улс төр</a>
+    <a href="#">Эдийн засаг</a>
+    <a href="#">Нийгэм</a>
+    <a href="#">Дэлхий</a>
+    <a href="#">Спорт</a>
+    <a href="#">Соёл урлаг</a>
+    <a href="#">Дотоод</a>
+  </div>
+
+  <div class="container">
+    <aside class="sidebar">Зүүн талын блок</aside>
+
+    <main class="content">
+      <div class="article">
+        <div class="img">Зураг</div>
+        <div class="text">
+          <h3>Импортын орлох бүтээгдэхүүн үйлдвэрлэв</h3>
+          <p>Импортын орлох бүтээгдэхүүн болох хуурай сүүг эх орондоо хийж эхэллээ</p>
+        </div>
+      </div>
+
+      <div class="article">
+        <div class="img">Зураг</div>
+        <div class="text">
+          <h3>Импортын орлох бүтээгдэхүүн үйлдвэрлэв</h3>
+          <p>Импортын орлох бүтээгдэхүүн болох хуурай сүүг эх орондоо хийж эхэллээ</p>
+        </div>
+      </div>
+    </main>
+
+    <aside class="rightbar">Баруун талын блок</aside>
+  </div>
+
+  <div id="footer">
+    Зохиогчийн эрх хуулиар хамгаалагдсан. Мэдээлэл хуулбарлах хориотой
+  </div>
+
+</body>
+</html>
