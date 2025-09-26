@@ -30,7 +30,17 @@ public class MyChain extends Chain {
 			temp.add(i, this.get(i));
 		}
 		for(int i = 0; i < chain.size(); i++) {
-	        temp.add(i, chain.get(i));
+			Object element = chain.get(i);
+			Boolean exists = false;
+			for(int j = 0; j < this.size(); j++) {
+				if (temp.get(j).equals(element)) {
+					exists = true;
+					break;
+				}
+			}
+			if(!exists) {
+				temp.add(temp.size(), element);
+			}
 	    }
 		return temp;
 	}
@@ -86,8 +96,6 @@ public class MyChain extends Chain {
 	public static void main(String[] args) {
 	    MyChain x = new MyChain();
 	    MyChain x1 = new MyChain();
-	    MyChain intersectionObj = new MyChain();
-	    MyChain unionObj = new MyChain();
 	    Random random = new Random();
 	    Scanner scan = new Scanner(System.in);
 	    while (true) {
@@ -143,7 +151,8 @@ public class MyChain extends Chain {
 	                }
 	                break;
 	            case 7:
-	                System.out.println("to Array: " + java.util.Arrays.toString(x.toArray()));
+	            		Object[] xArray = x.toArray();
+	                System.out.println("to Array: " + java.util.Arrays.toString(xArray));
 	                break;
 	            case 8:
 	                System.out.println("a[n] to add to x");
@@ -160,10 +169,10 @@ public class MyChain extends Chain {
 	                System.out.println("The list is " + x);
 	                break;
 	            case 9:
-	                System.out.println("x union(x1): " + unionObj);
+	                System.out.println("x union(x1): " + x.union(x1));
 	                break;
 	            case 10:
-	                System.out.println("x intersection(x1): " + intersectionObj);
+	                System.out.println("x intersection(x1): " + x.intersection(x1));
 	                break;
 	            case 11:
 	                System.out.println("n for x1: ");
