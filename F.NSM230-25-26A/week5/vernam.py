@@ -23,22 +23,22 @@ def decrypt(ciphertext, key):
     return decrypted_text
 
 
-with open("C:/Others/Cryptograph/CryptoG/week5/plain.txt", "r") as f:
+with open("C:/Users/orgil/OneDrive/Documents/GitHub/Classes-repo/F.NSM230-25-26A/week5/plain.txt", "r") as f:
     plaintext = f.read()
 key = generate_key(len(plaintext))
 
 ciphertext = encrypt(plaintext, key)
 
-with open("C:/Others/Cryptograph/CryptoG/week5/vernam_cipher.txt", "w") as f:
+with open("C:/Users/orgil/OneDrive/Documents/GitHub/Classes-repo/F.NSM230-25-26A/week5/vernam_cipher.txt", "w") as f:
     f.write(ciphertext)
 
-with open("C:/Others/Cryptograph/CryptoG/week5/vernam_cipher.txt", "r") as f:
+with open("C:/Users/orgil/OneDrive/Documents/GitHub/Classes-repo/F.NSM230-25-26A/week5/vernam_cipher.txt", "r") as f:
     encrypted_data = f.read()
 
 decrypted_text = decrypt(encrypted_data, key)
 
-with open("C:/Others/Cryptograph/CryptoG/week5/vernam_decrypted.txt", "w") as f:
+with open("C:/Users/orgil/OneDrive/Documents/GitHub/Classes-repo/F.NSM230-25-26A/week5/vernam_decrypted.txt", "w") as f:
     f.write(decrypted_text)
 
-with open("C:/Others/Cryptograph/CryptoG/week5/vernam_key.txt", "w") as f:
+with open("C:/Users/orgil/OneDrive/Documents/GitHub/Classes-repo/F.NSM230-25-26A/week5/vernam_key.txt", "w") as f:
     f.write(key)

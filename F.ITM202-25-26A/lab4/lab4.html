@@ -1,181 +1,309 @@
-<!DOCTYPE html>
-<html lang="mn">
-<head>
-  	<meta charset="UTF-8">
-  	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-  	<title>Мэдээний сайт</title>
-  	<style>
-      /*Header*/
-      #header {
-        background-color: #c00;
-        color: #fff;
-        font-family: 'Times New Roman', Times, serif;
-        padding: 20px;
-      } 
-      #header a {
-        color: #fff;
-      }
-      #header h1 {
-        padding-left: 10px;
-      }
-      #header span {
-        display: block;
-        font-size: 0.42em;
-        font-weight: normal;
-      }
-      /*nav*/
-      #nav {
-        background: #611d1d;
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-      }
-      #nav a {
-        color: white;
-        text-decoration: none;
-        padding: 10px 15px;
-        display: block;
-      }
-      #nav a:hover {
-        background-color: #a00;
-      }
-      #nav a:active {
-        color: #b00;
-        background-color: #ddd;
-      }
-      /* Layout container */
-      .container {
-        display: flex;
-        gap: 10px;
-        padding: 10px;
-      }
-      /* Sidebar + content */
-      .sidebar, .rightbar {
-        flex: 1;
-        background: #c9c9c9;
-        min-height: 200px;
-      }
-      .content {
-        flex: 2;
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-      }
-      .article {
-        display: flex;
-        background: #eee;
-        padding: 10px;
-        gap: 10px;
-      }
-      /*article = post
-      img = media*/
-      .article .img {
-        flex: 1;
-        background: #b0b0b0;
-        display: flex;
-        align-items: center;
-      }
-      .article .text {
-        flex: 2;
-      }
-      .on_mobile {
-        display: none;
-      }
-      
-      * {
-        box-sizing: border-box;
-      }
-    	body {
-			  background-color: #fff;
-        font-size: 14px;
-      	margin: 0;
-      	font-family: Arial, sans-serif;
-    	}
-      a {
-        text-decoration: none;
-      }
-      #footer {
-        background: #333;
-        color: white;
-        text-align: center;
-        padding: 15px;
-        margin-top: 20px;
-      }
-    /* --- Responsive breakpoints --- */
-    /* Tablet (2-column) */
-    @media (max-width: 1024px) {
-      .container {
-        flex-direction: row;
-      }
-      .sidebar {
-        display: none;
-      }
-    }
-    /* Mobile (1-column stacked) */
-    @media (max-width: 768px) {
-      nav {
-        flex-direction: column;
-      }
-      .container {
-        flex-direction: column;
-      }
-      .rightbar {
-        display: none;
-      }
-      .article {
-        flex-direction: column;
-      }
-    }
-  </style>
-</head>
-<body>
-
-  <div id="header">
-    <div class="container">
-      <h1>
-        <a href="#">Мэдээлэл <span>Мэдээ мэдээллийн сайт</span></a>
-      </h1>
-    </div>
-  </div>
-
-  <div id="nav">
-    <a href="#">Эхлэл</a>
-    <a href="#">Улс төр</a>
-    <a href="#">Эдийн засаг</a>
-    <a href="#">Нийгэм</a>
-    <a href="#">Дэлхий</a>
-    <a href="#">Спорт</a>
-    <a href="#">Соёл урлаг</a>
-    <a href="#">Дотоод</a>
-  </div>
-
-  <div class="container">
-    <aside class="sidebar">Зүүн талын блок</aside>
-
-    <main class="content">
-      <div class="article">
-        <div class="img">Зураг</div>
-        <div class="text">
-          <h3>Импортын орлох бүтээгдэхүүн үйлдвэрлэв</h3>
-          <p>Импортын орлох бүтээгдэхүүн болох хуурай сүүг эх орондоо хийж эхэллээ</p>
-        </div>
-      </div>
-
-      <div class="article">
-        <div class="img">Зураг</div>
-        <div class="text">
-          <h3>Импортын орлох бүтээгдэхүүн үйлдвэрлэв</h3>
-          <p>Импортын орлох бүтээгдэхүүн болох хуурай сүүг эх орондоо хийж эхэллээ</p>
-        </div>
-      </div>
-    </main>
-
-    <aside class="rightbar">Баруун талын блок</aside>
-  </div>
-
-  <div id="footer">
-    Зохиогчийн эрх хуулиар хамгаалагдсан. Мэдээлэл хуулбарлах хориотой
-  </div>
-
-</body>
+<!doctype html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<style>
+			* {
+				-webkit-box-sizing: border-box;
+				-moz-box-sizing: border-box;
+				box-sizing: border-box;
+			}
+			body {
+				background-color: #fff;
+				font-size: 14px;
+				margin: 0;
+				font-family: Arial;
+			}
+			a {
+				text-decoration: none;
+			}
+			.on_mobile {
+				display: none;
+			}
+			.container {
+				max-width: 1000px;
+				width: 100%;
+				display: flex;
+				flex-wrap: wrap;
+				margin: 0 auto;
+			}
+			#header {
+				background-color: #c00;
+				color: #fff;
+				font-family: "Times New Roman", Times, serif;
+			}
+			#header a {
+				color: #fff;
+				font-size: 1.3em;
+				text-transform: uppercase;
+			}
+			#header h1 {
+				padding-left: 10px;
+			}
+			#header span {
+				display: block;
+				font-size: 0.42em;
+				font-weight: normal;
+			}
+			.menu {
+				margin: 0;
+				padding: 0 0 0 10px;
+				overflow: hidden;
+			}
+			.menu li {
+				float: left;
+				list-style: none;
+				padding: 10px 20px;
+			}
+			#nav {
+				background: #b00;
+				border-bottom: 5px solid #ddd;
+			}
+			#nav li {
+				color: white;
+			}
+			#nav li:hover {
+				background-color: #a00;
+			}
+			#nav li.active {
+				color: #b00;
+				background-color: #ddd;
+			}
+			#left {
+				flex: 1 1 25%;
+				padding: 10px 5px 5px;
+			}
+			#right {
+				flex: 1 1 25%;
+				padding: 10px 5px 5px;
+			}
+			#main {
+				flex: 2 1 50%;
+				padding: 10px 5px 5px;
+			}
+			#left > div,
+			#right > div {
+				height: 250px;
+				margin-bottom: 10px;
+			}
+			#widget_1 { background-color: #ccc; }
+			#widget_2 { background-color: #bbc; }
+			#widget_3 { background-color: #aac; }
+			#widget_4 { background-color: #99c; }
+			#widget_5 { background-color: #88c; }
+			#widget_6 { background-color: #cbb; }
+			#widget_7 { background-color: #caa; }
+			#widget_8 { background-color: #c99; }
+			#widget_9 { background-color: #c88; }
+			#content {
+				background-color: #eee;
+				padding: 10px;
+				overflow: hidden;
+			}
+			.post {
+				padding: 10px;
+				overflow: hidden;
+				border-bottom: 1px solid #ccc;
+			}
+			.post .media {
+				width: 100%;
+				height: 200px;
+				background-color: #ccc;
+				line-height: 200px;
+				color: #bbb;
+				text-align: center;
+				font-size: 2em;
+			}
+			.post h3 {
+				margin: 10px 0;
+			}
+			.post p {
+				margin: 0;
+			}
+			#footer {
+				background-color: #333;
+				color: #ccc;
+				text-align: center;
+			}
+			#footer .menu {
+				border-bottom: 1px solid #999;
+			}
+			#footer p {
+				width: 100%;
+				margin: 0;
+				text-align: center;
+			}
+			@media (max-width: 999px) and (min-width: 800px) {
+				.container {
+					width: 800px;
+				}
+			}
+			@media (max-width: 799px) and (min-width: 721px) {
+				.container {
+					width: 720px;
+				}
+				#left {
+					display: none;
+				}
+			}
+			@media (max-width: 720px) {
+				.container {
+					width: 100%;
+				}
+				body {
+					background-color: #eee;
+				}
+				#left,
+				#right {
+					display: none;
+				}
+				/* nav: show only the mobile label (first item) */
+				.menu li {
+					display: none;
+				}
+				.menu li.on_mobile {
+					display: block;
+				}
+				/* make each post a horizontal card: thumbnail left, text right
+				   using grid so the title and paragraph stack vertically */
+				.post {
+					display: grid;
+					grid-template-columns: 86px 1fr;
+					gap: 12px;
+					align-items: start;
+				}
+				/* thumbnail box becomes a fixed square */
+				.post .media {
+					width: 86px;
+					height: 86px;
+					color: #bbb;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					border: 1px solid #e0e0e0;
+					grid-column: 1;
+					grid-row: 1 / span 2;
+				}
+				.post h3 {
+					margin: 0 0 6px 0;
+					font-size: 1em;
+					line-height: 1.2;
+					grid-column: 2;
+				}
+				.post p {
+					margin: 0;
+					color: #666;
+					font-size: 0.9em;
+					line-height: 1.3;
+					grid-column: 2;
+				}
+				#content {
+					padding: 1px 1px;
+				}
+				#footer .container {
+					padding: 10px 6px;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div id="header">
+			<div class="container">
+				<h1>
+					<a href="#">Мэдээлэл <span>Мэдээ мэдээллийн сайт</span></a>
+				</h1>
+			</div>
+		</div>
+		<div id="nav">
+			<div class="container">
+				<ul class="menu">
+					<li class="on_mobile">Цэс</li>
+					<li class="active">Эхлэл</li>
+					<li>Улс төр</li>
+					<li>Эдийн засаг</li>
+					<li>Нийгэм</li>
+					<li>Дэлхий</li>
+					<li>Спорт</li>
+					<li>Соёл урлаг</li>
+					<li>Дэлхий</li>
+				</ul>
+			</div>
+		</div>
+		<div class="container">
+			<div id="left">
+				<div id="widget_1"></div>
+				<div id="widget_2"></div>
+				<div id="widget_3"></div>
+				<div id="widget_4"></div>
+				<div id="widget_5"></div>
+			</div>
+			<div id="main">
+				<div id="content">
+					<div class="post">
+						<div class="media">Зураг</div>
+						<h3>Импортыг орлох бүтээгдэхүүн үйлдвэрлэв</h3>
+						<p>
+							Импортыг орлох үндэсний бүтээгдэхүүн болох хуурай сүүг
+							эх орондоо хийж эхэллээ
+						</p>
+					</div>
+					<div class="post">
+						<div class="media">Зураг</div>
+						<h3>Импортыг орлох бүтээгдэхүүн үйлдвэрлэв</h3>
+						<p>
+							Импортыг орлох үндэсний бүтээгдэхүүн болох хуурай сүүг
+							эх орондоо хийж эхэллээ
+						</p>
+					</div>
+					<div class="post">
+						<div class="media">Зураг</div>
+						<h3>Импортыг орлох бүтээгдэхүүн үйлдвэрлэв</h3>
+						<p>
+							Импортыг орлох үндэсний бүтээгдэхүүн болох хуурай сүүг
+							эх орондоо хийж эхэллээ
+						</p>
+					</div>
+					<div class="post">
+						<div class="media">Зураг</div>
+						<h3>Импортыг орлох бүтээгдэхүүн үйлдвэрлэв</h3>
+						<p>
+							Импортыг орлох үндэсний бүтээгдэхүүн болох хуурай сүүг
+							эх орондоо хийж эхэллээ
+						</p>
+					</div>
+					<div class="post">
+						<div class="media">Зураг</div>
+						<h3>Импортыг орлох бүтээгдэхүүн үйлдвэрлэв</h3>
+						<p>
+							Импортыг орлох үндэсний бүтээгдэхүүн болох хуурай сүүг
+							эх орондоо хийж эхэллээ
+						</p>
+					</div>
+				</div>
+			</div>
+			<div id="right">
+				<div id="widget_1"></div>
+				<div id="widget_2"></div>
+				<div id="widget_6"></div>
+				<div id="widget_7"></div>
+				<div id="widget_8"></div>
+				<div id="widget_9"></div>
+			</div>
+		</div>
+		<div id="footer">
+			<div class="container">
+				<ul class="menu">
+					<li>Эхлэл</li>
+					<li>Улс төр</li>
+					<li>Эдийн засаг</li>
+					<li>Нийгэм</li>
+					<li>Дэлхий</li>
+					<li>Спорт</li>
+					<li>Соёл урлаг</li>
+					<li>Дэлхий</li>
+				</ul>
+				<p>Зохиогчийн эрх хуулиар хамгаалагдсан. Мэдээлэл хуулбарлах хориотой</p>
+			</div>
+		</div>
+	</body>
 </html>

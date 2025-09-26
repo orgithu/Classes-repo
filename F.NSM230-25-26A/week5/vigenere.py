@@ -34,36 +34,26 @@ def decrypt_vigenere(msg, key):
             decrypted_char = chr((ord(char) - ord(key[i]) + 26) % 26 + ord('a'))
         else:
             decrypted_char = char
-        decrypted_text.append(decrypted_char)
+        decrypted_text.append(decrypted_char) 
     return "".join(decrypted_text)
 
-# Example usage
-#text_to_encrypt = "Hello, World!"
-key = "eng"
-#print("key: ",generate_key(text_to_encrypt,key))
-#encrypted_text = encrypt_vigenere(text_to_encrypt, key)
-#print(f"Encrypted Text: {encrypted_text}")
-
-#decrypted_text = decrypt_vigenere(encrypted_text, key)
-#print(f"Decrypted Text: {decrypted_text}")
-
-#previous code was only support the upper case letters
-#this code can be apply on both
-with open("C:/Others/Cryptograph/CryptoG/week5/plain.txt", "r") as f:
+key = "cryptographyisfun"
+print("hellooworld")
+with open("C:/Users/orgil/OneDrive/Documents/GitHub/Classes-repo/F.NSM230-25-26A/week5/plain.txt", "r") as f:
     plaintext = f.read()
 
 ciphertext = encrypt_vigenere(plaintext, key)
 
-with open("C:/Others/Cryptograph/CryptoG/week5/vigenere_cipher.txt", "w") as f:
+with open("C:/Users/orgil/OneDrive/Documents/GitHub/Classes-repo/F.NSM230-25-26A/week5/vigenere_cipher.txt", "w") as f:
     f.write(ciphertext)
 
-with open("C:/Others/Cryptograph/CryptoG/week5/vigenere_cipher.txt", "r") as f:
+with open("C:/Users/orgil/OneDrive/Documents/GitHub/Classes-repo/F.NSM230-25-26A/week5/vigenere_cipher.txt", "r") as f:
     encrypted_data = f.read()
 
 decrypted_text = decrypt_vigenere(encrypted_data, key)
 
-with open("C:/Others/Cryptograph/CryptoG/week5/vigenere_decrypted.txt", "w") as f:
+with open("C:/Users/orgil/OneDrive/Documents/GitHub/Classes-repo/F.NSM230-25-26A/week5/vigenere_decrypted.txt", "w") as f:
     f.write(decrypted_text)
 
-with open("C:/Others/Cryptograph/CryptoG/week5/vigenere_key.txt", "w") as f:
+with open("C:/Users/orgil/OneDrive/Documents/GitHub/Classes-repo/F.NSM230-25-26A/week5/vigenere_key.txt", "w") as f:
     f.write(generate_key(plaintext, key))
