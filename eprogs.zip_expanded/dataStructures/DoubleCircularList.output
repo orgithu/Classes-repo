@@ -1,0 +1,21 @@
+Initial size is 0
+The list is empty
+List size is 9
+The list is [0, 1, 2, 3, 4, 5, 6, 7, 8]
+The index of 4 is 4
+The index of 3 is 3
+Element at 0 is 0
+Element at 3 is 3
+Element at 5 is 5
+Element at 6 is 6
+Element at 8 is 8
+Removed 0 the list is [1, 2, 3, 4, 5, 6, 7, 8]
+Removed 8 the list is [1, 2, 3, 4, 5, 6, 7]
+Removed 3 the list is [1, 2, 4, 5, 6, 7]
+Removed 5 the list is [1, 2, 4, 6, 7]
+The list is not empty
+List size is 5
+The list is 1 2 4 6 7 
+After appending 99, the list is [1, 2, 4, 6, 7, 99]
+After appending 6 to an empty list, the list is [6]
+List size is 1

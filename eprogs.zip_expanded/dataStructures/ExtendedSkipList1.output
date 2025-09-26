@@ -1,0 +1,28 @@
+The list is
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+removed min element 1
+removed max element 20
+removed min element 2
+removed max element 19
+removed min element 3
+removed max element 18
+removed min element 4
+removed max element 17
+removed min element 5
+removed max element 16
+removed min element 6
+removed max element 15
+removed min element 7
+removed max element 14
+removed min element 8
+removed max element 13
+removed min element 9
+removed max element 12
+removed min element 10
+removed max element 11
+removed min element null
+removed max element null
+The list is
+[]
+The list is
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]

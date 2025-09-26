@@ -1,0 +1,69 @@
+// Prim's method using a min heap
+
+/** find a min cost spanning tree using Prim's method
+  * @return false iff the weighted undirected graph is not connected
+  * @param t[0:n-2] has the min cost tree edges when done */
+public boolean prim(WeightedEdge [] t)
+{
+   verifyWeightedUndirected("kruskal");
+
+   int n = vertices();
+   boolean [] selected = new boolean [n + 1];
+           // selected[i] is true iff vertex i already in spanning tree
+   WeightedEdgeNode [] nearNbr = new WeightedEdgeNode [n + 1];
+           // nearNbr[i].vertex is nearest spanning tree neighbor of vertex i
+           // nearNbr[i].weight is distance to this nearest neighbor
+
+   // start with vertex 1 in the spanning tree
+   // initialize nearNbr and modified min heap of candidates
+   selected[1] = true;
+   ModifiedMinHeap h = new ModifiedMinHeap (n);
+   Enumeration ev = elements(1);  // vertices adjacent to vertex 1
+   while (ev.hasMoreElements())
+   {
+      WeightedEdgeNode we = (WeightedEdgeNode) ev.nextElement();
+      nearNbr[we.vertex] = new WeightedEdgeNode(1, we.weight);
+      h.put(we);
+   }
+
+   // select n-1 edges for spanning tree
+   for (int i = 0; i < n - 1; i++)
+   {
+      // get nearest unselected vertex
+      WeightedEdgeNode we = h.removeMin();
+      if (we == null)
+         // no unselected neighbor remains
+          return false;
+
+      // select we.vertex
+      t[i] = new WeightedEdge(we.vertex, nearNbr[we.vertex].vertex,
+                              we.weight);
+      selected[we.vertex] = true;
+
+      // update distances
+      ev = elements(we.vertex);
+      while (ev.hasMoreElements())
+      { 
+         WeightedEdgeNode w = (WeightedEdgeNode) ev.nextElement();
+         if (!selected[w.vertex])
+         {
+            if (nearNbr[w.vertex] == null)
+            {// w.vertex not in min heap
+               nearNbr[w.vertex] = new WeightedEdgeNode(we.vertex, w.weight);
+               h.put(w);
+            }
+            else
+               // w.vertex is in the min heap
+               if (nearNbr[w.vertex].weight.greaterThan(w.weight))
+               {// found a closer neighbor
+                  nearNbr[w.vertex].weight = w.weight;
+                  nearNbr[w.vertex].vertex = we.vertex;
+                  h.decreaseWeight(w);
+               }
+         }
+      } 
+   }   
+
+   // spanning tree found
+   return true;
+}

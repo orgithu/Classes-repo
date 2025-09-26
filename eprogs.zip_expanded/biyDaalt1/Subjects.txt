@@ -1,0 +1,2 @@
+subjectCode/subjectName/credit
+CS203/Ugugdliin butets/3.0

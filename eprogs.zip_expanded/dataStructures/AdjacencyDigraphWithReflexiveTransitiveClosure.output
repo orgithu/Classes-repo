@@ -1,0 +1,88 @@
+
+Enter number of vertices and edges
+enter edge 1
+enter edge 2
+enter edge 3
+enter edge 4
+enter edge 5
+enter edge 6
+enter edge 7
+enter edge 8
+
+The digraph is
+0 1 1 1 0 
+0 0 1 0 0 
+0 0 0 1 1 
+0 1 0 0 0 
+0 1 0 0 0 
+The reflexive transitive closure matrix is
+true true true true true 
+false true true true true 
+false true true true true 
+false true true true true 
+false true true true true 
+
+
+Enter number of vertices and edges
+enter edge 1
+enter edge 2
+enter edge 3
+enter edge 4
+enter edge 5
+enter edge 6
+enter edge 7
+enter edge 8
+
+The digraph is
+0 1 0 0 0 0 0 0 0 
+0 0 1 0 0 0 0 0 0 
+0 0 0 1 0 0 0 0 0 
+0 0 0 0 1 0 0 0 0 
+0 0 0 0 0 1 0 0 0 
+0 0 0 0 0 0 1 0 0 
+0 0 0 0 0 0 0 1 0 
+0 0 0 0 0 0 0 0 1 
+0 0 0 0 0 0 0 0 0 
+The reflexive transitive closure matrix is
+true true true true true true true true true 
+false true true true true true true true true 
+false false true true true true true true true 
+false false false true true true true true true 
+false false false false true true true true true 
+false false false false false true true true true 
+false false false false false false true true true 
+false false false false false false false true true 
+false false false false false false false false true 
+
+
+Enter number of vertices and edges
+enter edge 1
+enter edge 2
+enter edge 3
+enter edge 4
+enter edge 5
+enter edge 6
+enter edge 7
+
+The digraph is
+0 0 0 1 1 0 1 0 0 
+0 0 1 0 0 0 0 0 1 
+0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 
+0 0 0 1 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 
+0 0 1 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 
+The reflexive transitive closure matrix is
+true false false true true false true false false 
+false true true false false false false false true 
+false false true false false false false false false 
+false false false true false false false false false 
+false false false false true false false false false 
+false false false true false true false false false 
+false false false false false false true false false 
+false false true false false false false true false 
+false false false false false false false false true 
+
+

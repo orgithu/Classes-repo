@@ -1,0 +1,33 @@
+enter number of edges in graph
+enter weighted edge 1
+enter weighted edge 2
+enter weighted edge 3
+enter weighted edge 4
+enter weighted edge 5
+enter weighted edge 6
+enter weighted edge 7
+exceptions.UndefinedMethodException: Graph.topologicalOrder is for directed graphs only
+The topological order is 7 6 1 3 2 4 5 
+exceptions.UndefinedMethodException: Graph.topologicalOrder is for directed graphs only
+The topological order is 7 6 1 2 3 4 5 
+exceptions.UndefinedMethodException: Graph.topologicalOrder is for directed graphs only
+The topological order is 7 6 1 3 2 4 5 
+exceptions.UndefinedMethodException: Graph.topologicalOrder is for directed graphs only
+The topological order is 7 6 1 2 3 4 5 
+enter number of edges in graph
+enter weighted edge 1
+enter weighted edge 2
+enter weighted edge 3
+enter weighted edge 4
+enter weighted edge 5
+enter weighted edge 6
+enter weighted edge 7
+enter weighted edge 8
+exceptions.UndefinedMethodException: Graph.topologicalOrder is for directed graphs only
+The digraph has no topological order
+exceptions.UndefinedMethodException: Graph.topologicalOrder is for directed graphs only
+The digraph has no topological order
+exceptions.UndefinedMethodException: Graph.topologicalOrder is for directed graphs only
+The digraph has no topological order
+exceptions.UndefinedMethodException: Graph.topologicalOrder is for directed graphs only
+The digraph has no topological order

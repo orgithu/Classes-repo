@@ -1,0 +1,11 @@
+Elements in array order are
+The 9 elements are [1, 2, 3, 6, 5, 4, 7, 8, 9]
+Element 1 has been changed to 6
+Elements in array order are
+The 9 elements are [2, 5, 3, 6, 6, 4, 7, 8, 9]
+Element 2 has been changed to 20
+Elements in array order are
+The 9 elements are [3, 5, 4, 6, 6, 20, 7, 8, 9]
+Element 3 has been changed to 0
+Elements in array order are
+The 9 elements are [0, 5, 4, 6, 6, 20, 7, 8, 9]

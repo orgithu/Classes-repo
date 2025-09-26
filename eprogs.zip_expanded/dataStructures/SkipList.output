@@ -1,0 +1,30 @@
+The list is
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+The list is
+[21, 1, 22, 2, 23, 3, 24, 4, 25, 5, 26, 6, 27, 7, 28, 8, 29, 9, 30, 10, 31, 11, 32, 12, 33, 13, 34, 14, 35, 15, 36, 16, 37, 17, 38, 18, 39, 19, 40, 20, 41]
+element 21 has key 1
+element 1 has key 2
+element 3 has key 6
+removed 21
+removed 22
+removed 23
+removed 24
+removed 25
+removed 26
+removed 27
+removed 28
+removed 29
+removed 30
+removed 31
+removed 32
+removed 33
+removed 34
+removed 35
+removed 36
+removed 37
+removed 38
+removed 39
+removed 40
+removed 41
+The list is
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]

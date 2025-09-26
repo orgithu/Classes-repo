@@ -1,0 +1,25 @@
+Elements in array order are
+The 9 elements are [9, 8, 7, 4, 5, 6, 3, 2, 1]
+Element null removed from position 12
+Elements in array order are
+The 9 elements are [9, 8, 7, 4, 5, 6, 3, 2, 1]
+Element 9 removed from position 1
+Elements in array order are
+The 8 elements are [8, 5, 7, 4, 1, 6, 3, 2]
+Element 2 removed from position 8
+Elements in array order are
+The 7 elements are [8, 5, 7, 4, 1, 6, 3]
+Element 4 removed from position 4
+Elements in array order are
+The 6 elements are [8, 5, 7, 3, 1, 6]
+Element 1 removed from position 5
+Elements in array order are
+The 5 elements are [8, 6, 7, 3, 5]
+Elements in array order are
+The 15 elements are [20, 10, 18, 9, 8, 5, 17, 8, 9, 8, 7, 4, 5, 2, 16]
+Element 9 removed from position 4
+Elements in array order are
+The 14 elements are [20, 16, 18, 10, 8, 5, 17, 8, 9, 8, 7, 4, 5, 2]
+Element 16 removed from position 2
+Elements in array order are
+The 13 elements are [20, 10, 18, 9, 8, 5, 17, 8, 2, 8, 7, 4, 5]

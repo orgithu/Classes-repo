@@ -1,0 +1,60 @@
+Enter the number of vertices in the digraph
+Enter the number of edges in the digraph
+Enter edge 1
+Enter an integer value
+Enter edge 2
+Enter an integer value
+Enter edge 3
+Enter an integer value
+Enter edge 4
+Enter an integer value
+Enter edge 5
+Enter an integer value
+Enter edge 6
+Enter an integer value
+The number of vertices is 8
+The number of edges is 6
+The graph is
+null 8 7 null null null null null 
+null null null null null null null null 
+null null null null null null null null 
+null null null null 5 null null null 
+null null null null null 3 null null 
+null null null null null null null null 
+null null null null 1 6 null null 
+null null null null null null null null 
+
+
+Enter the number of vertices in the digraph
+Enter the number of edges in the digraph
+Enter edge 1
+Enter an integer value
+Enter edge 2
+Enter an integer value
+Enter edge 3
+Enter an integer value
+Enter edge 4
+Enter an integer value
+Enter edge 5
+Enter an integer value
+Enter edge 6
+Enter an integer value
+Enter edge 7
+Enter an integer value
+Enter edge 8
+Enter an integer value
+Enter edge 9
+Enter an integer value
+Enter edge 10
+Enter an integer value
+The number of vertices is 6
+The number of edges is 10
+The graph is
+null null null null null 3 
+2 null null null null 6 
+null 2 null null 4 7 
+1 2 null null 4 null 
+null 5 null null null null 
+null null null null null null 
+
+

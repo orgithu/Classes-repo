@@ -1,0 +1,12 @@
+Type an expression with no spaces
+The parentheses in
+(d+(a+b)*c*(d+e)-f))(()
+are not matched
+Type an expression with no spaces
+The parentheses in
+(d+(a+b)*c*(d+e)-f)
+are matched
+Type an expression with no spaces
+The parentheses in
+a+b+c+(((d+e))+f
+are not matched

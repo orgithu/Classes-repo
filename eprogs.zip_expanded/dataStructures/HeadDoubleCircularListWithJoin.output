@@ -1,0 +1,14 @@
+First list is []
+Second list is [7, 9, 11, 13, 15]
+Joined list is [7, 9, 11, 13, 15]
+Second list is []
+
+First list is [2, 4, 6, 8, 10, 12, 14, 16]
+Second list is []
+Joined list is [2, 4, 6, 8, 10, 12, 14, 16]
+
+First list is [7, 9, 11, 13, 15]
+Second list is [2, 4, 6, 8, 10, 12, 14, 16]
+Joined list is [7, 9, 11, 13, 15, 2, 4, 6, 8, 10, 12, 14, 16]
+Second list is []
+

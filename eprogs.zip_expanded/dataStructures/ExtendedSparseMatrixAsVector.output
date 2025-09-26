@@ -1,0 +1,45 @@
+Enter number of rows, columns, and nonzero terms
+Enter row and column of term 1
+Enter an integer value
+Enter row and column of term 2
+Enter an integer value
+Enter row and column of term 3
+Enter an integer value
+Enter row and column of term 4
+Enter an integer value
+Enter row and column of term 5
+Enter an integer value
+Enter row and column of term 6
+Enter an integer value
+The matrix a is
+rows = 4  columns = 5
+number of nonzero terms = 6
+row = 1 column = 3 value = 2
+row = 2 column = 5 value = 3
+row = 3 column = 1 value = 4
+row = 3 column = 4 value = 5
+row = 4 column = 2 value = 1
+row = 4 column = 5 value = 2
+
+
+Enter number of rows, columns, and nonzero terms
+Enter row and column of term 1
+Enter an integer value
+Enter row and column of term 2
+Enter an integer value
+Enter row and column of term 3
+Enter an integer value
+Enter row and column of term 4
+Enter an integer value
+Enter row and column of term 5
+Enter an integer value
+The matrix b is
+rows = 4  columns = 5
+number of nonzero terms = 5
+row = 1 column = 2 value = 1
+row = 1 column = 3 value = 3
+row = 3 column = 1 value = 4
+row = 3 column = 2 value = 3
+row = 3 column = 4 value = -5
+
+

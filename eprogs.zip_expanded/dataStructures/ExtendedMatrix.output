@@ -1,0 +1,43 @@
+Enter number of rows and columns
+Matrix x is
+
+Enter number of rows and columns
+Enter an integer value
+Enter an integer value
+Enter an integer value
+Enter an integer value
+Enter an integer value
+Enter an integer value
+Enter an integer value
+Enter an integer value
+Enter an integer value
+Enter an integer value
+Enter an integer value
+Enter an integer value
+Matrix y is
+5 6 7 6 
+6 7 6 5 
+5 6 7 3 
+
+Enter number of rows and columns
+Enter an integer value
+Enter an integer value
+Enter an integer value
+Matrix z is
+7 8 9 
+
+y decremented by 2 is
+3 4 5 4 
+4 5 4 3 
+3 4 5 1 
+
+y multiplied by 2 is
+6 8 10 8 
+8 10 8 6 
+6 8 10 2 
+
+y divided by 2 is
+3 4 5 4 
+4 5 4 3 
+3 4 5 1 
+

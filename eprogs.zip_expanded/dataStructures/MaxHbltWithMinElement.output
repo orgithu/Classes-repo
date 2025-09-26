@@ -1,0 +1,11 @@
+Elements in postorder are
+The 3 elements, in postorder, are [10, 5, 20]
+
+The 5 elements, in postorder, are [10, 5, 15, 20, 30]
+
+The max element is 30
+Deleted max element 30
+Deleted max element 20
+The 3 elements, in postorder, are [5, 10, 15]
+
+The 9 elements, in postorder, are [5, 3, 4, 6, 7, 8, 1, 2, 9]

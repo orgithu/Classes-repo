@@ -1,0 +1,8 @@
+List size is 4
+The list is [0, 1, 1, 0]
+
+First occurrence of 0 is 0
+First occurrence of 1 is 1
+Last occurrence of 0 is 3
+Last occurrence of 1 is 2
+Last occurrence of 2 is -1

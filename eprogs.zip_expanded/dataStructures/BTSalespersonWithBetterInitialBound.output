@@ -1,0 +1,22 @@
+
+Enter number of vertices and edges
+enter weighted edge 1
+enter weighted edge 2
+enter weighted edge 3
+enter weighted edge 4
+enter weighted edge 5
+enter weighted edge 6
+enter weighted edge 7
+enter weighted edge 8
+
+The weighted digraph is
+null null null 5 10 null null 
+null null null null null 3 null 
+null null null null null null 2 
+null 8 null null null null null 
+null null 3 null null null null 
+null null null null 1 null null 
+9 null null null null null null 
+
+The length of the shortest tour is 31
+The shortest tour is 1 4 2 6 5 3 7 

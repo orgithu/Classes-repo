@@ -1,0 +1,22 @@
+Enter number of vertices and edges
+enter weighted edge 1
+enter weighted edge 2
+enter weighted edge 3
+enter weighted edge 4
+enter weighted edge 5
+enter weighted edge 6
+enter weighted edge 7
+
+The weighted digraph is
+Vertex 1 = [5 8, 3 2, 2 4]
+Vertex 2 = [5 5, 4 4]
+Vertex 3 = [4 1]
+Vertex 4 = [5 3]
+Vertex 5 = []
+
+The dist and p values for the directed graph are
+0 0
+4 1
+2 1
+3 3
+6 4

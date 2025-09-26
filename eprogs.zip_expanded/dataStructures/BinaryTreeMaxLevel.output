@@ -1,0 +1,7 @@
+The elements in preorder are
+1 2 4 5 3 6 7 
+The elements in inorder are
+4 2 5 1 6 7 3 
+The elements in postorder are
+4 5 2 7 6 3 1 
+Level 3 has the maximum number of nodes

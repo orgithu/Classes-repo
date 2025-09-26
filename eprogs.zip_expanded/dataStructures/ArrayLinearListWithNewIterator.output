@@ -1,0 +1,7 @@
+The list is [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+At front, should return false false
+0th element is 1
+1th element is 2
+3rd element is 4
+2nd element is 3
+Not at front, should return true true

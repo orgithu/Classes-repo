@@ -1,0 +1,15 @@
+The given inorder list is 3 5 1 0 2 6 4 
+and the given postorder list is 5 3 1 6 4 2 0 
+Construction of binary tree is complete
+Postorder sequence of constructed tree is 5 3 1 6 4 2 0 
+Inorder sequence of constructed tree is 3 5 1 0 2 6 4 
+
+The given inorder list is 7 3 8 11 1 4 0 9 5 2 6 10 
+and the given postorder list is 7 11 8 3 4 1 9 5 10 6 2 0 
+Construction of binary tree is complete
+Postorder sequence of constructed tree is 7 11 8 3 4 1 9 5 10 6 2 0 
+Inorder sequence of constructed tree is 7 3 8 11 1 4 0 9 5 2 6 10 
+
+The given inorder list is 7 3 8 11 1 4 0 9 5 2 6 10 
+and the given postorder list is 7 11 9 3 4 1 8 5 10 6 2 0 
+java.lang.IllegalArgumentException: incompatible postorder and inorder listings

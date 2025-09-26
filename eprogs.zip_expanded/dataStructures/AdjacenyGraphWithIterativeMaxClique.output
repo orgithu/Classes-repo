@@ -1,0 +1,23 @@
+enter number of edges in 7 vertex graph
+enter unweighted edge 1
+enter unweighted edge 2
+enter unweighted edge 3
+enter unweighted edge 4
+enter unweighted edge 5
+enter unweighted edge 6
+enter unweighted edge 7
+enter unweighted edge 8
+enter unweighted edge 9
+enter unweighted edge 10
+The undirected graph is
+0 1 0 1 0 0 0 
+1 0 1 1 1 1 0 
+0 1 0 0 1 1 0 
+1 1 0 0 1 0 0 
+0 1 1 1 0 1 0 
+0 1 1 0 1 0 0 
+0 0 0 0 0 0 0 
+
+Max Clique size is 4
+
+Solution vector is 0 1 1 0 1 1 0 

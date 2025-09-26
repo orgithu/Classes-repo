@@ -1,0 +1,25 @@
+Type an expression with no spaces
+The pairs of matching delimiters in
+{d+[a+b]*c*(d+e)-f})((]
+are (indexing begins at 0)
+3  7
+11  15
+0  18
+No match for right delimiter at 19
+No match for right delimiter at 22
+No match for left delimiter at 21
+No match for left delimiter at 20
+Type an expression with no spaces
+The pairs of matching delimiters in
+[d+{a+b}*c*[d+e]-f]
+are (indexing begins at 0)
+3  7
+11  15
+0  18
+Type an expression with no spaces
+The pairs of matching delimiters in
+a+b+c+[({d+e})+f]
+are (indexing begins at 0)
+8  12
+7  13
+6  16

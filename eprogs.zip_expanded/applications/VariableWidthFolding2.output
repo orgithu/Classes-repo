@@ -1,0 +1,54 @@
+Allowable rectangle width is 1
+The minimum height is 30
+The W values are 1 1 1 1 1 1 1 1 1 
+kay values are 9 9 9 9 9 9 9 9 9 
+There are no fold points
+
+Allowable rectangle width is 2
+The minimum height is 17
+The W values are 2 2 2 2 1 2 1 1 1 
+kay values are 4 4 4 4 9 6 9 9 9 
+The fold points are 5 
+
+Allowable rectangle width is 3
+The minimum height is 14
+The W values are 3 3 3 2 2 2 1 1 1 
+kay values are 3 3 3 6 6 6 9 9 9 
+The fold points are 4 7 
+
+Allowable rectangle width is 4
+The minimum height is 11
+The W values are 4 4 3 3 2 2 1 1 1 
+kay values are 2 2 4 4 6 6 9 9 9 
+The fold points are 3 5 7 
+
+Allowable rectangle width is 5
+The minimum height is 11
+The W values are 4 4 3 3 2 2 1 1 1 
+kay values are 2 2 4 4 6 6 9 9 9 
+The fold points are 3 5 7 
+
+Allowable rectangle width is 6
+The minimum height is 10
+The W values are 6 6 5 4 3 10 2 2 1 
+kay values are 2 2 3 4 6 6 8 8 9 
+The fold points are 3 4 5 7 9 
+
+Allowable rectangle width is 7
+The minimum height is 10
+The W values are 6 6 5 4 3 10 2 2 1 
+kay values are 2 2 3 4 6 6 8 8 9 
+The fold points are 3 4 5 7 9 
+
+Allowable rectangle width is 8
+The minimum height is 10
+The W values are 6 6 5 4 3 10 2 2 1 
+kay values are 2 2 3 4 6 6 8 8 9 
+The fold points are 3 4 5 7 9 
+
+Allowable rectangle width is 9
+The minimum height is 10
+The W values are 6 6 5 4 3 10 2 2 1 
+kay values are 2 2 3 4 6 6 8 8 9 
+The fold points are 3 4 5 7 9 
+

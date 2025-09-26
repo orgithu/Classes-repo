@@ -1,0 +1,21 @@
+Testing the MyDouble wrapper class
+The test array is 1.0 2.0 5.0 10.0 17.0 
+2.0 + 5.0 = 7.0
+5.0 - 2.0 = 3.0
+2.0 * 5.0 = 10.0
+5.0 / 1.0 = 5.0
+The zero element is 0.0
+The identity element is 1.0
+
+2.0 compareTo(5.0) = -1
+5.0 compareTo(2.0) = 1
+5.0 compareTo(5.0) = 0
+
+2.0 == 5.0 = false
+2.0 == 2.0 = true
+
+The sum of the numbers is 35.0
+
+After swapping the first and last elements, the test array is 17.0 2.0 5.0 10.0 1.0 
+
+The maximum element is 17.0

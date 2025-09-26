@@ -1,0 +1,2 @@
+majorCode/majorName
+SW/Program hangamj

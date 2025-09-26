@@ -1,0 +1,47 @@
+The list is [0, 1, 2, 3, 4]
+The list shifted by 0 is [0, 1, 2, 3, 4]
+
+The list is [0, 1, 2, 3, 4]
+The list shifted by 1 is [1, 2, 3, 4, 0]
+
+The list is [0, 1, 2, 3, 4]
+The list shifted by 2 is [2, 3, 4, 0, 1]
+
+The list is [0, 1, 2, 3, 4]
+The list shifted by 3 is [3, 4, 0, 1, 2]
+
+The list is [0, 1, 2, 3, 4]
+The list shifted by 4 is [4, 0, 1, 2, 3]
+
+The list is [0, 1, 2, 3, 4]
+The list shifted by 5 is [0, 1, 2, 3, 4]
+
+
+The list is [0, 1, 2, 3, 4, 5, 6, 7]
+The list shifted by 0 is [0, 1, 2, 3, 4, 5, 6, 7]
+
+The list is [0, 1, 2, 3, 4, 5, 6, 7]
+The list shifted by 1 is [1, 2, 3, 4, 5, 6, 7, 0]
+
+The list is [0, 1, 2, 3, 4, 5, 6, 7]
+The list shifted by 2 is [2, 3, 4, 5, 6, 7, 0, 1]
+
+The list is [0, 1, 2, 3, 4, 5, 6, 7]
+The list shifted by 3 is [3, 4, 5, 6, 7, 0, 1, 2]
+
+The list is [0, 1, 2, 3, 4, 5, 6, 7]
+The list shifted by 4 is [4, 5, 6, 7, 0, 1, 2, 3]
+
+The list is [0, 1, 2, 3, 4, 5, 6, 7]
+The list shifted by 5 is [5, 6, 7, 0, 1, 2, 3, 4]
+
+The list is [0, 1, 2, 3, 4, 5, 6, 7]
+The list shifted by 6 is [6, 7, 0, 1, 2, 3, 4, 5]
+
+The list is [0, 1, 2, 3, 4, 5, 6, 7]
+The list shifted by 7 is [7, 0, 1, 2, 3, 4, 5, 6]
+
+The list is [0, 1, 2, 3, 4, 5, 6, 7]
+The list shifted by 8 is [0, 1, 2, 3, 4, 5, 6, 7]
+
+
