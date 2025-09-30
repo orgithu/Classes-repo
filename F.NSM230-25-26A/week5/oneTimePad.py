@@ -5,12 +5,18 @@ def generate_key(length):
     return os.urandom(length)
 
 def encrypt(plaintext_bytes, key):
-    # XOR each byte with the key
-    return bytes([p ^ k for p, k in zip(plaintext_bytes, key)])
+    # XOR each byte with the key using a normal for loop
+    result = bytearray()
+    for p, k in zip(plaintext_bytes, key):
+        result.append(p ^ k)
+    return bytes(result)
 
 def decrypt(ciphertext_bytes, key):
-    # XOR again with the same key
-    return bytes([c ^ k for c, k in zip(ciphertext_bytes, key)])
+    # XOR again with the same key using a normal for loop
+    result = bytearray()
+    for c, k in zip(ciphertext_bytes, key):
+        result.append(c ^ k)
+    return bytes(result)
 
 with open("C:/Users/orgil/OneDrive/Documents/GitHub/Classes-repo/F.NSM230-25-26A/week5/plain.txt", "rb") as f:
     plaintext_bytes = f.read()

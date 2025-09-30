@@ -39,7 +39,7 @@ def mono_brute(ciphertext):
     for ch in all_letters:
         if ch not in cipher_rank:
             cipher_rank.append(ch)
-    english_rank = list("etarhoisndlcumwgfypbvkjxqz")
+    english_rank = list("etorhaisndlcumwgfypbvkjxqz")
     brute_key = dict(zip(english_rank, cipher_rank))
     brutetext = mono_decrypt(ciphertext, brute_key)
     return brutetext
