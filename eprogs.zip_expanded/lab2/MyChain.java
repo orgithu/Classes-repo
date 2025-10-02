@@ -1,10 +1,19 @@
 package lab2;
-import java.util.Random;
-import java.util.Scanner;
-import java.util.Arrays;
+import java.util.*;
+import java.io.*;
 import dataStructures.Chain;
 public class MyChain extends Chain {
-	
+	public MyChain(String ss) {
+		super(0);
+		String [] strval;
+		strval = ss.split(" ");
+		for(int i = 0; i < strval.length; i++) {
+			this.add(i, Integer.parseInt(strval[i]));
+		}
+	}
+	public MyChain() {
+		super(0);
+	}
 	//Жагсаалтыг массив рүү хөрвүүлж буцаана
 	public Object[] toArray() {
 	    Object[] tempArray = new Object[this.size()];
@@ -60,7 +69,7 @@ public class MyChain extends Chain {
 	    int x = 0, y = 0, k = 0;
 	    while (x < arr1.length && y < arr2.length)
 	    {
-	        if ((int)arr1[x] < (int)arr2[y])
+	        if ((int)arr1[x ] < (int)arr2[y])
 	            x++;
 	        else if ((int)arr1[x] > (int)arr2[y])
 	            y++;
@@ -71,6 +80,24 @@ public class MyChain extends Chain {
 	        }
 	    }
 	    return intersectCh;
+	}
+	public MyChain intersectionBrute(MyChain chain) {
+		MyChain intersectCh = new MyChain();
+		int k = 0;
+		for(int i = 0; i < this.size(); i++) {
+			for(int j = 0; j < chain.size(); j++) {
+				if ((int)this.get(i) == (int)chain.get(j)) {
+					intersectCh.add(k, chain.get(j));
+					k++;
+				}
+			}
+		}
+		return intersectCh;
+	}
+	public MyChain intersectionMerge(MyChain chain) {
+		MyChain ch1 = new MyChain(this);
+		MyChain ch2 = new MyChain(chain);
+		
 	}
 
 
@@ -94,7 +121,7 @@ public class MyChain extends Chain {
 	}
 
 	public static void main(String[] args) {
-	    MyChain x = new MyChain();
+	    /*MyChain x = new MyChain();
 	    MyChain x1 = new MyChain();
 	    Random random = new Random();
 	    Scanner scan = new Scanner(System.in);
@@ -192,7 +219,41 @@ public class MyChain extends Chain {
 	            default:
 	                System.out.println("Invalid");
 	        }
-	    }
+	    }*/
+		/**/
+		try {
+			File ff = new File("input01.txt");
+			Scanner sc = new Scanner(ff);
+			MyChain ch1 = new MyChain(sc.nextLine());
+			MyChain ch2 = new MyChain(sc.nextLine());
+			long t1 = System.currentTimeMillis();
+			MyChain ch = ch1.intersectionBrute(ch2);
+			long t2 = System.currentTimeMillis();
+			/*System.out.println("Ch1: " + ch1.toString());
+			System.out.println("Ch2: " + ch2.toString());
+			System.out.println("intersect: " + ch.toString());*/
+			long diff = t2-t1;
+			System.out.println("Time: " + (double)diff/1000);
+		} catch(Exception e) {
+			System.out.println("ALDAA");
+		}
+		/*-----------------input txt generation------------------
+		int n = 10000;
+		int m = 5000;
+		try {
+			FileWriter writer = new FileWriter("input01.txt");
+			Random r = new Random();
+			for(int i = 0; i < n; i++) {
+				writer.write(r.nextInt(n) + " ");
+			}
+			writer.write("\n");
+			for(int i = 0; i < m; i++) {
+				writer.write(r.nextInt(m) + " ");
+			}
+			writer.close();
+			System.out.println("done");
+		} catch(Exception e) {
+			System.out.println("ALDAA");
+		}*/
 	}
-
 }

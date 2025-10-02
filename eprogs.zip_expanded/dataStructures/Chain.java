@@ -25,6 +25,7 @@ public class Chain implements LinearList
    public Chain()
       {this(0);}
    
+   
    public Chain unique() {
 	    Chain temp = new Chain();
 	    for (int i = 0; i < this.size(); i++) {
