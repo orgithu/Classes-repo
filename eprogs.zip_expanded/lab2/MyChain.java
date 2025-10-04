@@ -2,6 +2,7 @@ package lab2;
 import java.util.*;
 import java.io.*;
 import dataStructures.Chain;
+
 public class MyChain extends Chain {
 	public MyChain(String ss) {
 		super(0);
@@ -14,7 +15,58 @@ public class MyChain extends Chain {
 	public MyChain() {
 		super(0);
 	}
-	//Жагсаалтыг массив рүү хөрвүүлж буцаана
+	public MyChain(MyChain original) {
+        // Deep copy
+        for (int i = 0; i < original.size(); i++) {
+            this.add(i, original.get(i));
+        }
+    }
+	
+	public void clear() {
+	    firstNode = null; 
+	    size = 0; 
+	}
+
+	public static void MergeSort(MyChain mlist) {
+	    int q, i, j, k;
+	    MyChain lefthalf, righthalf;
+	    if (mlist.size() > 1) {
+	        q = mlist.size() / 2; 
+	        lefthalf = new MyChain();
+	        righthalf = new MyChain();
+	        for (i = 0; i < mlist.size(); i++) {
+	            if (i < q)
+	                lefthalf.add(i, mlist.get(i));
+	            else
+	                righthalf.add(i - lefthalf.size(), mlist.get(i));
+	        }
+	        MergeSort(lefthalf);
+	        MergeSort(righthalf);
+	        i = j = k = 0;
+	        mlist.clear();   // ✅ fixed (was mlist.empty())
+	        while (i < lefthalf.size() && j < righthalf.size()) {
+	            if ((Integer) lefthalf.get(i) < (Integer) righthalf.get(j)) {
+	                mlist.add(k, lefthalf.get(i));
+	                i++;
+	            } else {
+	                mlist.add(k, righthalf.get(j));
+	                j++;
+	            }
+	            k++;
+	        }
+	        while (i < lefthalf.size()) {
+	            mlist.add(k, lefthalf.get(i));
+	            i++;
+	            k++;
+	        }
+	        while (j < righthalf.size()) {
+	            mlist.add(k, righthalf.get(j));
+	            j++;
+	            k++;
+	        }
+	    }
+	}
+
 	public Object[] toArray() {
 	    Object[] tempArray = new Object[this.size()];
 	    for (int i = 0; i < this.size(); i++) {
@@ -23,16 +75,12 @@ public class MyChain extends Chain {
 	    return tempArray;
 	}
 	
-	//Өгөгдсөн элементүүдийг жагсаалтын ард нэмнэ
 	public void addRange(Object[] elements) {
 	    for (int i = 0; i < elements.length; i++) {
 	        this.add(this.size(), elements[i]);
 	    }
 	}
-	/*Өгөгдсөн жагсаалт болон үндсэн жагсаалтын нэгдэл 
-	 * жагсаалтыг буцаана. Үндсэн жагсаалтад ямарнэг 
-	 * өөрчлөлт оруулахгүй.
-	 */
+
 	public MyChain union(MyChain chain) {
 		MyChain temp = new MyChain();
 		for(int i = 0; i < this.size(); i++) {
@@ -41,7 +89,7 @@ public class MyChain extends Chain {
 		for(int i = 0; i < chain.size(); i++) {
 			Object element = chain.get(i);
 			Boolean exists = false;
-			for(int j = 0; j < this.size(); j++) {
+			for(int j = 0; j < temp.size(); j++) {   // ✅ fixed (was this.size())
 				if (temp.get(j).equals(element)) {
 					exists = true;
 					break;
@@ -54,39 +102,32 @@ public class MyChain extends Chain {
 		return temp;
 	}
 	
-	/*Өгөгдсөн жагсаалт болон үндсэн жагсаалтын огтлолцол 
-	 * жагсаалтыг буцаана. Үндсэн жагсаалтад ямар нэг 
-	 * өөрчлөлт оруулахгүй.
-	 */
-	//O(nlogn) + O(mlogm)
-	public MyChain intersection(MyChain chain)
-	{
+	public MyChain intersection(MyChain chain) {
 	    Object[] arr1 = this.toArray();
 	    Object[] arr2 = chain.toArray();
 	    Arrays.sort(arr1);
 	    Arrays.sort(arr2);
 	    MyChain intersectCh = new MyChain();
 	    int x = 0, y = 0, k = 0;
-	    while (x < arr1.length && y < arr2.length)
-	    {
-	        if ((int)arr1[x ] < (int)arr2[y])
+	    while (x < arr1.length && y < arr2.length) {
+	        if ((Integer)arr1[x] < (Integer)arr2[y])   // ✅ fixed cast
 	            x++;
-	        else if ((int)arr1[x] > (int)arr2[y])
+	        else if ((Integer)arr1[x] > (Integer)arr2[y])
 	            y++;
-	        else
-	        {
+	        else {
 	            intersectCh.add(k, arr1[x]);
 	            x++; y++; k++;
 	        }
 	    }
 	    return intersectCh;
 	}
+
 	public MyChain intersectionBrute(MyChain chain) {
 		MyChain intersectCh = new MyChain();
 		int k = 0;
 		for(int i = 0; i < this.size(); i++) {
 			for(int j = 0; j < chain.size(); j++) {
-				if ((int)this.get(i) == (int)chain.get(j)) {
+				if ((Integer)this.get(i) == (Integer)chain.get(j)) {  // ✅ fixed cast
 					intersectCh.add(k, chain.get(j));
 					k++;
 				}
@@ -94,12 +135,28 @@ public class MyChain extends Chain {
 		}
 		return intersectCh;
 	}
-	public MyChain intersectionMerge(MyChain chain) {
-		MyChain ch1 = new MyChain(this);
-		MyChain ch2 = new MyChain(chain);
-		
-	}
 
+	public MyChain intersectMerge(MyChain mlist) {
+	    MyChain ch1 = new MyChain(this);
+	    MyChain ch2 = new MyChain(mlist);
+	    MergeSort(ch1);
+	    MergeSort(ch2);
+	    int x=0,y=0,k=0;
+	    MyChain intersectCh = new MyChain();
+	    while(x<ch1.size() && y<ch2.size()) {
+	        if(((Integer)ch1.get(x))<((Integer)ch2.get(y)))   // ✅ fixed cast
+	            x++;
+	        else if(((Integer)ch1.get(x))>((Integer)ch2.get(y)))
+	            y++;
+	        else {
+	            intersectCh.add(k,ch1.get(x));
+	            x++;
+	            y++;
+	            k++;
+	        }
+	    }
+	    return intersectCh;
+	}
 
 	public static void printMenu() {
 		System.out.println("--------^Result^--------");
@@ -121,7 +178,7 @@ public class MyChain extends Chain {
 	}
 
 	public static void main(String[] args) {
-	    /*MyChain x = new MyChain();
+		/*MyChain x = new MyChain();
 	    MyChain x1 = new MyChain();
 	    Random random = new Random();
 	    Scanner scan = new Scanner(System.in);
@@ -229,9 +286,6 @@ public class MyChain extends Chain {
 			long t1 = System.currentTimeMillis();
 			MyChain ch = ch1.intersectionBrute(ch2);
 			long t2 = System.currentTimeMillis();
-			/*System.out.println("Ch1: " + ch1.toString());
-			System.out.println("Ch2: " + ch2.toString());
-			System.out.println("intersect: " + ch.toString());*/
 			long diff = t2-t1;
 			System.out.println("Time: " + (double)diff/1000);
 		} catch(Exception e) {

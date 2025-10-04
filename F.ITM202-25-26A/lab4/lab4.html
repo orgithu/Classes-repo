@@ -53,11 +53,12 @@
 			.menu li {
 				float: left;
 				list-style: none;
-				padding: 10px 20px;
+				padding: 10px 17px;
 			}
 			#nav {
 				background: #b00;
 				border-bottom: 5px solid #ddd;
+				width: 100%;
 			}
 			#nav li {
 				color: white;
@@ -65,6 +66,7 @@
 			#nav li:hover {
 				background-color: #a00;
 			}
+
 			#nav li.active {
 				color: #b00;
 				background-color: #ddd;
@@ -157,22 +159,31 @@
 				#right {
 					display: none;
 				}
-				/* nav: show only the mobile label (first item) */
 				.menu li {
 					display: none;
+					float: none;
+					padding: 10px 170px;
 				}
-				.menu li.on_mobile {
+				.on_mobile {
 					display: block;
+					background: #b00;
+					color: #fff;
+					padding: 15px;
+					cursor: pointer;
 				}
-				/* make each post a horizontal card: thumbnail left, text right
-				   using grid so the title and paragraph stack vertically */
+				#menuCheck:checked + .on_mobile {
+					color: #b00;
+					background-color: #ddd;
+				}
+				#menuCheck:checked ~ .menu li {
+					display: list-item;
+				}
 				.post {
 					display: grid;
 					grid-template-columns: 86px 1fr;
 					gap: 12px;
 					align-items: start;
 				}
-				/* thumbnail box becomes a fixed square */
 				.post .media {
 					width: 86px;
 					height: 86px;
@@ -216,8 +227,9 @@
 		</div>
 		<div id="nav">
 			<div class="container">
+				<input type="checkbox" id="menuCheck" hidden>
+				<label for="menuCheck" class="on_mobile">Цэс</label>
 				<ul class="menu">
-					<li class="on_mobile">Цэс</li>
 					<li class="active">Эхлэл</li>
 					<li>Улс төр</li>
 					<li>Эдийн засаг</li>

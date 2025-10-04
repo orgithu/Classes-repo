@@ -1,2 +1,4 @@
 majorCode/majorName
-SW/Program hangamj
+IT/Program hangamj
+KAB/Cybersecutiry
+IoT/Zuilsiin internet
