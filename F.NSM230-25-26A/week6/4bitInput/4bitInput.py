@@ -14,7 +14,7 @@ try:
         mappedDecimal = fourBitMap[fourBitDecimal]
         print("map number: ", mappedDecimal)
         mappedBinary = bin(mappedDecimal).replace("0b", "")
-        print("Binary of mapped number: ", mappedBinary)
+        print("Binary of mapped number: ", mappedBinary.zfill(4))
     elif choice == "2":
         plaintext = input("enter plaintext:\n")
         print("|char|ord| 8bitOfOrd |len| left | right|ld |rd |lm |rm |mapped left, right, combined, int value, chr, hex\n--------------------------------------------------------")

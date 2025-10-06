@@ -1,4 +1,3 @@
-subjectCode/subjectName/credit
 CSM203/Ugugdliin butets/3.0
 IMT202/Web zohiomj/3.0
 NSM231/Medeelliin ayulgui baidal/3.0
