@@ -24,7 +24,10 @@ s1=[['00','01','10','11'],
 # -------------------------
 # Helper Functions
 # -------------------------
-
+def binToHex(binary_input):
+    decimal_value = int(binary_input, 2)
+    hex_value = hex(decimal_value)
+    return hex_value
 # General permutation function: rearranges bits according to table
 def ip(key,st):
     s=''
@@ -136,25 +139,27 @@ key_file = "C:/Users/orgil/OneDrive/Documents/GitHub/Classes-repo/F.NSM230-25-26
 
 # Example fixed 10-bit key (can be randomized)
 key10 = '1010000010'
-
+k1,k2=key(key10)
 # Read plaintext
-with open(plaintext_file,"r",encoding="utf-8") as f:
+with open(plaintext_file,"r") as f:
     plaintext = f.read()
 
 # Encrypt plaintext → ciphertext
 ciphertext = encrypt_text(plaintext,key10)
-with open(cipher_file,"w",encoding="utf-8") as f:
+with open(cipher_file,"w",) as f:
     f.write(ciphertext)
 
 # Decrypt ciphertext → original plaintext
-with open(cipher_file,"r",encoding="utf-8") as f:
+with open(cipher_file,"r",) as f:
     encrypted_data = f.read()
 decrypted_text = decrypt_text(encrypted_data,key10)
-with open(decrypted_file,"w",encoding="utf-8") as f:
+with open(decrypted_file,"w") as f:
     f.write(decrypted_text)
 
 # Save the used key for reference
-with open(key_file,"w",encoding="utf-8") as f:
-    f.write(key10)
+with open(key_file,"w") as f:
+    f.write(binToHex(key10).replace("0x",''))
+    f.write(binToHex(k1).replace("0x",''))
+    f.write(binToHex(k2).replace("0x",''))
 
-print("Encryption and decryption done. Files saved.")
+print("En\De done")
