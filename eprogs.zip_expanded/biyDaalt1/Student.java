@@ -1,43 +1,63 @@
 package biyDaalt1;
 import dataStructures.Chain;
 
+//Student.java
 public class Student {
-    private String studentCode; // код
-    private float GPA;          // голч дүн
-    public Chain lessons;      // үзсэн хичээлүүд (жагсаалт)
+	private String studentCode;
+	private float GPA;
+	private Chain lessons;
 
-    public Student(String code) {
-        this.studentCode = code;
-        this.lessons = new Chain(); // эсвэл ArrayLinearList
-    }
+	public Student(String studentCode) {
+		this.studentCode = studentCode;
+		this.lessons = new Chain();
+		this.GPA = 0.0f;
+	}
 
-    public void addLesson(Lessons l) {
-        lessons.add(lessons.size(), l);
-    }
+	public String getStudentCode() {
+		return studentCode;
+	}
 
-    public String getStudentCode() { return studentCode; }
+	public float getGPA() {
+		return GPA;
+	}
 
-    public float getGPA() {
-        if (lessons.size() == 0) return 0;
-        double sum = 0;
-        for (int i = 0; i < lessons.size(); i++) {
-            Lessons l = (Lessons) lessons.get(i);
-            sum += l.getGPA();
-        }
-        return (float)(sum / lessons.size());
-    }
+	public Chain getLessons() {
+		return lessons;
+	}
 
-    public int countF() {
-        int c = 0;
-        for (int i = 0; i < lessons.size(); i++) {
-            Lessons l = (Lessons) lessons.get(i);
-            if (l.getGPA() == 0.0) c++;
-        }
-        return c;
-    }
+	public void addLesson(Lessons lesson) {
+		lessons.add(lessons.size(),lesson);
+		calculateGPA();
+	}
 
-    @Override
-    public String toString() {
-        return studentCode + " AvgGPA=" + getGPA();
-    }
+	private void calculateGPA() {
+		if (lessons.size() == 0) {
+			GPA = 0.0f;
+			return;
+		}
+		float totalPoints = 0.0f;
+		float totalCredits = 0.0f;
+		for (int i = 0; i < lessons.size(); i++) {
+			Lessons l = (Lessons) lessons.get(i);
+			totalPoints += l.getGPAValue() * l.getLearned().getCredit();
+			totalCredits += l.getLearned().getCredit();
+		}
+		GPA = totalPoints / totalCredits;
+	}
+
+	public int countFGrades() {
+		int count = 0;
+		for (int i = 0; i < lessons.size(); i++) {
+			Lessons l = (Lessons) lessons.get(i);
+			if (l.getGrade().equals("F")) {
+				count++;
+			}
+		}
+		return count;
+	}
+
+	@Override
+	public String toString() {
+		return studentCode + " (GPA: " + GPA + ")";
+	}
 }

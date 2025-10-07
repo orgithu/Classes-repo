@@ -4,9 +4,9 @@ public class Major {
     private String majorCode; // код
     private String majorName; // нэр
 
-    public Major(String code, String name) {
-        this.majorCode = code;
-        this.majorName = name;
+    public Major(String majorCode, String majorName) {
+        this.majorCode = majorCode;
+        this.majorName = majorName;
     }
 
     public String getMajorCode() { 
