@@ -9,8 +9,8 @@ import utilities.*;
 public class ArrayStack implements Stack
 {
    // data members
-   int top;          // current top of stack
-   Object [] stack;  // element array
+   protected int top;          // current top of stack
+   protected Object [] stack;  // element array
 
    // constructors
    /** create a stack with the given initial capacity
@@ -65,6 +65,28 @@ public class ArrayStack implements Stack
       return topElement;
    }
    
+   public int size() {
+	   return top + 1;
+   }
+   
+   public String toString() {
+	   ArrayStack temp = new ArrayStack();
+	   StringBuffer s = new StringBuffer("[");
+	   // put elements into the buffer
+	   while(!this.empty()) {
+		   Object t = this.pop();
+		   s.append(t.toString() + ", ");
+		   temp.push(t);
+	   }
+	   s.delete(s.length() - 2, s.length()); // remove last ", "
+	   s.append("]");
+	   while(!temp.empty()) {
+		   this.push(temp.pop());
+	   }
+	   // create equivalent String
+	   return new String(s);
+   }
+
    /** test program */
    public static void main(String [] args)
    {  
@@ -81,6 +103,9 @@ public class ArrayStack implements Stack
       while (!s.empty())
       {
          System.out.println("Top element is " + s.peek());
+      }
+      while (!s.empty())
+      {
          System.out.println("Removed the element " + s.pop());
       }
    }  

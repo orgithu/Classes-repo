@@ -45,6 +45,6 @@ public class Lessons {
 
     @Override
     public String toString() {
-        return learned.getSubjectCode() + ":" + score + " (GPA=" + getGPA() + ")";
+        return learned.getSubjectCode() + ":" + score + " (GPA=" + getGPAValue() + ")";
     }
 }

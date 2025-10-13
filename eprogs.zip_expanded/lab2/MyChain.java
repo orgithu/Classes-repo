@@ -89,7 +89,7 @@ public class MyChain extends Chain {
 		for(int i = 0; i < chain.size(); i++) {
 			Object element = chain.get(i);
 			Boolean exists = false;
-			for(int j = 0; j < temp.size(); j++) {   // ✅ fixed (was this.size())
+			for(int j = 0; j < temp.size(); j++) {
 				if (temp.get(j).equals(element)) {
 					exists = true;
 					break;

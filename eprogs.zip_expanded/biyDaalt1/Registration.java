@@ -14,7 +14,7 @@ public class Registration {
         subjectList = new ArrayLinearList();
         majorList = new ArrayLinearList();
     }
-
+    //using arraylinearlist to add all in list
     public void loadSubjects(String fileName) {
         try {
             BufferedReader input = new BufferedReader(new FileReader(fileName));
@@ -33,7 +33,6 @@ public class Registration {
             System.out.println("Error loading subjects: " + e.getMessage());
         }
     }
-
     public void loadMajors(String fileName) {
         try {
             BufferedReader input = new BufferedReader(new FileReader(fileName));
@@ -114,23 +113,6 @@ public class Registration {
         return null;
     }
 
-    public void saveExams(String fileName) {
-        try {
-            BufferedWriter output = new BufferedWriter(new FileWriter(fileName));
-            for (int i = 0; i < studentList.size(); i++) {
-                Student s = (Student) studentList.get(i);
-                for (int j = 0; j < s.getLessons().size(); j++) {
-                    Lessons l = (Lessons) s.getLessons().get(j);
-                    output.write(s.getStudentCode() + "/" + l.getLearned().getSubjectCode() + "/" + l.getScore());
-                    output.newLine();
-                }
-            }
-            output.close();
-        } catch (IOException e) {
-            System.out.println("Error saving exams: " + e.getMessage());
-        }
-    }
-
     public void showAllSubjects() {
         System.out.println("Niit hicheel:");
         for (int i = 0; i < subjectList.size(); i++) {
@@ -183,26 +165,13 @@ public class Registration {
     }
 
     public void showGradesByMajor() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Mergejliin code: ,(blank for all)");
-        String majorCode = scanner.nextLine().trim();
-        
-        if (majorCode.isEmpty()) {
-            for (int i = 0; i < majorList.size(); i++) {
-                Major m = (Major) majorList.get(i);
-                showGradesForMajor(m.getMajorCode());
-            }
-        } else {
-            showGradesForMajor(majorCode);
+        for (int i = 0; i < majorList.size(); i++) {
+            Major m = (Major) majorList.get(i);
+            showStudentsByMajor(m.getMajorCode());
         }
     }
 
-    private void showGradesForMajor(String majorCode) {
-        Major major = findMajor(majorCode);
-        if (major == null) {
-            System.out.println("Major not found: " + majorCode);
-            return;
-        }
+    private void showStudentsByMajor(String majorCode) {
         String numericCode = "";
         if (majorCode.equals("IT")) {
             numericCode = "17";
@@ -214,18 +183,18 @@ public class Registration {
             System.out.println("No numeric mapping for major: " + majorCode);
             return;
         }
-        System.out.println("Grades for Major " + major.getMajorName() + ":");
-        for (int j = 0; j < studentList.size(); j++) {
-            Student s = (Student) studentList.get(j);
-            if (s.getStudentCode().length() >= 5 && s.getStudentCode().substring(3, 5).equals(numericCode)) {
-                System.out.println(s + " Lessons:");
-                for (int k = 0; k < s.getLessons().size(); k++) {
-                    Lessons l = (Lessons) s.getLessons().get(k);
-                    System.out.println("  " + l);
-                }
+
+        System.out.println("\n" + majorCode + " — " + findMajor(majorCode).getMajorName());
+        for (int i = 0; i < studentList.size(); i++) {
+            Student s = (Student) studentList.get(i);
+            for(int j = 0; j < s.getLessons().size(); j++) {
+            	Lessons l = (Lessons) s.getLessons().get(j);
+            	if (s.getStudentCode().length() >= 5 && 
+                        s.getStudentCode().substring(3, 5).equals(numericCode)) {
+                        System.out.println(s.getStudentCode() + ": " + l.getScore() + " (" + l.getGrade() + ")");
+            	}
             }
         }
-        System.out.println();
     }
     public static void printMenu() {
     	System.out.println("\n----------^Menu^----------");
@@ -235,7 +204,7 @@ public class Registration {
         System.out.println("4. Гурваас дээш хичээлд “F” үнэлгээ авсан хасагдах оюутан");
         System.out.println("5. Хичээл бүрээр оюутнуудын дүнгийн жагсаалтыг харуулах");
         System.out.println("6. Мэргэжил бүрээр оюутнуудын дүнгийн жагсаалтыг харуулах");
-        System.out.println("7. Save and Exit");
+        System.out.println("7. Exit");
         System.out.print("----------Choose an option----------\n");
     }
 
@@ -249,7 +218,7 @@ public class Registration {
         while (true) {
             printMenu();
             int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
+            scanner.nextLine();
 
             switch (choice) {
                 case 1:
@@ -259,7 +228,7 @@ public class Registration {
                     reg.showAllMajors();
                     break;
                 case 3:
-                    System.out.println("Dundaj GPA: " + reg.calculateAverageGPA());
+                    System.out.printf("Dundaj GPA: %.2f%n", reg.calculateAverageGPA());
                     break;
                 case 4:
                     reg.showFailingStudents();
@@ -271,8 +240,7 @@ public class Registration {
                     reg.showGradesByMajor();
                     break;
                 case 7:
-                    reg.saveExams("Exams.txt");
-                    System.out.println("Data saved. Exiting...");
+                    System.out.println("Exiting...");
                     System.exit(0);
                     break;
                 default:
