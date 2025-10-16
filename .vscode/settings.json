@@ -1,4 +1,11 @@
 {
     "editor.inlineSuggest.edits.allowCodeShifting": "never",
-    "editor.inlineSuggest.enabled": true
+    "editor.inlineSuggest.enabled": true,
+    "java.configuration.runtimes": [
+        {
+            "name": "JavaSE-21",
+            "path": "C:\\Program Files\\Eclipse Adoptium\\jdk-21.0.8.9-hotspot",
+            "default": true
+        }
+    ]
 }
