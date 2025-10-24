@@ -1,14 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Banhariin aylal</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Banhariin aylal</title>
         <link rel="stylesheet" href="lab5Main.css">
     </head>
-    <body class="body">
-        <div id="title">
-            <h1>Banhariin aylal</h1>
+    <body>
+        <div id="page">
+            <header id="title"><h1>Banhariin аялал</h1></header>
+
+            <section id="stage" aria-label="animation stage">
+                <!-- simple mountains drawn inline so they scale with the stage -->
+                <svg id="mountains" viewBox="0 0 1000 400" preserveAspectRatio="none" aria-hidden="true">
+                    <ellipse cx="300" cy="300" rx="420" ry="140" fill="#3d7a3f" />
+                    <ellipse cx="700" cy="300" rx="500" ry="160" fill="#3b6f3a" />
+                </svg>
+
+                <!-- parallax layer: trees (SVG objects preserve internal animations) -->
+                <div class="layer trees">
+                    <object data="lab5_svg/mod1.svg" type="image/svg+xml" class="tree"></object>
+                    <object data="lab5_svg/mod2.svg" type="image/svg+xml" class="tree"></object>
+                    <object data="lab5_svg/mod3.svg" type="image/svg+xml" class="tree"></object>
+                    <!-- duplicate for seamless animation -->
+                    <object data="lab5_svg/mod1.svg" type="image/svg+xml" class="tree"></object>
+                    <object data="lab5_svg/mod2.svg" type="image/svg+xml" class="tree"></object>
+                    <object data="lab5_svg/mod3.svg" type="image/svg+xml" class="tree"></object>
+                </div>
+
+                <!-- parallax layer: bushes -->
+                <div class="layer bushes">
+                    <object data="lab5_svg/but1.svg" type="image/svg+xml" class="bush"></object>
+                    <object data="lab5_svg/but2.svg" type="image/svg+xml" class="bush"></object>
+                    <object data="lab5_svg/but3.svg" type="image/svg+xml" class="bush"></object>
+                    <object data="lab5_svg/but1.svg" type="image/svg+xml" class="bush"></object>
+                    <object data="lab5_svg/but2.svg" type="image/svg+xml" class="bush"></object>
+                    <object data="lab5_svg/but3.svg" type="image/svg+xml" class="bush"></object>
+                </div>
+
+                <!-- main character centered; keep SVG animation by using object -->
+                <div class="layer character">
+                    <object data="lab5_svg/nohoi.svg" type="image/svg+xml" id="nohoi" class="nohoi"></object>
+                </div>
+
+                <!-- ground bar -->
+                <div id="ground" aria-hidden="true"></div>
+            </section>
         </div>
     </body>
 </html>
