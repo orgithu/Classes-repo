@@ -1,6 +1,6 @@
 {
     "editor.inlineSuggest.edits.allowCodeShifting": "never",
-    "editor.inlineSuggest.enabled": false,
+    "editor.inlineSuggest.enabled": true,
     "java.configuration.runtimes": [
         {
             "name": "JavaSE-21",

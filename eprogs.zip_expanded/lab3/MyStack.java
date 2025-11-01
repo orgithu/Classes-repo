@@ -135,7 +135,13 @@ public class MyStack extends ArrayStack {
 					try { System.out.println("Top: " + ms.peek()); } catch (Exception e) { System.out.println("Stack is empty"); }
 					break;
 				case 5: // pop
-					try { System.out.println("Popped: " + ms.pop()); } catch (Exception e) { System.out.println("Stack is empty"); }
+					try {
+						System.out.println("before Stack: " + ms.toString());
+						System.out.println("Popped: " + ms.pop());
+						System.out.println("after Stack: " + ms.toString());
+						} catch (Exception e) { 
+							System.out.println("Stack is empty"); 
+						}
 					break;
 				case 6: // push single
 					System.out.print("Enter int to push: ");
@@ -165,6 +171,7 @@ public class MyStack extends ArrayStack {
 					} catch (Exception e) {
 						System.out.println("Invalid input");
 					}
+					System.out.println("Stack: " + ms.toString());
 					break;
 				case 9: // rand
 					System.out.println("Rand copy: " + ms.rand().toString());

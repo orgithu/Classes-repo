@@ -1,91 +1,185 @@
-/* Page reset */
-body, html {
-	margin: 0;
-	height: 100%;
-	font-family: Arial, sans-serif;
+.main h1 {
+    color: blue;
+    text-align: center;
 }
 
-/* page and title */
-#title {
-	text-align: center;
-	font-size: 20px;
-	font-weight: bold;
-	color: #fff;
-	padding: 10px 0;
-	background: #a22218;
+/* Size variables - change these to resize SVG layers easily */
+:root {
+    --tree-size: 200px;
+    --bush-size: 140px;
+    --character-size: 250px;
 }
 
-/* stage */
-#stage {
-	position: relative;
-	width: 100%;
-	height: 400px;
-	overflow: hidden;
-	background: #0b1630; /* static dark sky */
+.animation {
+    width: 100%;
+    height: 340px;
+    max-width: 1100px;
+    margin: 0 auto;
+    background-color: #CAEDFA;
+    animation: dayNightCycle 60s linear infinite;
+    position: relative;
+    overflow: hidden;
+    transform-origin: center bottom;
 }
 
-#mountains {
-	position: absolute;
-	left: 0;
-	top: 120px;
-	width: 100%;
-	height: 220px;
-	pointer-events: none;
+.background-mountain {
+    width: 100%;
+    height: 100%;
+    transform: translateY(30px) scale(1.08);
+    transform-origin: center bottom;
+    display: block;
 }
 
-#ground {
-	position: absolute;
-	left: 0;
-	bottom: 0;
-	height: 60px;
-	width: 100%;
-	background: #254b26;
+.mountain-wrap {
+    position: absolute;
+    bottom: -20px; /* lift mountain up slightly */
+    left: 0;
+    width: 110%;     /* a bit larger to fill view when zoomed */
+    height: 120%;
+    transform-origin: center bottom;
+    z-index: 1;
+    /* we'll animate the internal track for a smooth repeating scroll */
+    overflow: hidden;
 }
 
-/* parallax layers: simple horizontal translation animations */
+/* generic scrolling track: two copies of items side-by-side animate left */
+.scroll-track {
+    display: flex;
+    align-items: flex-end;
+    width: 200%; /* two copies side by side */
+    height: 100%;
+    will-change: transform;
+    pointer-events: none; /* decorative only */
+}
+
+.scroll-track .items {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start; /* put elements next to each other so the second copy sits immediately after the first */
+    gap: 0; /* spacing handled by child margins so duplicate blocks line up exactly */
+    padding-left: 0;
+    padding-right: 0;
+    box-sizing: border-box;
+    flex: 0 0 50%; /* each items block equals one viewport width (scroll-track is 200%) */
+    height: 100%;
+}
+
 .layer {
-	position: absolute;
-	left: 0;
-	top: 0;
-	width: 200%; /* doubled width for seamless loop */
-	height: 100%;
-	display: flex;
-	align-items: flex-end;
-	pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
-.trees { animation: slideTrees linear infinite; animation-duration: 40s; }
-.bushes { animation: slideBushes linear infinite; animation-duration: 20s; }
-
-.layer object {
-	width: 180px;
-	height: auto;
-	margin: 0 40px;
+.back-bushes {
+    z-index: 3;
 }
 
-.character { pointer-events: auto; display: flex; align-items: flex-end; justify-content: center; }
-.character .nohoi { width: 420px; height: auto; transform-origin: 50% 50%; animation: bob 1.6s ease-in-out infinite; }
-
-@keyframes slideTrees {
-	from { transform: translateX(0); }
-	to   { transform: translateX(-50%); }
+.trees {
+    z-index: 2;
 }
 
-@keyframes slideBushes {
-	from { transform: translateX(0); }
-	to   { transform: translateX(-50%); }
+.main-character {
+    z-index: 4;
+    /* keep main character mostly stationary horizontally, slightly left */
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    padding-left: 18%;
+}
+
+.character {
+    animation: bob 0.2s ease-in-out infinite;
+    width: var(--character-size); /* zoomed in character */
+    height: auto;
+    display: block;
+}
+
+.bush, .tree {
+    height: auto;
+}
+
+/* ensure objects and inline svgs inside items don't create extra margins */
+.scroll-track object,
+.scroll-track svg {
+    display: block;
+    margin: 0;
+    pointer-events: none;
+}
+
+/* spacing between visible items inside an items block. Use margin-right so duplicates align exactly */
+.scroll-track .items > object,
+.scroll-track .items > svg {
+    margin-right: 11rem;
+}
+.scroll-track .items > object:last-child,
+.scroll-track .items > svg:last-child {
+    margin-right: 0;
+}
+
+/* Specific track animations for smooth infinite scrolling */
+.bush-track { animation: none; }
+.tree-track { animation: none; }
+.mountain-track { animation: none; }
+.scroll-track.animate.bush-track { animation: scroll-bushes 4s linear infinite; }
+.scroll-track.animate.tree-track { animation: scroll-trees 8s linear infinite; }
+.scroll-track.animate.mountain-track { animation: scroll-mountains 12s linear infinite; }
+
+/* per-type sizes (using variables) - override with specific rules or change variables above */
+.tree { width: var(--tree-size); }
+.bush { width: var(--bush-size); }
+
+/* per-instance overrides available, e.g. .tree1 { --tree-size: 220px; } */
+.tree1 { width: var(--tree1-size, var(--tree-size)); }
+.tree2 { width: var(--tree2-size, var(--tree-size)); }
+.tree3 { width: var(--tree3-size, var(--tree-size)); }
+.bush1 { width: var(--bush1-size, var(--bush-size)); }
+.bush2 { width: var(--bush2-size, var(--bush-size)); }
+.bush3 { width: var(--bush3-size, var(--bush-size)); }
+
+@keyframes dayNightCycle {
+    0% { background-color: #CAEDFA; }
+    50% { background-color: #021233; }
+    100% { background-color: #CAEDFA; }
+}
+
+@keyframes parallaxSlow {
+    0% { transform: translateX(60%); }
+    100% { transform: translateX(-60%); }
+}
+
+@keyframes parallaxMedium {
+    0% { transform: translateX(40%); }
+    100% { transform: translateX(-40%); }
+}
+
+@keyframes parallaxFast {
+    0% { transform: translateX(20%); }
+    100% { transform: translateX(-20%); }
+}
+
+@keyframes parallaxBack {
+    0% { transform: translateX(20%); }
+    100% { transform: translateX(-20%); }
+}
+
+@keyframes scroll-bushes {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
+}
+
+@keyframes scroll-trees {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
+}
+
+@keyframes scroll-mountains {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
 }
 
 @keyframes bob {
-	0% { transform: translateY(0px) rotate(0deg); }
-	50% { transform: translateY(-6px) rotate(-1deg); }
-	100% { transform: translateY(0px) rotate(0deg); }
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-2px); }
 }
-
-/* responsive tweaks */
-@media (max-width: 600px) {
-	.layer object { width: 120px; margin: 0 20px; }
-	.character .nohoi { width: 260px; }
-	#stage { height: 320px; }
-}
-

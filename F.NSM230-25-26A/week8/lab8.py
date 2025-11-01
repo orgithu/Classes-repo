@@ -1,9 +1,20 @@
 def addRoundKey(a, b):
     afterRoundKey = []
     for i in range(16):
-        afterRoundKey.append(hex(a[i]^b[i])[2:])
+        afterRoundKey.append(a[i] ^ b[i])
     return afterRoundKey
+def mPrint(st):
+    m = []
+    m.append([st[0], st[4], st[8], st[12]])
+    m.append([st[1], st[5], st[9], st[13]])
+    m.append([st[2], st[6], st[10], st[14]])
+    m.append([st[3], st[7], st[11], st[15]])
+    for i in m:
+        for j in i:
+            print(hex(j).replace('0x', '').upper(), end='\t')
+        print()
 key = "Thats my Kung Fu"
+key = key.ljust(16, '\x00')  #Pad
 key16=[]
 plaintext16=[]
 plaintext = input("enter plaintext: ")
@@ -26,8 +37,11 @@ while True:
                 p = p[:16]
             for i in p:
                 plaintext16.append(ord(i))
+            print("ptext: ", plaintext16)
+            print("key16: ", key16)
             afterRoundPlaintext = addRoundKey(key16, plaintext16)
-            print("plaintext after addRoundKey: ", afterRoundPlaintext)
+            print("plaintext after addRoundKey:")
+            mPrint(afterRoundPlaintext)
         elif choice == "2":
             count = 1
             print("Key in hex: ")
@@ -41,22 +55,20 @@ while True:
                 count += 1
             print()
         elif choice == "3":
-            # ensure plaintext is 16 bytes for matrix display
+            #plaintext must be 16 bytes.
             p = plaintext
             if len(p) < 16:
                 p = p.ljust(16, '\x00')
             else:
                 p = p[:16]
+            for i in key:
+                key16.append(ord(i))
+            for i in p:
+                plaintext16.append(ord(i))
             print("Key in 4x4 matrix: ")
-            for i in range(4):
-                for j in range(4):
-                    print(hex(ord(key[j*4+i]))[2:], end=' ')
-                print()
+            mPrint(key16)
             print("plaintext in 4x4 matrix: ")
-            for i in range(4):
-                for j in range(4):
-                    print(hex(ord(p[j*4+i]))[2:], end=' ')
-                print()
+            mPrint(plaintext16)
         else:
             raise Exception
     except KeyboardInterrupt:

@@ -1,51 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Banhariin aylal</title>
-        <link rel="stylesheet" href="lab5Main.css">
+<html lang="mn">
+    <head>  
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/F.ITM202-25-26A/lab5/lab5Main.css" />
+        <title>Лабораторийн ажил 5</title>
     </head>
-    <body>
-        <div id="page">
-            <header id="title"><h1>Banhariin аялал</h1></header>
-
-            <section id="stage" aria-label="animation stage">
-                <!-- simple mountains drawn inline so they scale with the stage -->
-                <svg id="mountains" viewBox="0 0 1000 400" preserveAspectRatio="none" aria-hidden="true">
-                    <ellipse cx="300" cy="300" rx="420" ry="140" fill="#3d7a3f" />
-                    <ellipse cx="700" cy="300" rx="500" ry="160" fill="#3b6f3a" />
-                </svg>
-
-                <!-- parallax layer: trees (SVG objects preserve internal animations) -->
-                <div class="layer trees">
-                    <object data="lab5_svg/mod1.svg" type="image/svg+xml" class="tree"></object>
-                    <object data="lab5_svg/mod2.svg" type="image/svg+xml" class="tree"></object>
-                    <object data="lab5_svg/mod3.svg" type="image/svg+xml" class="tree"></object>
-                    <!-- duplicate for seamless animation -->
-                    <object data="lab5_svg/mod1.svg" type="image/svg+xml" class="tree"></object>
-                    <object data="lab5_svg/mod2.svg" type="image/svg+xml" class="tree"></object>
-                    <object data="lab5_svg/mod3.svg" type="image/svg+xml" class="tree"></object>
+    <body class="main">
+        <h1>Bankhariin aylal</h1>
+        <div class="animation">
+            <!-- Background mountain (wrapped so it can parallax separately) -->
+            <div class="mountain-wrap">
+                <div class="scroll-track mountain-track">
+                    <div class="items">
+                        <svg class="background-mountain" viewBox="-100 -200 1000 400" xmlns="http://www.w3.org/2000/svg">
+                            <ellipse cx="400" cy="330" rx="700" ry="220" fill="#1f7a1f"/>
+                        </svg>
+                    </div>
+                    <div class="items">
+                        <svg class="background-mountain" viewBox="-100 -200 1000 400" xmlns="http://www.w3.org/2000/svg">
+                            <ellipse cx="400" cy="330" rx="700" ry="220" fill="#1f7a1f"/>
+                        </svg>
+                    </div>
                 </div>
-
-                <!-- parallax layer: bushes -->
-                <div class="layer bushes">
-                    <object data="lab5_svg/but1.svg" type="image/svg+xml" class="bush"></object>
-                    <object data="lab5_svg/but2.svg" type="image/svg+xml" class="bush"></object>
-                    <object data="lab5_svg/but3.svg" type="image/svg+xml" class="bush"></object>
-                    <object data="lab5_svg/but1.svg" type="image/svg+xml" class="bush"></object>
-                    <object data="lab5_svg/but2.svg" type="image/svg+xml" class="bush"></object>
-                    <object data="lab5_svg/but3.svg" type="image/svg+xml" class="bush"></object>
+            </div>
+            
+            <!-- Back bushes -->
+            <div class="layer back-bushes">
+                <div class="scroll-track bush-track">
+                    <div class="items">
+                        <object data="lab5_svg/but1.svg" type="image/svg+xml" class="bush bush1"></object>
+                        <object data="lab5_svg/but2.svg" type="image/svg+xml" class="bush bush2"></object>
+                        <object data="lab5_svg/but3.svg" type="image/svg+xml" class="bush bush3"></object>
+                    </div>
+                    <div class="items">
+                        <object data="lab5_svg/but1.svg" type="image/svg+xml" class="bush bush1"></object>
+                        <object data="lab5_svg/but2.svg" type="image/svg+xml" class="bush bush2"></object>
+                        <object data="lab5_svg/but3.svg" type="image/svg+xml" class="bush bush3"></object>
+                    </div>
                 </div>
-
-                <!-- main character centered; keep SVG animation by using object -->
-                <div class="layer character">
-                    <object data="lab5_svg/nohoi.svg" type="image/svg+xml" id="nohoi" class="nohoi"></object>
+            </div>
+            
+            <!-- Trees -->
+            <div class="layer trees">
+                <div class="scroll-track tree-track">
+                    <div class="items">
+                        <object data="lab5_svg/mod1.svg" type="image/svg+xml" class="tree tree1"></object>
+                        <object data="lab5_svg/mod2.svg" type="image/svg+xml" class="tree tree2"></object>
+                        <object data="lab5_svg/mod3.svg" type="image/svg+xml" class="tree tree3"></object>
+                    </div>
+                    <div class="items">
+                        <object data="lab5_svg/mod1.svg" type="image/svg+xml" class="tree tree1"></object>
+                        <object data="lab5_svg/mod2.svg" type="image/svg+xml" class="tree tree2"></object>
+                        <object data="lab5_svg/mod3.svg" type="image/svg+xml" class="tree tree3"></object>
+                    </div>
                 </div>
-
-                <!-- ground bar -->
-                <div id="ground" aria-hidden="true"></div>
-            </section>
+            </div>
+            
+            <!-- Main character -->
+            <div class="layer main-character">
+                <object data="lab5_svg/nohoi.svg" type="image/svg+xml" class="character"></object>
+            </div>
         </div>
+        <script src="/F.ITM202-25-26A/lab5/lab5Main.js"></script>
     </body>
 </html>

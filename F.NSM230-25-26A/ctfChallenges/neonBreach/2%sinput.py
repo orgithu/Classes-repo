@@ -7,7 +7,7 @@ def queueRequests(target, wordlists):
                            requestsPerConnection=100,
                            pipeline=False)
 
-    alphabet = list("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
+    alphabet = list("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()_+-=<>?,./;[]{}\|`~")
     max_pos = 10000
 
     for pos in range(1, max_pos + 1):
