@@ -214,32 +214,19 @@ def mPrint(st):
         for j in i:
             print(hex(j).replace('0x', '').upper(), end='\t')
         print()
-def ordToHex(st):
-    hx = ''
-    for i in st:
-        hx += hex(i).replace('0x', '').zfill(2)
-    return hx
+
 # Function to perform AES encryption
 def AES(Key, PlainText):
     keyList = st_2_16(Key)
     pList = st_2_16(PlainText)
     w = wlist(keyList)
     st0 = addRoundKey(pList, w[0:4])
-    for i in range(1, 11): # Rounds 1 to 10)
+    for i in range(1, 11): # Rounds 1 to 10
         st0 = subByte(st0, Sbox)
         st0 = shiftRow(st0)
         if i != 10:
             st0 = mix_columns(st0)
         st0 = addRoundKey(st0, w[4 * i:4 * i + 4])
-        print("Round:", i)
-        print(i,". Used key:")
-        # w[4*i:4*i+4] is a list of 4 words (each word is list of 4 bytes).
-        # mPrint expects a flat list of 16 bytes, so flatten first.
-        round_key_flat = []
-        for word in w[4 * i:4 * i + 4]:
-            round_key_flat.extend(word)
-        mPrint(round_key_flat)
-        print(i,". Encrypted plaintext: ",ordToHex(st0))
     return st0
 
 # Function to perform AES decryption
@@ -278,8 +265,8 @@ def unpad(text):
     padding_len = ord(text[-1])
     return text[:-padding_len]
 
-# Encrypt text with AES
-def encrypt_text(text, key_hex):
+# Encrypt text with AES (ECB mode for simplicity)
+def encrypt(text, key_hex):
     padded = pad(text)
     ciphertext = ""
     for i in range(0, len(padded), 16):
@@ -290,23 +277,10 @@ def encrypt_text(text, key_hex):
     return ciphertext
 
 # Decrypt hex string back to text
-def decrypt_text(cipher_hex, key_hex):
+def decrypt(cipher_hex, key_hex):
     plaintext = ""
     for i in range(0, len(cipher_hex), 32):  # 32 hex chars = 16 bytes
         block_hex = cipher_hex[i:i+32]
         decrypted = AES_de(key_hex, st_2_16(block_hex))
         plaintext += ''.join(chr(b) for b in decrypted)
     return unpad(plaintext)
-
-key = "0123456789abcdef0123456789abcdef"
-while True:
-    try:
-        plaintext = input("Enter plaintext: ")
-        if len(plaintext) < 16:
-            plaintext = plaintext.ljust(16, '\x00')
-        encrypted = encrypt_text(plaintext, key)
-        print("final:", encrypted)
-    except KeyboardInterrupt:
-        break
-    except Exception as e:
-        print("ALDAA", e)
