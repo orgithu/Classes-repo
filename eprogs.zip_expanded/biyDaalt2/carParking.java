@@ -1,12 +1,8 @@
 package biyDaalt2;
-
 import dataStructures.ArrayStack;
 import java.io.*;
 import java.util.ArrayList;
 
-/**
- * Car parking system using stack.
- */
 public class carParking extends ArrayStack {
     private ArrayList<String> commands;
     private ArrayList<String> outputs;
@@ -42,16 +38,31 @@ public class carParking extends ArrayStack {
             String plate = parts[1];
             Car car = new Car(plate);
             if (action.equals("A")) {
-                // Arrival
-                if (size() < 10) {
+            	boolean found = false;
+            	ArrayStack temp = new ArrayStack();
+            	while (!empty()) {
+            		Car topCar = (Car) pop();
+            		if (topCar.equals(car)) {
+            			found = true;
+            		} else {
+            			temp.push(topCar);
+            		}
+            	}
+                //arrival
+                if (size() < 10 && !found) {
                     push(car);
                     outputs.add("Arrival " + plate + " -> There is room.");
-                } else {
+                } else if(!found) {
                     outputs.add("Arrival " + plate + " -> Garage full, this car cannot enter.");
+                } else {
+                	outputs.add("Arrival "+ plate + " This car is already in garage.");
                 }
-                outputs.add("Current stack: " + getStackString());
+                while (!temp.empty()) {
+                    push(temp.pop());
+                }
+                //outputs.add("Current stack: " + getStackString());
             } else if (action.equals("D")) {
-                // Departure
+                //departure
                 boolean found = false;
                 int moved = 0;
                 ArrayStack temp = new ArrayStack();
@@ -70,11 +81,11 @@ public class carParking extends ArrayStack {
                 } else {
                     outputs.add("Departure " + plate + " -> This car not in the garage.");
                 }
-                // Push back the temp stack
+                //push back the temp stack
                 while (!temp.empty()) {
                     push(temp.pop());
                 }
-                outputs.add("Current stack: " + getStackString());
+                //outputs.add("Current stack: " + getStackString());
             }
         }
     }
@@ -88,7 +99,7 @@ public class carParking extends ArrayStack {
         ArrayStack temp = new ArrayStack();
         while (!empty()) {
             Car c = (Car) pop();
-            list.add(c.getLicensePlate()); // add to end for top to bottom
+            list.add(c.getLicensePlate()); //add to end for top to bottom
             temp.push(c);
         }
         while (!temp.empty()) {
@@ -98,7 +109,7 @@ public class carParking extends ArrayStack {
     }
 
     public static void main(String[] args) {
-        carParking cp = new carParking(10);
+        carParking cp = new carParking();
         cp.input();
         cp.process();
         cp.output();

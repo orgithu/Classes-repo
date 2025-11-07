@@ -1,20 +1,21 @@
 html {
     font-size: 64px;
-    font-family: "Courier New", Courier, monospace;
+    font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
 }
+
 body {
     margin: 0;
     display: flex;
 }
-/* make position relative so #vs absolute positions inside body bounds */
-body { position: relative; }
+
 #left, #right {
     flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
 }
+
 #left div, #right div, #vs {
     border-radius: 50%;
     display: flex;
@@ -22,16 +23,18 @@ body { position: relative; }
     justify-content: center;
     height: 2rem;
     width: 2rem;
-    transition: transform 180ms ease, width 180ms ease, height 180ms ease;
 }
+
 #right, #left div {
-    background-color: #eee;
+    background-color: #900;
     color: #eee;
 }
+
 #left, #right div {
     background-color: #eee;
-    color: #eee;
+    color: #900;
 }
+
 #vs {
     background-color: #000;
     color: #fff;
@@ -39,9 +42,4 @@ body { position: relative; }
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    transition: left 220ms ease;
-    pointer-events: none; /* allow clicks to pass through to left/right areas */
 }
-
-/* ensure the small circle that holds the number scales smoothly */
-#left .div-1, #right .div-1 { transition: transform 180ms ease, font-size 180ms ease; }

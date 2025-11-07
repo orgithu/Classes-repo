@@ -50,7 +50,7 @@ public class HashTable
      * @return location of matching element if found, otherwise return
      * location where an element with key theKey may be inserted
      * provided the hash table is not full */
-   private int search(Object theKey)
+   protected int search(Object theKey)
    {
       int i = Math.abs(theKey.hashCode()) % divisor;  // home bucket
       int j = i;    // start at home bucket
@@ -62,6 +62,31 @@ public class HashTable
       } while (j != i);          // returned to home bucket?
    
       return j;  // table full
+   }
+
+   /** remove the element with specified key and return it; return null if not found */
+   public Object remove(Object theKey)
+   {
+      int b = search(theKey);
+      if (table[b] == null || !table[b].key.equals(theKey))
+         return null; // not found
+
+      Object element = table[b].element;
+      // remove entry at b
+      table[b] = null;
+      size--;
+      // reinsert following cluster entries
+      int j = (b + 1) % divisor;
+      while (table[j] != null)
+      {
+         Object k = table[j].key;
+         Object e = table[j].element;
+         table[j] = null;
+         size--;
+         put(k, e);
+         j = (j + 1) % divisor;
+      }
+      return element;
    }
    
    /** @return element with specified key

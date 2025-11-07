@@ -1,8 +1,5 @@
 package biyDaalt2;
 
-/**
- * Car class representing a car with a license plate.
- */
 public class Car {
     private String licensePlate;
 

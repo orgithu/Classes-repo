@@ -16,7 +16,7 @@
     max-width: 1100px;
     margin: 0 auto;
     background-color: #CAEDFA;
-    animation: dayNightCycle 60s linear infinite;
+    animation: dayNightCycle 10s linear infinite;
     position: relative;
     overflow: hidden;
     transform-origin: center bottom;
