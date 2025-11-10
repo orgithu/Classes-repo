@@ -108,7 +108,7 @@ def SDES_block(key10, P, mode):
     k1, k2 = key_generate(key10) # Generate subkeys
     if mode == 'de': k2, k1 = k1, k2  # Swap keys for decryption
     
-    P = ip(ip8, P)               # Initial permutation (IP)
+    P = ip(ip8, P)                # Initial permutation (IP)
     P = rund(P, k1)              # Round 1
     P = rund(P, k2)              # Round 2
     P = P[4:] + P[0:4]            # Switch halves

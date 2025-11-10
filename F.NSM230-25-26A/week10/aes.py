@@ -284,3 +284,5 @@ def decrypt(cipher_hex, key_hex):
         decrypted = AES_de(key_hex, st_2_16(block_hex))
         plaintext += ''.join(chr(b) for b in decrypted)
     return unpad(plaintext)
+def xor_hex(h1, h2):
+    return ''.join(f'{(int(h1[i:i+2],16) ^ int(h2[i:i+2],16)):02x}' for i in range(0, len(h1), 2))
