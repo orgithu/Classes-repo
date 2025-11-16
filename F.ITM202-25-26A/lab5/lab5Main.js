@@ -1,7 +1,7 @@
 // lab5Main.js - Wait for SVG <object> assets to load then start scroll animations
 document.addEventListener('DOMContentLoaded', function () {
     const tracks = Array.from(document.querySelectorAll('.scroll-track'));
-    const objects = Array.from(document.querySelectorAll('.scroll-track object'));
+    const objects = Array.from(document.querySelectorAll('.scroll-track object'));  
 
     if (objects.length === 0) {
         // no external objects, start immediately

@@ -10,8 +10,8 @@ public class HashTable
    protected static class HashEntry
    {
       // data members
-      protected Object key;
-      protected Object element;
+      public Object key;
+      public Object element;
 
       // constructors
       private HashEntry() {}
@@ -165,9 +165,10 @@ public class HashTable
       h.put(new Integer(21), new Integer(21));
       h.output();
       System.out.println();
-      try {h.put(new Integer(99), new Integer(99));}
-      catch (Exception e)
-      {System.out.println(" No memory for 99");}
+      try {
+    	  h.put(new Integer(99), new Integer(99));
+    	  } catch (Exception e) {
+    		  System.out.println(" No memory for 99");}
       System.out.println();
       // update element
       h.put(new Integer(7), new Integer(29));
