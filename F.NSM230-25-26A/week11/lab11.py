@@ -18,5 +18,5 @@ numbers = lcg(a, c, m, seed, N)
 freq = Counter(numbers)
 
 print("Seed:", seed)
-print("Unique numbers:", len(freq))
+print("Numbers generated:", len(freq))
 print("Most common:", freq.most_common(10))
