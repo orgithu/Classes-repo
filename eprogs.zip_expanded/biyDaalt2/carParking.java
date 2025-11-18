@@ -20,7 +20,7 @@ public class carParking extends ArrayStack {
     }
     public void input() {
         try {
-            BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\orgil\\OneDrive\\Documents\\GitHub\\Classes-repo\\eprogs.zip_expanded\\biyDaalt2\\cars.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("/home/orgdg/Documents/Classes-repo/eprogs.zip_expanded/biyDaalt2/cars.txt"));
             String line;
             while ((line = br.readLine()) != null) {
                 commands.add(line.trim());
