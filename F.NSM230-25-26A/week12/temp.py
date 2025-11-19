@@ -36,8 +36,9 @@ def convertToChar(P): #len=4
         l = int(str(P)[2:])
         r = int(str(P)[:2])
         result = st[r]+st[l]
-        list_result = list(result)
         return str(result)
+    elif (len(str(P)) > 4):
+        raise ValueError("len is more than 4")
     else:
         a = '0' + str(P)
         return convertToChar(a)
@@ -55,15 +56,49 @@ def mypow(a, b, n):
 def rsa(x, k):
     return mypow(x, k[0], k[1])
 
-def keys(p, q):
-    e = 7
+def keys(p=int, q=int):
+    e = 11
     n = p * q
     pn = (p - 1) * (q - 1)
     d = inv(e, pn)
     return [e, n], [d, n]
 
-pub, priv = keys(7, 11) #key
-m = 88
-c = rsa(m, pub)
+def encrypt(pt=str,k=list):
+    if len(pt) % 4 != 0:
+        pt = ' ' + pt
+        print(list(pt),len(pt))
+        return encrypt(pt, k)
+    i = 0
+    strC = []
+    while i < len(pt):
+        l = charToDecimal(pt[i])
+        r = charToDecimal(pt[i+1])
+        P = int(str(l)+str(r))
+        C = rsa(P,k)
+        strC.append(str(C))
+        i += 2
+    return strC
+
+def decrypt(ct,k):
+    i = 0
+    strP = []
+    while i < len(ct):
+        P1 = rsa(int(ct[i]),k)
+        P2 = rsa(int(ct[i+1]),k)
+        strP.append(convertToChar(P1))
+        strP.append(convertToChar(P2))
+        i += 2
+    if strP[0] == ' ' or strP[0] == '  ':
+        del strP[0]
+    return strP
+
+PU,PR = keys(73, 151)
+plaintext = "SDAVESVE"
+ciphertext = encrypt(plaintext,PR)
+dePt = decrypt(ciphertext,PU)
+print("ciphertext:",ciphertext)
+print("plaintext",''.join(dePt))
+
+"""c = rsa(m, pub)
 d = rsa(c, priv)
-print(c, d)
+print(c, d)"""
