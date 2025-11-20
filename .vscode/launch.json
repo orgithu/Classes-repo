@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Test",
+            "request": "launch",
+            "mainClass": "lab5.Test",
+            "projectName": "eprogs.zip_expanded"
+        },
+        {
+            "type": "java",
+            "name": "BinarySearchTree",
+            "request": "launch",
+            "mainClass": "dataStructures.BinarySearchTree",
+            "projectName": "eprogs.zip_expanded"
+        },
+        {
+            "type": "java",
             "name": "carParking",
             "request": "launch",
             "mainClass": "biyDaalt2.carParking",
