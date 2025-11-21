@@ -13,7 +13,6 @@ p and q must be big as possible. in practice, 7-11 digit prime numbers.
 """
 import string
 st=list(string.ascii_lowercase+string.ascii_uppercase+"0123456789 ,;@?")
-
 def egcd(a, b):
     if a == 0:
         return b, 0, 1
@@ -66,7 +65,6 @@ def keys(p=int, q=int):
 def encrypt(pt=str,k=list):
     if len(pt) % 4 != 0:
         pt = ' ' + pt
-        print(list(pt),len(pt))
         return encrypt(pt, k)
     i = 0
     strC = []
@@ -91,14 +89,11 @@ def decrypt(ct,k):
     if strP[0] == ' ' or strP[0] == '  ':
         del strP[0]
     return strP
-
-PU,PR = keys(73, 151)
-plaintext = "SDAVESVE"
-ciphertext = encrypt(plaintext,PR)
-dePt = decrypt(ciphertext,PU)
+p = 1313131313131313131313131 #25 digit
+q = 151
+PU,PR = keys(p, q)
+plaintext = "a0"
+ciphertext = encrypt(plaintext,PU)
+dePt = decrypt(ciphertext,PR)
 print("ciphertext:",ciphertext)
 print("plaintext",''.join(dePt))
-
-"""c = rsa(m, pub)
-d = rsa(c, priv)
-print(c, d)"""
