@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <div id="input">
+            <input id="n1" type="number" placeholder="n1">
+            <input id="n2" type="number" placeholder="n2">
+            <button type="button" onclick="loadXMLDoc()">calculate</button>
+        </div>
+        <div id="result"></div>
+        <script>
+            function loadXMLDoc() {
+                var xhttp = new XMLHttpRequest();
+                var n1 = document.getElementById("n1").value;
+                var n2 = document.getElementById("n2").value;
+                if (!n1 || !n2) {
+                    document.getElementById("result").textContent = "Please enter both numbers.";
+                    return;
+                }
+                xhttp.open("POST", "post.asp", true);
+                xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState === 4 && this.status === 200) {
+                        document.getElementById("result").innerHTML = this.responseText;
+                    }
+                };
+                xhttp.send("n1=" + encodeURIComponent(n1) + "&n2=" + encodeURIComponent(n2));
+            }
+        </script>
+    </body>
+</html>
