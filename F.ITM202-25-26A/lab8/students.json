@@ -1,0 +1,29 @@
+[
+  {
+    "surname": "Bat",
+    "name": "Munkhzul",
+    "studentCode": "b249911001",
+    "age": 20,
+    "birthDate": "2005-02-14",
+    "gpa": 3.8,
+    "onLeave": false
+  },
+  {
+    "surname": "Bold",
+    "name": "Gerelt",
+    "studentCode": "b249911002",
+    "age": 22,
+    "birthDate": "2003-07-03",
+    "gpa": 3.2,
+    "onLeave": true
+  },
+  {
+    "surname": "Enkh",
+    "name": "Sarnai",
+    "studentCode": "b249911003",
+    "age": 21,
+    "birthDate": "2004-03-09",
+    "gpa": 3.95,
+    "onLeave": false
+  }
+]

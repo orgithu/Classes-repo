@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lab 8 — Нэг хуудаст вэб сайт (AJAX)</title>
+</head>
+<body>
+  <header>
+    <h1>Lab 8 AJAX</h1>
+    <ul>
+      <li>1. async AJAX POST (fetch) - сервер рүү өгөгдөл илгээж хариуг харуулна</li>
+      <li>2. sync AJAX GET (XMLHttpRequest sync) - серверээс текст хүлээн авч харуулна</li>
+      <li>3. async AJAX GET (fetch) - read students.json</li>
+    </ul>
+  </header>
+
+  <section id="asyncPost">
+    <h2>1.AJAX POST (fetch)</h2>
+    <div class="row">
+      <label for="surname">Овог:</label>
+      <input id="surname" type="text" placeholder="Овог" />
+    </div>
+    <div class="row">
+      <label for="name">Нэр:</label>
+      <input id="name" type="text" placeholder="Нэр" />
+    </div>
+    <div class="row">
+      <label for="studentCode">Оюутны код:</label>
+      <input id="studentCode" type="text" placeholder="b241234567" />
+    </div>
+    <div class="row">
+      <label for="age">Нас:</label>
+      <input id="age" type="number" min="15" max="120" />
+    </div>
+    <div class="row">
+      <label for="birthDate">Төрсөн огноо:</label>
+      <input id="birthDate" type="date" />
+    </div>
+    <div class="row">
+      <label for="gpa">GPA:</label>
+      <input id="gpa" type="number" step="0.01" min="0" max="4" />
+    </div>
+    <div class="row">
+      <label for="onLeave">Чөлөө авсан:</label>
+      <input id="onLeave" type="checkbox" />
+    </div>
+    <div class="row">
+      <button id="postBtn">POST</button>
+    </div>
+    <div class="result" id="postResult">result</div>
+  </section>
+
+  <section id="syncGet">
+    <h2>2.sync AJAX GET (XMLHttpRequest)</h2>
+    <div class="row">
+      <label for="qparam">Query:</label>
+      <input id="qparam" type="text" value="hello" />
+      <button id="syncBtn">GET</button>
+    </div>
+    <div class="result" id="syncResult">Хариу энд харагдана...</div>
+  </section>
+
+  <section id="asyncGetJson">
+    <h2>3.async AJAX GET (students.json to хүснэгт)</h2>
+    <div class="row">
+      <button id="loadStudents">Оюутнуудыг унших</button>
+    </div>
+    <div class="result">
+      <table id="studentsTable">
+        <thead>
+          <tr>
+            <th>Овог</th>
+            <th>Нэр</th>
+            <th>Код</th>
+            <th>Нас</th>
+            <th>Төрсөн огноо</th>
+            <th>Голч дүн</th>
+            <th>Чөлөө</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <script>
+    // 1) async POST (fetch)
+    document.getElementById('postBtn').addEventListener('click', async () => {
+      const data = {
+        surname: document.getElementById('surname').value,
+        name: document.getElementById('name').value,
+        studentCode: document.getElementById('studentCode').value,
+        age: parseInt(document.getElementById('age').value) || null,
+        // birthDate from the date input is yyyy-mm-dd which is compatible with the JSON
+        birthDate: document.getElementById('birthDate').value || null,
+        gpa: parseFloat(document.getElementById('gpa').value) || null,
+        onLeave: document.getElementById('onLeave').checked
+      };
+      const resultDiv = document.getElementById('postResult');
+      try {
+        const response = await fetch('/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+        const json = await response.json();
+        resultDiv.textContent = 'response: ' + JSON.stringify(json);
+      } catch (err) {
+        resultDiv.textContent = 'error!!!!: ' + err.message;
+      }
+    });
+
+    // 2)sync GET (XMLHttpRequest)
+    document.getElementById('syncBtn').addEventListener('click', () => {
+      const q = encodeURIComponent(document.getElementById('qparam').value || '');
+      const url = '/sync-data?q=' + q;
+      const resultDiv = document.getElementById('syncResult');
+      try {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', url, false);
+        xhr.send(null);
+        if (xhr.status >= 200 && xhr.status < 300) {
+          resultDiv.textContent = 'Синхрон GET хариу: ' + xhr.responseText;
+        } else {
+          resultDiv.textContent = 'Хариуны алдаа: ' + xhr.status + ' - ' + xhr.statusText;
+        }
+      } catch (err) {
+        resultDiv.textContent = 'Алдаа: ' + err.message;
+      }
+    });
+    function formatDateYMDToDMY(ymd) {
+      // expects yyyy-mm-dd. Converts to dd/MM/yyyy
+      if (!ymd) return '';
+      const parts = ymd.split('-');
+      if (parts.length !== 3) return ymd;
+      const [y,m,d] = parts;
+      return `${d}/${m}/${y}`;
+    }
+
+    // 3) async GET (fetch students.json)
+    async function renderStudents() {
+      const tbody = document.querySelector('#studentsTable tbody');
+      tbody.innerHTML = '';
+      try {
+        const resp = await fetch('students.json');
+        if (!resp.ok) throw new Error('Failed to load students.json: ' + resp.status);
+        const students = await resp.json();
+        students.forEach(s => {
+          const tr = document.createElement('tr');
+          const onLeaveText = s.onLeave ? 'Тийм' : 'Үгүй';
+          const birthVal = s.birthDate || '';
+          const formattedBirth = birthVal ? formatDateYMDToDMY(birthVal) : '';
+          tr.innerHTML = `
+            <td>${escapeHTML(s.surname)}</td>
+            <td>${escapeHTML(s.name)}</td>
+            <td>${escapeHTML(s.studentCode)}</td>
+            <td>${Number(s.age)}</td>
+            <td><input type="date" value="${escapeHTML(birthVal)}" readonly aria-readonly="true" title="${escapeHTML(formattedBirth)}"> <div>${escapeHTML(formattedBirth)}</div></td>
+            <td>${Number(s.gpa).toFixed(2)}</td>
+            <td>${onLeaveText}</td>`;
+          tbody.appendChild(tr);
+        });
+        if (students.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="7">Оюутнууд олдсонгүй</td></tr>';
+        }
+      } catch (err) {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td colspan="7">Алдаа: ${escapeHTML(err.message)}</td>`;
+        document.querySelector('#studentsTable tbody').appendChild(tr);
+      }
+    }
+    document.getElementById('loadStudents').addEventListener('click', renderStudents);
+  </script>
+</body>
+</html>
