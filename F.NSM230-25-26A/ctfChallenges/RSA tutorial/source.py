@@ -1,8 +1,10 @@
-from Crypto.Util.number import getPrime
-from Crypto.Util.number import bytes_to_long as b2l
+try:
+	from Crypto.Util.number import getPrime, bytes_to_long as b2l
+except Exception:
+	from Cryptodome.Util.number import getPrime, bytes_to_long as b2l
 
-from secret import flag
-
+# placeholder flag value (replace with the actual bytes when using this script)
+flag = b"flag"
 
 p = getPrime(256)
 q = getPrime(256)

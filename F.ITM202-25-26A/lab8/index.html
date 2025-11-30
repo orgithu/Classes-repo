@@ -151,14 +151,26 @@
           const onLeaveText = s.onLeave ? 'Тийм' : 'Үгүй';
           const birthVal = s.birthDate || '';
           const formattedBirth = birthVal ? formatDateYMDToDMY(birthVal) : '';
-          tr.innerHTML = `
-            <td>${escapeHTML(s.surname)}</td>
-            <td>${escapeHTML(s.name)}</td>
-            <td>${escapeHTML(s.studentCode)}</td>
-            <td>${Number(s.age)}</td>
-            <td><input type="date" value="${escapeHTML(birthVal)}" readonly aria-readonly="true" title="${escapeHTML(formattedBirth)}"> <div>${escapeHTML(formattedBirth)}</div></td>
-            <td>${Number(s.gpa).toFixed(2)}</td>
-            <td>${onLeaveText}</td>`;
+
+          const tdSurname = document.createElement('td'); tdSurname.textContent = s.surname || '';
+          const tdName = document.createElement('td'); tdName.textContent = s.name || '';
+          const tdCode = document.createElement('td'); tdCode.textContent = s.studentCode || '';
+          const tdAge = document.createElement('td'); tdAge.textContent = Number(s.age);
+          const tdBirth = document.createElement('td');
+          const birthInput = document.createElement('input');
+          birthInput.type = 'date'; birthInput.value = birthVal; birthInput.readOnly = true;
+          const birthDiv = document.createElement('div'); birthDiv.textContent = formattedBirth;
+          tdBirth.appendChild(birthInput); tdBirth.appendChild(birthDiv);
+          const tdGpa = document.createElement('td'); tdGpa.textContent = Number(s.gpa).toFixed(2);
+          const tdLeave = document.createElement('td'); tdLeave.textContent = onLeaveText;
+
+          tr.appendChild(tdSurname);
+          tr.appendChild(tdName);
+          tr.appendChild(tdCode);
+          tr.appendChild(tdAge);
+          tr.appendChild(tdBirth);
+          tr.appendChild(tdGpa);
+          tr.appendChild(tdLeave);
           tbody.appendChild(tr);
         });
         if (students.length === 0) {

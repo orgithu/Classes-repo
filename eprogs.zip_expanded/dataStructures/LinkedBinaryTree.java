@@ -230,10 +230,11 @@ public class LinkedBinaryTree implements BinaryTree
       y.makeTree(new Integer(1), a, a);
       z.makeTree(new Integer(2), a, a);
       x.makeTree(new Integer(3), y, z);
-      y.makeTree(new Integer(4), x, a);
+      y.makeTree(4, x, a);
+      z.makeTree(5, y, x);
 
       System.out.println("Preorder sequence is ");
-      y.preOrderOutput();
+      z.preOrderOutput();
       System.out.println();
 
       System.out.println("Inorder sequence is ");

@@ -6,6 +6,27 @@
     "configurations": [
         {
             "type": "java",
+            "name": "SimulatedSpace2",
+            "request": "launch",
+            "mainClass": "dataStructures.SimulatedSpace2",
+            "projectName": "eprogs.zip_expanded"
+        },
+        {
+            "type": "java",
+            "name": "Expression",
+            "request": "launch",
+            "mainClass": "lab5.Expression",
+            "projectName": "eprogs.zip_expanded"
+        },
+        {
+            "type": "java",
+            "name": "LinkedBinaryTree",
+            "request": "launch",
+            "mainClass": "dataStructures.LinkedBinaryTree",
+            "projectName": "eprogs.zip_expanded"
+        },
+        {
+            "type": "java",
             "name": "Test",
             "request": "launch",
             "mainClass": "lab5.Test",
