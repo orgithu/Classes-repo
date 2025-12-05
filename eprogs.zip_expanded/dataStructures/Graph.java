@@ -424,7 +424,7 @@ public abstract class Graph
 
       int n = vertices();
       int e = edges();
-      // set up array of graph edges
+      // set up array of graph edges1
       ComparableEdge [] edge = new ComparableEdge [e + 1];
       int k = 0;        // cursor for edge[]
       for (int i = 1; i <= n; i++)

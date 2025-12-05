@@ -1,27 +1,14 @@
-"""Elliptic Curve Diffie-Hellman demo and helpers.
+import x981
+import time
 
-This is an educational/demo implementation. Function and variable names use
-camelCase and type hints avoid complex typing imports as requested.
-"""
-import secrets
-
-
-def isOnCurve(P, a: int, b: int, q: int) -> bool:
-    if P is None:
-        return True
-    x, y = P
-    return (y * y - (x * x * x + a * x + b)) % q == 0
-
-
-def pointNeg(P, q: int):
+def pointNeg(P, q):
     if P is None:
         return None
     x, y = P
     return (x, (-y) % q)
 
 
-def pointAdd(P, Q, a: int, q: int):
-    """Add two points P and Q on the curve over F_q. Handles infinity."""
+def pointAdd(P, Q, a, q):
     if P is None:
         return Q
     if Q is None:
@@ -45,12 +32,7 @@ def pointAdd(P, Q, a: int, q: int):
     return (x3, y3)
 
 
-def scalarMult(k: int, P, a: int, q: int):
-    """Double-and-add scalar multiplication: compute k * P."""
-    if k % q == 0 or P is None:
-        return None
-    if k < 0:
-        return scalarMult(-k, pointNeg(P, q), a, q)
+def scalarMult(k, P, a, q):
 
     result = None
     addend = P
@@ -62,26 +44,20 @@ def scalarMult(k: int, P, a: int, q: int):
         k >>= 1
     return result
 
-
-def keyGen(G, nBits: int, a: int, b: int, q: int):
-    """Generate private/public key pair. nBits controls private size."""
-    priv = secrets.randbelow(2 ** nBits - 1) + 1
+def keyGen(G, nBits, a, b, q):
+    priv = x981.ctrRand(2 ** nBits)+1
     pub = scalarMult(priv, G, a, q)
     return priv, pub
-    print("Shared secret matches — ECC Diffie-Hellman successful")
-
-
-def sharedSecret(priv: int, peerPub, a: int, q: int):
+ 
+def sharedSecret(priv, peerPub, a, q):
     return scalarMult(priv, peerPub, a, q)
 
-
 if __name__ == "__main__":
+    start = time.time_ns()
     q = 257
     a = 0
     b = -4
-    G = (56, 248)
-
-    assert isOnCurve(G, a, b, q), "G is not on curve"
+    G = (2, 2)
 
     alicePriv, alicePub = keyGen(G, nBits=10, a=a, b=b, q=q)
     bobPriv, bobPub = keyGen(G, nBits=10, a=a, b=b, q=q)
@@ -96,5 +72,6 @@ if __name__ == "__main__":
 
     print("Alice computed K:", K1)
     print("Bob computed   K:", K2)
-
-    print("Shared secret matches — ECC Diffie-Hellman successful")
+    end = time.time_ns()
+    dur = end - start
+    print(dur/10**9,'s')

@@ -5,9 +5,9 @@ package dataStructures;
 public class BinaryTreeNode
 {
    // package visible data members
-   Object element;
-   BinaryTreeNode leftChild;    // left subtree
-   BinaryTreeNode rightChild;   // right subtree
+   public Object element;
+   public BinaryTreeNode leftChild;    // left subtree
+   public BinaryTreeNode rightChild;   // right subtree
    
    // constructors
    public BinaryTreeNode() {}

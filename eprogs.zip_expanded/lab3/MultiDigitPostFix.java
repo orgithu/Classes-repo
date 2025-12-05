@@ -93,7 +93,7 @@ public class MultiDigitPostFix {
 				continue;
 			}
 			switch (choice) {
-				case 1: // create random n elements
+				case 1:
 					System.out.print("string: ");
 					try {
 						String s = scanner.nextLine().trim();

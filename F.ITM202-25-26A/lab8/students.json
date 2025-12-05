@@ -1,29 +1,42 @@
 [
   {
-    "surname": "Bat",
-    "name": "Munkhzul",
-    "studentCode": "b249911001",
+    "id": 1,
+    "surname": "Батбаатар",
+    "name": "Дорж",
+    "studentCode": "b241870001",
     "age": 20,
-    "birthDate": "2005-02-14",
-    "gpa": 3.8,
+    "birthDate": "2005-05-15",
+    "gpa": 3.9,
     "onLeave": false
   },
   {
-    "surname": "Bold",
-    "name": "Gerelt",
-    "studentCode": "b249911002",
-    "age": 22,
-    "birthDate": "2003-07-03",
-    "gpa": 3.2,
+    "id":2,
+    "surname": "Сараа",
+    "name": "Оюун",
+    "studentCode": "b241870002",
+    "age": 21,
+    "birthDate": "2004-03-22",
+    "gpa": 3.59,
     "onLeave": true
   },
   {
-    "surname": "Enkh",
-    "name": "Sarnai",
-    "studentCode": "b249911003",
-    "age": 21,
-    "birthDate": "2004-03-09",
-    "gpa": 4,
+    "id":3,
+    "surname": "Тэмүүжин",
+    "name": "Болд",
+    "studentCode": "b241870003",
+    "age": 19,
+    "birthDate": "2006-11-10",
+    "gpa": 2.79,
+    "onLeave": false
+  },
+  {
+    "id":4,
+    "surname": "Нараа",
+    "name": "Сувд",
+    "studentCode": "b241870004",
+    "age": 22,
+    "birthDate": "2003-07-30",
+    "gpa": 0.1,
     "onLeave": false
   }
 ]

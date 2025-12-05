@@ -1,188 +1,94 @@
 <!DOCTYPE html>
 <html lang="mn">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lab 8 — Нэг хуудаст вэб сайт (AJAX)</title>
+    <meta charset="UTF-8">
+    <title>Лабораторийн ажил 8 - Нэг хуудаст вэб сайт</title>
 </head>
 <body>
-  <header>
-    <h1>Lab 8 AJAX</h1>
-    <ul>
-      <li>1. async AJAX POST (fetch) - сервер рүү өгөгдөл илгээж хариуг харуулна</li>
-      <li>2. sync AJAX GET (XMLHttpRequest sync) - серверээс текст хүлээн авч харуулна</li>
-      <li>3. async AJAX GET (fetch) - read students.json</li>
-    </ul>
-  </header>
+    <h1>Лабораторийн ажил 8</h1>
 
-  <section id="asyncPost">
-    <h2>1.AJAX POST (fetch)</h2>
-    <div class="row">
-      <label for="surname">Овог:</label>
-      <input id="surname" type="text" placeholder="Овог" />
-    </div>
-    <div class="row">
-      <label for="name">Нэр:</label>
-      <input id="name" type="text" placeholder="Нэр" />
-    </div>
-    <div class="row">
-      <label for="studentCode">Оюутны код:</label>
-      <input id="studentCode" type="text" placeholder="b241234567" />
-    </div>
-    <div class="row">
-      <label for="age">Нас:</label>
-      <input id="age" type="number" min="15" max="120" />
-    </div>
-    <div class="row">
-      <label for="birthDate">Төрсөн огноо:</label>
-      <input id="birthDate" type="date" />
-    </div>
-    <div class="row">
-      <label for="gpa">GPA:</label>
-      <input id="gpa" type="number" step="0.01" min="0" max="4" />
-    </div>
-    <div class="row">
-      <label for="onLeave">Чөлөө авсан:</label>
-      <input id="onLeave" type="checkbox" />
-    </div>
-    <div class="row">
-      <button id="postBtn">POST</button>
-    </div>
-    <div class="result" id="postResult">result</div>
-  </section>
+    <h2>1. Асинхрон AJAX POST</h2>
+    <button onclick="loadPagePost()">POST to get page1</button>
+    <div id="postContent"></div>
 
-  <section id="syncGet">
-    <h2>2.sync AJAX GET (XMLHttpRequest)</h2>
-    <div class="row">
-      <label for="qparam">Query:</label>
-      <input id="qparam" type="text" value="hello" />
-      <button id="syncBtn">GET</button>
-    </div>
-    <div class="result" id="syncResult">Хариу энд харагдана...</div>
-  </section>
+    <h2>2. Синхрон AJAX GET</h2>
+    <button onclick="loadPageGetSync()">GET page2</button>
+    <div id="getContent"></div>
 
-  <section id="asyncGetJson">
-    <h2>3.async AJAX GET (students.json to хүснэгт)</h2>
-    <div class="row">
-      <button id="loadStudents">Оюутнуудыг унших</button>
-    </div>
-    <div class="result">
-      <table id="studentsTable">
+    <h2>3. Асинхрон AJAX GET</h2>
+    <button onclick="loadStudents()">GET student info</button>
+    <table id="studentsTable">
         <thead>
-          <tr>
-            <th>Овог</th>
-            <th>Нэр</th>
-            <th>Код</th>
-            <th>Нас</th>
-            <th>Төрсөн огноо</th>
-            <th>Голч дүн</th>
-            <th>Чөлөө</th>
-          </tr>
+            <tr>
+                <th>Овог</th>
+                <th>Нэр</th>
+                <th>Оюутны код</th>
+                <th>Нас</th>
+                <th>Төрсөн огноо</th>
+                <th>number</th>
+                <th>Голч дүн</th>
+                <th>Чөлөө авсан эсэх</th>
+            </tr>
         </thead>
-        <tbody></tbody>
-      </table>
-    </div>
-  </section>
+        <tbody id="studentsBody">
+        </tbody>
+    </table>
 
-  <script>
-    // 1) async POST (fetch)
-    document.getElementById('postBtn').addEventListener('click', async () => {
-      const data = {
-        surname: document.getElementById('surname').value,
-        name: document.getElementById('name').value,
-        studentCode: document.getElementById('studentCode').value,
-        age: parseInt(document.getElementById('age').value) || null,
-        // birthDate from the date input is yyyy-mm-dd which is compatible with the JSON
-        birthDate: document.getElementById('birthDate').value || null,
-        gpa: parseFloat(document.getElementById('gpa').value) || null,
-        onLeave: document.getElementById('onLeave').checked
-      };
-      const resultDiv = document.getElementById('postResult');
-      try {
-        const response = await fetch('/submit', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data),
-        });
-        const json = await response.json();
-        resultDiv.textContent = 'response: ' + JSON.stringify(json);
-      } catch (err) {
-        resultDiv.textContent = 'error!!!!: ' + err.message;
-      }
-    });
-
-    // 2)sync GET (XMLHttpRequest)
-    document.getElementById('syncBtn').addEventListener('click', () => {
-      const q = encodeURIComponent(document.getElementById('qparam').value || '');
-      const url = '/sync-data?q=' + q;
-      const resultDiv = document.getElementById('syncResult');
-      try {
-        const xhr = new XMLHttpRequest();
-        xhr.open('GET', url, false);
-        xhr.send(null);
-        if (xhr.status >= 200 && xhr.status < 300) {
-          resultDiv.textContent = 'Синхрон GET хариу: ' + xhr.responseText;
-        } else {
-          resultDiv.textContent = 'Хариуны алдаа: ' + xhr.status + ' - ' + xhr.statusText;
+    <script>
+        // 1. Асинхрон AJAX POST
+        function loadPagePost() {
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', '/page1', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    document.getElementById('postContent').innerHTML = xhr.responseText;
+                }
+            };
+            xhr.send('data=sample');
         }
-      } catch (err) {
-        resultDiv.textContent = 'Алдаа: ' + err.message;
-      }
-    });
-    function formatDateYMDToDMY(ymd) {
-      // expects yyyy-mm-dd. Converts to dd/MM/yyyy
-      if (!ymd) return '';
-      const parts = ymd.split('-');
-      if (parts.length !== 3) return ymd;
-      const [y,m,d] = parts;
-      return `${d}/${m}/${y}`;
-    }
 
-    // 3) async GET (fetch students.json)
-    async function renderStudents() {
-      const tbody = document.querySelector('#studentsTable tbody');
-      tbody.innerHTML = '';
-      try {
-        const resp = await fetch('students.json');
-        if (!resp.ok) throw new Error('Failed to load students.json: ' + resp.status);
-        const students = await resp.json();
-        students.forEach(s => {
-          const tr = document.createElement('tr');
-          const onLeaveText = s.onLeave ? 'Тийм' : 'Үгүй';
-          const birthVal = s.birthDate || '';
-          const formattedBirth = birthVal ? formatDateYMDToDMY(birthVal) : '';
-
-          const tdSurname = document.createElement('td'); tdSurname.textContent = s.surname || '';
-          const tdName = document.createElement('td'); tdName.textContent = s.name || '';
-          const tdCode = document.createElement('td'); tdCode.textContent = s.studentCode || '';
-          const tdAge = document.createElement('td'); tdAge.textContent = Number(s.age);
-          const tdBirth = document.createElement('td');
-          const birthInput = document.createElement('input');
-          birthInput.type = 'date'; birthInput.value = birthVal; birthInput.readOnly = true;
-          const birthDiv = document.createElement('div'); birthDiv.textContent = formattedBirth;
-          tdBirth.appendChild(birthInput); tdBirth.appendChild(birthDiv);
-          const tdGpa = document.createElement('td'); tdGpa.textContent = Number(s.gpa).toFixed(2);
-          const tdLeave = document.createElement('td'); tdLeave.textContent = onLeaveText;
-
-          tr.appendChild(tdSurname);
-          tr.appendChild(tdName);
-          tr.appendChild(tdCode);
-          tr.appendChild(tdAge);
-          tr.appendChild(tdBirth);
-          tr.appendChild(tdGpa);
-          tr.appendChild(tdLeave);
-          tbody.appendChild(tr);
-        });
-        if (students.length === 0) {
-          tbody.innerHTML = '<tr><td colspan="7">Оюутнууд олдсонгүй</td></tr>';
+        // 2. Синхрон AJAX GET
+        function loadPageGetSync() {
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', '/page2', false); // Синхрон
+            xhr.send();
+            if (xhr.status === 200) {
+                document.getElementById('getContent').innerHTML = xhr.responseText;
+            }
         }
-      } catch (err) {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `<td colspan="7">Алдаа: ${escapeHTML(err.message)}</td>`;
-        document.querySelector('#studentsTable tbody').appendChild(tr);
-      }
-    }
-    document.getElementById('loadStudents').addEventListener('click', renderStudents);
-  </script>
+
+        // 3. Асинхрон AJAX GET JSON
+        function loadStudents() {
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', '/students', true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    const students = JSON.parse(xhr.responseText);
+                    displayStudents(students);
+                }
+            };
+            xhr.send();
+        }
+
+        function displayStudents(students) {
+            const tbody = document.getElementById('studentsBody');
+            tbody.innerHTML = '';
+            students.forEach(student => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${student.surname}</td>
+                    <td>${student.name}</td>
+                    <td>${student.studentCode}</td>
+                    <td>${student.age}</td>
+                    <td>${student.birthDate}</td>
+                    <td>${student.id}</td>
+                    <td>${student.gpa}</td>
+                    <td>${student.onLeave ? 'Тийм' : 'Үгүй'}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+    </script>
 </body>
 </html>

@@ -16,6 +16,10 @@ public class Edge
       vertex2 = theVertex2;
    }
 
+   // getters
+   public int getVertex1() { return vertex1; }
+   public int getVertex2() { return vertex2; }
+
    // convert to string suitable for output
    public String toString()
    {

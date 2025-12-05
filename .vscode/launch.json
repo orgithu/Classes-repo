@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "KruskalVisualizer",
+            "request": "launch",
+            "mainClass": "biyDaalt3.KruskalVisualizer",
+            "projectName": "eprogs.zip_expanded"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "biyDaalt3.Main",
+            "projectName": "eprogs.zip_expanded"
+        },
+        {
+            "type": "java",
             "name": "SimulatedSpace2",
             "request": "launch",
             "mainClass": "dataStructures.SimulatedSpace2",

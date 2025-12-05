@@ -7,7 +7,7 @@ import java.lang.reflect.*;
 public class LinkedBinaryTree implements BinaryTree
 {
    // instance data member
-   BinaryTreeNode root;  // root node
+   public BinaryTreeNode root;  // root node
 
    // class data members
    static Method visit;      // visit method to use during a traversal
