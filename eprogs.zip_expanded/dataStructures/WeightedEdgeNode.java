@@ -16,7 +16,6 @@ public class WeightedEdgeNode extends EdgeNode
       super(theVertex);
       weight = theWeight;
    }
-
    // convert to a String
    public String toString()
       {return String.valueOf(vertex) + " " + weight.toString();}

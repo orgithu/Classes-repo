@@ -16,7 +16,9 @@ public class WeightedEdge extends Edge
       super(theVertex1, theVertex2);
       weight = theWeight;
    }
-
+   public int getWeight() {
+      return (int)weight;
+   }
    // convert to string suitable for output
    public String toString()
    {

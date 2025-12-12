@@ -115,32 +115,33 @@ def strToList(st=str):
     for i in temp:
         ls.append(int(i,16))
     return ls
-start = time.time_ns()
-p = 1313131313131313131313131 #25 digit
-q = 1304313049130631309313099
-PU,PR = keys(p, q)
-#plaintext = "a0"
-"""ciphertext = encrypt(plaintext,PU)
-dePt = decrypt(ciphertext,PR)
-print("ciphertext:",ciphertext)
-print("plaintext",''.join(dePt))"""
+if __name__ == "__main__":
+    start = time.time_ns()
+    p = 1313131313131313131313131 #25 digit
+    q = 1304313049130631309313099
+    PU,PR = keys(p, q)
+    #plaintext = "a0"
+    """ciphertext = encrypt(plaintext,PU)
+    dePt = decrypt(ciphertext,PR)
+    print("ciphertext:",ciphertext)
+    print("plaintext",''.join(dePt))"""
 
 
 
-with open("/home/orgdg/Documents/Classes-repo/F.NSM230-25-26A/week12/plain.txt","r") as f:
-    plaintext = f.read()
-ciphertext = encrypt(plaintext,PU)
+    with open("/home/orgdg/Documents/Classes-repo/F.NSM230-25-26A/week12/plain.txt","r") as f:
+        plaintext = f.read()
+    ciphertext = encrypt(plaintext,PU)
 
-with open("/home/orgdg/Documents/Classes-repo/F.NSM230-25-26A/week12/cipher.txt","w") as f:
-    f.write(ciphertext)
+    with open("/home/orgdg/Documents/Classes-repo/F.NSM230-25-26A/week12/cipher.txt","w") as f:
+        f.write(ciphertext)
 
-with open("/home/orgdg/Documents/Classes-repo/F.NSM230-25-26A/week12/cipher.txt","r") as f:
-    ciphertext1 = f.read()
-decrypted = decrypt(ciphertext1,PR)
+    with open("/home/orgdg/Documents/Classes-repo/F.NSM230-25-26A/week12/cipher.txt","r") as f:
+        ciphertext1 = f.read()
+    decrypted = decrypt(ciphertext1,PR)
 
-with open("/home/orgdg/Documents/Classes-repo/F.NSM230-25-26A/week12/decrypted.txt","w") as f:
-    f.write(decrypted)
-end = time.time_ns()
-duration = end - start
-print("Done")
-print("duration", duration / 10**9,"second")
+    with open("/home/orgdg/Documents/Classes-repo/F.NSM230-25-26A/week12/decrypted.txt","w") as f:
+        f.write(decrypted)
+    end = time.time_ns()
+    duration = end - start
+    print("Done")
+    print("duration", duration / 10**9,"second")

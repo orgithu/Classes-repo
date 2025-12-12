@@ -58,20 +58,19 @@ if __name__ == "__main__":
     a = 0
     b = -4
     G = (2, 2)
+    nA, PA = keyGen(G, nBits=10, a=a, b=b, q=q)
+    nB, PB = keyGen(G, nBits=10, a=a, b=b, q=q)
 
-    alicePriv, alicePub = keyGen(G, nBits=10, a=a, b=b, q=q)
-    bobPriv, bobPub = keyGen(G, nBits=10, a=a, b=b, q=q)
+    print("User A private (nA):", nA)
+    print("User A public  (PA):", PA)
+    print("User B private (nB):", nB)
+    print("User B public  (PB):", PB)
+    
+    K_A = sharedSecret(nA, PB, a, q)
+    K_B = sharedSecret(nB, PA, a, q)
 
-    print("Alice priv:", alicePriv)
-    print("Alice pub:", alicePub)
-    print("Bob priv:", bobPriv)
-    print("Bob pub:", bobPub)
-
-    K1 = sharedSecret(alicePriv, bobPub, a, q)
-    K2 = sharedSecret(bobPriv, alicePub, a, q)
-
-    print("Alice computed K:", K1)
-    print("Bob computed   K:", K2)
+    print("User A computed K:", K_A)
+    print("User B computed K:", K_B)
     end = time.time_ns()
     dur = end - start
     print(dur/10**9,'s')
