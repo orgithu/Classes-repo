@@ -1,0 +1,11 @@
+List size is 7
+The list is [0, 1, 2, 3, 4, 5, 6]
+Shifted by 1
+List size is 6
+The list is [1, 2, 3, 4, 5, 6]
+Shifted by 3
+List size is 3
+The list is [4, 5, 6]
+Shifted by 10
+List size is 0
+The list is []

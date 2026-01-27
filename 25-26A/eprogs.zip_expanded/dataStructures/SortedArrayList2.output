@@ -1,0 +1,25 @@
+The list is [12]
+The list is [12, 16]
+The list is [11, 12, 16]
+The list is [11, 12, 14, 16]
+The list is [11, 12, 14, 16, 26]
+element 12 has key 12
+element 14 has key 14
+element 26 has key 26
+removed element 26 with key 26
+The list is [11, 12, 14, 16]
+removed element 14 with key 14
+The list is [11, 12, 16]
+removed element 11 with key 11
+The list is [12, 16]
+The list is not empty
+List size is 6
+The list is [1, 2, 4, 6, 12, 16]
+The index of 4 is 2
+3 not found
+Element at 0 is 1
+Element at 3 is 6
+The list is [1, 4, 6, 12, 16]
+The list is [1, 4, 12, 16]
+The list is not empty
+List size is 4

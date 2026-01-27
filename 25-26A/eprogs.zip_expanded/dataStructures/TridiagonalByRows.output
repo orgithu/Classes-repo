@@ -1,0 +1,75 @@
+55
+44
+22
+0
+0
+Enter number of rows
+Enter lower diagonal
+Enter an integer value
+Enter an integer value
+Enter an integer value
+Enter main diagonal
+Enter an integer value
+Enter an integer value
+Enter an integer value
+Enter an integer value
+Enter upper diagonal
+Enter an integer value
+Enter an integer value
+Enter an integer value
+Enter number of rows
+Enter lower diagonal
+Enter an integer value
+Enter an integer value
+Enter an integer value
+Enter main diagonal
+Enter an integer value
+Enter an integer value
+Enter an integer value
+Enter an integer value
+Enter upper diagonal
+Enter an integer value
+Enter an integer value
+Enter an integer value
+Lower diagonal is 
+1  2  3  
+Main diagonal is 
+4  5  6  7  
+Upper diagonal is 
+8  9  10  
+
+
+Lower diagonal is 
+1  -2  3  
+Main diagonal is 
+-4  -5  1  -7  
+Upper diagonal is 
+1  3  -6  
+
+
+The sum of the matrices is
+Lower diagonal is 
+2  0  6  
+Main diagonal is 
+0  0  7  0  
+Upper diagonal is 
+9  12  4  
+
+
+Their difference is
+Lower diagonal is 
+0  4  0  
+Main diagonal is 
+8  10  5  14  
+Upper diagonal is 
+7  6  16  
+
+
+The transpose of the first matrix is
+Lower diagonal is 
+8  9  10  
+Main diagonal is 
+4  5  6  7  
+Upper diagonal is 
+1  2  3  
+

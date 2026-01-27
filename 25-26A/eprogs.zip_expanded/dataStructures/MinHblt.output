@@ -1,0 +1,11 @@
+Elements in postorder are
+The 5 elements, in postorder, are [20, 10, 40, 35, 5,]
+
+The 7 elements, in postorder, are [40, 35, 30, 15, 20, 10, 5,]
+
+The min element is 5
+Deleted min element 5
+Deleted min element 10
+The 5 elements, in postorder, are [40, 35, 30, 20, 15,]
+
+The 9 elements, in postorder, are [8, 9, 7, 4, 6, 5, 3, 2, 1,]

@@ -1,0 +1,32 @@
+The capacity is 2
+The capacity is 2
+The capacity is 4
+The capacity is 4
+The capacity is 8
+The capacity is 8
+The capacity is 8
+The capacity is 8
+The capacity is 16
+The capacity is 16
+List size is 10
+The list is [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+Removing element 9
+The capacity is 16
+Removing element 8
+The capacity is 16
+Removing element 7
+The capacity is 16
+Removing element 6
+The capacity is 16
+Removing element 5
+The capacity is 16
+Removing element 4
+The capacity is 16
+Removing element 3
+The capacity is 3
+Removing element 2
+The capacity is 3
+Removing element 1
+The capacity is 3
+List size is 1
+The list is [0]

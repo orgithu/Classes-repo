@@ -1,0 +1,6 @@
+n = 1000   number of sequences = 75   time/sequence = 14 ms
+n = 2000   number of sequences = 24   time/sequence = 43 ms
+n = 4000   number of sequences = 10   time/sequence = 176 ms
+n = 8000   number of sequences = 10   time/sequence = 1966 ms
+n = 16000   number of sequences = 10   time/sequence = 10485 ms
+n = 32000   number of sequences = 10   time/sequence = 50378 ms

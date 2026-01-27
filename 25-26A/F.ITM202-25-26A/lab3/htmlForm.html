@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HTML маягт </title>
+</head>
+<body style="background-color: #fff;">
+    <h1>HTML маягт</h1>
+    <form>
+        <fieldset>
+            <legend>Хувийн мэдээлэл</legend>
+
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" value="thworgil" required><br><br>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" value="orgil@gmail.com" required><br><br>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" value="qwerty" required><br><br>
+
+            <label for="birthday">Төрсөн өдөр:</label>
+            <input type="date" id="birthday" name="birthday" value="2006-01-01"><br><br>
+
+            <label>Хүйс:</label>
+            <input type="radio" id="male" name="gender" value="Эр" checked required>
+            <label for="male">Эр</label>
+            <input type="radio" id="female" name="gender" value="Эм" required>
+            <label for="female">Эм</label><br><br>
+
+            <label for="pet">dog or cat</label>
+            <select id="pet" name="pet">
+            <option value="cat">Муур</option>
+            <option value="dog">Нохой</option>
+            <option value="both" selected>Хоёулаа</option>
+            </select><br><br>
+
+            <label>Дуртай тоо:</label>
+            <input type="number" name="favorite_number" value="37"><br><br>
+
+            <label>Тусч байсан өвчин:</label>
+            <input type="radio" id="check1" name="gender" value="a">
+            <label for="check1">Covid-99</label>
+            <input type="radio" id="check2" name="gender" value="b">
+            <label for="check2">Woke mind virus</label>
+            <input type="radio" id="check2" name="gender" value="c" checked>
+            <label for="check2">Ханиад</label>
+            <input type="radio" id="check3" name="gender" value="d">
+            <label for="check3">Шамбарам</label><br><br>
+
+            <label for="month">Дургүй он сар:</label>
+            <input type="month" id="month" name="month" value="2001-09"><br><br>
+
+            <label for="color">Дуртай өнгө:</label>
+            <input type="color" id="color" name="color" value="#331c42"><br><br>
+
+            <label for="week">Дуртай долоо хоног:</label>
+            <input type="week" id="week" name="week" value="2037-W37"><br><br>
+
+            <label for="tel">Утас:</label>
+            <input type="tel" id="tel" name="tel" value="+97660116969"><br><br>
+
+            <label for="url">Дуртай website:</label>
+            <input type="url" id="url" name="url" value="https://gandan.mn"><br><br>
+
+            <label for="range">Өөрийгөө хэр өндөр гэж боддог вэ:</label>
+            <input type="range" id="range" name="range" value="7" min="1" max="10"><br><br>
+
+            <label for="file">Robot биш гэдгээ баталж дуртай meme ээ upload хий:</label>
+            <input type="file" id="file" name="file" required><br><br>
+
+            <label for="textarea">Миний нутаг шүлгийн эхний 4 мөр (заавал):</label><br>
+            <textarea id="textarea" name="bio" rows="4" cols="50" required>Хэнтий, Хангай, Соёны өндөр сайхан нуруунууд
+Хойд зүгийн чимэг болсон ойн хөвч уулнууд
+Мэнэн, Шарга, Номины өргөн их говиуд
+Өмнө зүгийн манлай болсон элсэн манхан далайнууд</textarea><br><br>
+
+            <label for="datetime">Цаг хэд болж байна:</label>
+            <input type="datetime-local" id="datetime" name="datetime" value="2025-09-18T17:01"><br><br>
+
+            <input type="hidden" name="secret" value="nuuts!">
+
+            <input type="button" value="Don't click me">
+            <input type="submit" value="Submit">
+            <input type="reset" value="Reset">
+
+        </fieldset>
+    </form>
+</body>
+</html>

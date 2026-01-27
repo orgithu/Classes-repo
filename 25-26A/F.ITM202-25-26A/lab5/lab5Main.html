@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="mn">
+    <head>  
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/F.ITM202-25-26A/lab5/lab5Main.css" />
+        <title>Лабораторийн ажил 5</title>
+    </head>
+    <body class="main">
+        <h1>Bankhariin aylal</h1>
+        <div class="animation">
+            <!-- Background mountain (wrapped so it can parallax separately) -->
+            <div class="mountain-wrap">
+                <div class="scroll-track mountain-track">
+                    <div class="items">
+                        <svg class="background-mountain" viewBox="-100 -200 1000 400" xmlns="http://www.w3.org/2000/svg">
+                            <ellipse cx="400" cy="330" rx="700" ry="220" fill="#1f7a1f"/>
+                        </svg>
+                    </div>
+                    <div class="items">
+                        <svg class="background-mountain" viewBox="-100 -200 1000 400" xmlns="http://www.w3.org/2000/svg">
+                            <ellipse cx="400" cy="330" rx="700" ry="220" fill="#1f7a1f"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Back bushes -->
+            <div class="layer back-bushes">
+                <div class="scroll-track bush-track">
+                    <div class="items">
+                        <object data="lab5_svg/but1.svg" type="image/svg+xml" class="bush bush1"></object>
+                        <object data="lab5_svg/but2.svg" type="image/svg+xml" class="bush bush2"></object>
+                        <object data="lab5_svg/but3.svg" type="image/svg+xml" class="bush bush3"></object>
+                    </div>
+                    <div class="items">
+                        <object data="lab5_svg/but1.svg" type="image/svg+xml" class="bush bush1"></object>
+                        <object data="lab5_svg/but2.svg" type="image/svg+xml" class="bush bush2"></object>
+                        <object data="lab5_svg/but3.svg" type="image/svg+xml" class="bush bush3"></object>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Trees -->
+            <div class="layer trees">
+                <div class="scroll-track tree-track">
+                    <div class="items">
+                        <object data="lab5_svg/mod1.svg" type="image/svg+xml" class="tree tree1"></object>
+                        <object data="lab5_svg/mod2.svg" type="image/svg+xml" class="tree tree2"></object>
+                        <object data="lab5_svg/mod3.svg" type="image/svg+xml" class="tree tree3"></object>
+                    </div>
+                    <div class="items">
+                        <object data="lab5_svg/mod1.svg" type="image/svg+xml" class="tree tree1"></object>
+                        <object data="lab5_svg/mod2.svg" type="image/svg+xml" class="tree tree2"></object>
+                        <object data="lab5_svg/mod3.svg" type="image/svg+xml" class="tree tree3"></object>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Main character -->
+            <div class="layer main-character">
+                <object data="lab5_svg/nohoi.svg" type="image/svg+xml" class="character"></object>
+            </div>
+        </div>
+        <script src="/F.ITM202-25-26A/lab5/lab5Main.js"></script>
+    </body>
+</html>

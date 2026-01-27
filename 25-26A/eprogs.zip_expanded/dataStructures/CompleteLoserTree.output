@@ -1,0 +1,18 @@
+Enter number of players
+Enter player values
+The loser tree is
+size = 10 lowExt = 4 offset = 15
+Loser tree pointers are
+10 3 5 8 1 6 7 9 2 4 
+Changed player 10 to 20, new tree is
+size = 10 lowExt = 4 offset = 15
+Loser tree pointers are
+3 8 5 9 1 6 7 10 2 4 
+Changed player 3 to 7, new tree is
+size = 10 lowExt = 4 offset = 15
+Loser tree pointers are
+1 8 5 9 4 6 7 10 2 3 
+Changed player 1 to 25, new tree is
+size = 10 lowExt = 4 offset = 15
+Loser tree pointers are
+4 8 5 9 2 6 7 10 1 3 

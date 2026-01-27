@@ -1,0 +1,14 @@
+Elements in ascending order are
+a b c d 
+Removed element b with key 4
+Elements in ascending order are
+a c d 
+Removed element d with key 8
+Elements in ascending order are
+a c 
+Removed element c with key 6
+Elements in ascending order are
+a 
+Removed element null with key 6
+Elements in ascending order are
+a 

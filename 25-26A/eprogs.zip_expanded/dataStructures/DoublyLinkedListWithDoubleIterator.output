@@ -1,0 +1,4 @@
+The list is [1, 2, 4, 6]
+The list is 1 2 4 6 
+The list, in reverse order (excluding last element), is 4 2 1 
+Visited elements 2 4 2 4 6

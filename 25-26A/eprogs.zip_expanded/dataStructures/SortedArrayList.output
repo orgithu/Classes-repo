@@ -1,0 +1,14 @@
+The list is [12]
+The list is [12, 16]
+The list is [11, 12, 16]
+The list is [11, 12, 14, 16]
+The list is [11, 12, 14, 26]
+element 12 has key 2
+element 11 has key 1
+element 26 has key 6
+removed element 12 with key 2
+The list is [11, 14, 26]
+removed element 11 with key 1
+The list is [14, 26]
+removed element 26 with key 6
+The list is [14]

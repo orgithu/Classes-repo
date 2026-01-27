@@ -1,0 +1,7 @@
+The list is [1, 2, 7, 4, 6, 9]
+Element at 0 is 1
+Element at 3 is 4
+Element at 5 removed. The list is [2, 7, 4, 6, 1]
+Element at 2 removed. The list is [2, 7, 6, 1]
+Element at 2 removed. The list is [2, 7, 1]
+Element at 2 removed. The list is [7, 2]

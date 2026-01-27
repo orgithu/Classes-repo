@@ -1,0 +1,34 @@
+Elements in ascending order are
+a b c d e f g 
+Removed element c with key 3
+Elements in ascending order are
+a b d e f g 
+Removed element d with key 3
+Elements in ascending order are
+a b e f g 
+Removed element a with key 1
+Elements in ascending order are
+b e f g 
+Removed element null with key 8
+Elements in ascending order are
+b e f g 
+Elements in ascending order are
+b b e c f g d e f g h 
+The element with index 0 is b
+The element with index 1 is b
+The element with index 2 is e
+The element with index 3 is c
+The element with index 4 is f
+The element with index 5 is g
+The element with index 6 is d
+The element with index 7 is e
+The element with index 8 is f
+Removed element g with index 5
+Elements in ascending order are
+b b e c g d e f g h 
+Removed element b with index 0
+Elements in ascending order are
+b e c g d e f g h 
+Removed element e with index 5
+Elements in ascending order are
+b e c g d f g h 

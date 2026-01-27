@@ -1,0 +1,15 @@
+The given inorder list is 3 5 1 0 2 6 4 
+and the given preorder list is 0 1 3 5 2 4 6 
+Construction of binary tree is complete
+Preorder sequence of constructed tree is 0 1 3 5 2 4 6 
+Inorder sequence of constructed tree is 3 5 1 0 2 6 4 
+
+The given inorder list is 7 3 8 11 1 4 0 9 5 2 6 10 
+and the given preorder list is 0 1 3 7 8 11 4 2 5 9 6 10 
+Construction of binary tree is complete
+Preorder sequence of constructed tree is 0 1 3 7 8 11 4 2 5 9 6 10 
+Inorder sequence of constructed tree is 7 3 8 11 1 4 0 9 5 2 6 10 
+
+The given inorder list is 7 3 8 11 1 4 0 9 5 2 6 10 
+and the given preorder list is 0 9 3 7 8 11 4 2 5 1 6 10 
+java.lang.IllegalArgumentException: incompatible preorder and inorder listings

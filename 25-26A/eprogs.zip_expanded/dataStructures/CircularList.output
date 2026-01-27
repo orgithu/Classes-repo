@@ -1,0 +1,16 @@
+Initial size is 0
+The list is empty
+List size is 4
+The list is [1, 2, 4, 6]
+The index of 4 is 2
+3 not found
+Element at 0 is 1
+Element at 3 is 6
+The list is [1, 4, 6]
+The list is [1, 4]
+The list is not empty
+List size is 2
+The list is 1 4 
+After appending 99, the list is [1, 4, 99]
+After appending 6 to an empty list, the list is [6]
+List size is 1

@@ -1,0 +1,21 @@
+Testing the MyInteger wrapper class
+The test array is 1 2 5 10 17 
+2 + 5 = 7
+5 - 2 = 3
+2 * 5 = 10
+5 / 1 = 5
+The zero element is 0
+The identity element is 1
+
+2 compareTo(5) = -1
+5 compareTo(2) = 1
+5 compareTo(5) = 0
+
+2 == 5 = false
+2 == 2 = true
+
+The sum of the integers is 35
+
+After swapping the first and last elements, the test array is 17 2 5 10 1 
+
+The maximum element is 17

@@ -1,0 +1,13 @@
+Elements in ascending order are
+a b c d 
+Removed max element d
+Elements in ascending order are
+a b c 
+Removed max element c
+Elements in ascending order are
+a b 
+Removed max element b
+Elements in ascending order are
+a 
+Elements in ascending order are
+a b c d 

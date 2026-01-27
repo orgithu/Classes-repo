@@ -1,0 +1,50 @@
+x(3,1) = 7
+Matrix x is
+3 4 
+5 6 
+7 8 
+
+Matrix x is now
+3 4 
+5 6 
+7 0 
+
+Matrix y (the clone of original x) is
+3 4 
+5 6 
+7 8 
+
+Matrix z (the copy of original x) is
+3 4 
+5 6 
+7 0 
+
+y incremented by 2 is
+5 6 
+7 8 
+9 10 
+
+x is
+3 4 
+5 6 
+7 0 
+
+y + x is
+8 10 
+12 14 
+16 10 
+
+Matrix w is
+2 3 4 
+3 4 5 
+
+y * w is
+28 39 50 
+38 53 68 
+48 67 86 
+
+The transpose is
+2 3 
+3 4 
+4 5 
+
