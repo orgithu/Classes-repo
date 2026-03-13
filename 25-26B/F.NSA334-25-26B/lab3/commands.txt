@@ -1,0 +1,143 @@
+-- 1. Character Set Configuration
+SET NAMES utf8mb4;
+
+-- 2. Database Creation
+DROP DATABASE IF EXISTS university_lab3;
+CREATE DATABASE university_lab3;
+USE university_lab3;
+
+-- 3. Create Tables
+
+-- 3.1 Student Table
+CREATE TABLE Oyutan (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    ovog VARCHAR(50),
+    ner VARCHAR(50),
+    utas VARCHAR(20),
+    torson_ognoo DATE,
+    oyutan_kod VARCHAR(20) UNIQUE,
+    mail VARCHAR(100) UNIQUE
+);
+
+-- 3.2 Teacher Table
+CREATE TABLE Bagsh (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    ovog VARCHAR(50),
+    ner VARCHAR(50),
+    utas VARCHAR(20),
+    torson_ognoo DATE,
+    bagsh_kod VARCHAR(20) UNIQUE,
+    mail VARCHAR(100) UNIQUE
+);
+
+-- 3.3 Subject Table
+CREATE TABLE Hicheel (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    hicheel_ner VARCHAR(100),
+    hicheel_kod VARCHAR(20) UNIQUE,
+    kredit INT,
+    umnuh_holboo VARCHAR(20),
+    uliral VARCHAR(20)
+);
+
+-- 3.4 Course Selection Table
+CREATE TABLE Hicheel_songolt (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    hicheel_id INT,
+    oyutan_id INT,
+    bagsh_id INT,
+    songoson_ognoo DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (hicheel_id) REFERENCES Hicheel(id),
+    FOREIGN KEY (oyutan_id) REFERENCES Oyutan(id),
+    FOREIGN KEY (bagsh_id) REFERENCES Bagsh(id)
+);
+
+-- 4. Insert Data
+
+-- 4.1 Insert Students
+INSERT INTO Oyutan (ovog, ner, utas, torson_ognoo, oyutan_kod, mail) VALUES
+('Bat','Erdene','99110001','2002-05-10','S001','s001@gmail.com'),
+('Bold','Saruul','99110002','2001-03-15','S002','s002@gmail.com'),
+('Dorj','Anu','99110003','2002-07-21','S003','s003@gmail.com'),
+('Sukh','Temuulen','99110004','2001-09-11','S004','s004@gmail.com'),
+('Gan','Naraa','99110005','2002-01-18','S005','s005@gmail.com'),
+('Enkh','Bilegt','99110006','2001-12-22','S006','s006@gmail.com'),
+('Tseren','Khulan','99110007','2002-02-28','S007','s007@gmail.com'),
+('Munkh','Ariunaa','99110008','2001-06-30','S008','s008@gmail.com'),
+('Altan','Bayarmaa','99110009','2002-08-19','S009','s009@gmail.com'),
+('Erdene','Uyanga','99110010','2001-04-05','S010','s010@gmail.com'),
+('Baatar','Oyun','99110011','2002-10-14','S011','s011@gmail.com'),
+('Purev','Delger','99110012','2001-11-09','S012','s012@gmail.com'),
+('Davaajav','Tsolmon','99110013','2002-03-25','S013','s013@gmail.com'),
+('Chuluun','Ganzorig','99110014','2001-07-17','S014','s014@gmail.com'),
+('Lkhagva','Erdenetsetseg','99110015','2002-09-02','S015','s015@gmail.com'),
+('Otgon','Munkhjin','99110016','2001-01-13','S016','s016@gmail.com'),
+('Byambaa','Anujin','99110017','2002-12-01','S017','s017@gmail.com'),
+('Sainaa','Temka','99110018','2001-05-27','S018','s018@gmail.com'),
+('Narantuya','Solongo','99110019','2002-06-16','S019','s019@gmail.com'),
+('Amar','Batsaikhan','99110020','2001-08-23','S020','s020@gmail.com');
+
+-- 4.2 Insert Teachers
+INSERT INTO Bagsh (ovog, ner, utas, torson_ognoo, bagsh_kod, mail) VALUES
+('Bat','Ganbold','88110001','1980-05-10','T001','t001@gmail.com'),
+('Bold','Enkhtsetseg','88110002','1978-03-15','T002','t002@gmail.com'),
+('Dorj','Munkhbat','88110003','1985-07-21','T003','t003@gmail.com'),
+('Sukh','Oyunbileg','88110004','1982-09-11','T004','t004@gmail.com'),
+('Gan','Altantuya','88110005','1979-01-18','T005','t005@gmail.com'),
+('Enkh','Temuujin','88110006','1983-12-22','T006','t006@gmail.com'),
+('Tseren','Naran','88110007','1981-02-28','T007','t007@gmail.com'),
+('Munkh','Delgersaikhan','88110008','1977-06-30','T008','t008@gmail.com'),
+('Altan','Bilegt','88110009','1984-08-19','T009','t009@gmail.com'),
+('Erdene','Uyanga','88110010','1986-04-05','T010','t010@gmail.com');
+
+-- 4.3 Insert Subjects
+INSERT INTO Hicheel (hicheel_ner, hicheel_kod, kredit, umnuh_holboo, uliral)
+VALUES
+('Мэдээллийн технологи','IT101',3,NULL,'Намар'),
+('Програмчлал I','CS102',3,NULL,'Намар'),
+('Өгөгдлийн сан','CS201',3,'CS102','Хавар'),
+('Алгоритм','CS202',3,'CS102','Хавар'),
+('Сүлжээ','CS301',3,'CS201','Намар'),
+('Веб програмчлал','CS302',3,'CS201','Хавар'),
+('Математик','MATH101',3,NULL,'Намар'),
+('Статистик','STAT201',3,'MATH101','Хавар'),
+('Кибер аюулгүй байдал','SEC401',3,'CS301','Намар'),
+('Хиймэл оюун ухаан','AI402',3,'CS202','Хавар');
+
+-- 4.4 Insert Course Selections
+INSERT INTO Hicheel_songolt (hicheel_id, oyutan_id, bagsh_id) VALUES
+(1,1,1),(2,1,2),(3,2,3),(4,2,4),(5,3,5),(6,3,6),(7,4,7),(8,4,8),(9,5,9),(10,5,10),
+(1,6,1),(2,7,2),(3,8,3),(4,9,4),(5,10,5),(6,11,6),(7,12,7),(8,13,8),(9,14,9),(10,15,10);
+
+-- =========================================
+-- LAB OBJECTIVES DEMONSTRATION
+-- =========================================
+
+SELECT '--- 1. Simple Join: Student Name, Subject Name, Teacher Name ---' AS '';
+SELECT 
+    o.ner AS Oyutan_Ner,
+    h.hicheel_ner AS Hicheel_Ner,
+    b.ner AS Bagsh_Ner
+FROM Hicheel_songolt hs
+INNER JOIN Oyutan o ON hs.oyutan_id = o.id
+INNER JOIN Hicheel h ON hs.hicheel_id = h.id
+INNER JOIN Bagsh b ON hs.bagsh_id = b.id
+LIMIT 5;
+
+SELECT '--- 2. Age Calculation (Oyutan) ---' AS '';
+SELECT 
+    ner, 
+    torson_ognoo, 
+    TIMESTAMPDIFF(YEAR, torson_ognoo, CURDATE()) AS Nas
+FROM Oyutan
+LIMIT 5;
+
+SELECT '--- 3. Prerequisite Check (Self Join / Conditional) ---' AS '';
+SELECT 
+    h1.hicheel_ner AS Hicheel, 
+    h1.hicheel_kod AS Kod, 
+    h1.umnuh_holboo AS Prerequisite_Kod,
+    h2.hicheel_ner AS Prerequisite_Ner
+FROM Hicheel h1
+LEFT JOIN Hicheel h2 ON h1.umnuh_holboo = h2.hicheel_kod
+WHERE h1.umnuh_holboo IS NOT NULL;
