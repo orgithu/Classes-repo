@@ -20,13 +20,6 @@ CREATE TABLE IF NOT EXISTS packages (
     arrivedAt DATETIME DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE IF NOT EXISTS admin_auth_tokens (
-    token VARCHAR(64) PRIMARY KEY,
-    employeeID INT NOT NULL,
-    expiresAt DATETIME NOT NULL,
-    createdAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
 ALTER TABLE employees MODIFY COLUMN password VARCHAR(64) NOT NULL;
 ALTER TABLE packages ADD COLUMN IF NOT EXISTS trackCode VARCHAR(40) NOT NULL DEFAULT '';
 ALTER TABLE packages ADD COLUMN IF NOT EXISTS phoneNumber VARCHAR(20) NOT NULL DEFAULT '';
@@ -43,7 +36,7 @@ SET password = MD5(password)
 WHERE password NOT REGEXP '^[a-fA-F0-9]{32}$';
 
 INSERT INTO employees (employeeName, password)
-SELECT 'admin_user', MD5('securePass123')
+SELECT 'admin', MD5('pass123')
 WHERE NOT EXISTS (
     SELECT 1 FROM employees WHERE employeeName = 'admin_user'
 );
