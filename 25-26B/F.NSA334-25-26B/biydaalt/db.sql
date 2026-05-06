@@ -14,10 +14,8 @@ CREATE TABLE IF NOT EXISTS packages (
     shelf VARCHAR(50) DEFAULT NULL,
     createdBy INT DEFAULT NULL,
     isDeleted TINYINT(1) NOT NULL DEFAULT 0,
-    status VARCHAR(20) NOT NULL DEFAULT 'Pending',
     price DECIMAL(12,2) NOT NULL DEFAULT 0,
     createdAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    arrivedAt DATETIME DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 ALTER TABLE employees MODIFY COLUMN password VARCHAR(64) NOT NULL;
@@ -26,10 +24,8 @@ ALTER TABLE packages ADD COLUMN IF NOT EXISTS phoneNumber VARCHAR(20) NOT NULL D
 ALTER TABLE packages ADD COLUMN IF NOT EXISTS shelf VARCHAR(50) DEFAULT NULL;
 ALTER TABLE packages ADD COLUMN IF NOT EXISTS createdBy INT DEFAULT NULL;
 ALTER TABLE packages ADD COLUMN IF NOT EXISTS isDeleted TINYINT(1) NOT NULL DEFAULT 0;
-ALTER TABLE packages ADD COLUMN IF NOT EXISTS status VARCHAR(20) NOT NULL DEFAULT 'Pending';
 ALTER TABLE packages ADD COLUMN IF NOT EXISTS price DECIMAL(12,2) NOT NULL DEFAULT 0;
 ALTER TABLE packages ADD COLUMN IF NOT EXISTS createdAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP;
-ALTER TABLE packages ADD COLUMN IF NOT EXISTS arrivedAt DATETIME DEFAULT NULL;
 
 UPDATE employees
 SET password = MD5(password)
@@ -38,7 +34,7 @@ WHERE password NOT REGEXP '^[a-fA-F0-9]{32}$';
 INSERT INTO employees (employeeName, password)
 SELECT 'admin', MD5('pass123')
 WHERE NOT EXISTS (
-    SELECT 1 FROM employees WHERE employeeName = 'admin_user'
+    SELECT 1 FROM employees WHERE employeeName = 'admin'
 );
 
 INSERT INTO packages (trackCode, phoneNumber, shelf, createdBy, status, price, arrivedAt, createdAt, isDeleted)

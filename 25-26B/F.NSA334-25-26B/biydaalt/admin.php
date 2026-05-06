@@ -1,143 +1,108 @@
 <?php
-require_once __DIR__ . "/db.php";
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-$conn = db();
+session_start();
+$auth = $_SESSION["auth"] ?? false;
+
+$conn = new mysqli("127.0.0.1", "guest", "pass123", "biydaalt");
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
 $errors = [];
 $success = "";
 $queryText = "";
 $queryRows = [];
 $recentPackages = [];
-
-function statusMn($status)
-{
-    if ($status === "Arrived") {
-        return "Ирсэн";
-    }
-    if ($status === "Pending") {
-        return "Хүлээгдэж байгаа";
-    }
-    return $status;
-}
+$sqlOutput = "";
+$sqlError = "";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $action = (string)($_POST["action"] ?? "");
+    $action = $_POST["action"] ?? "";
 
-    if ($action === "add_package") {
-        $trackCode = trim(strtoupper((string)($_POST["trackCode"] ?? "")));
-        $phoneNumber = trim((string)($_POST["phoneNumber"] ?? ""));
-        $shelf = trim((string)($_POST["shelf"] ?? ""));
-        $priceText = trim((string)($_POST["price"] ?? ""));
-        $price = is_numeric($priceText) ? (float)$priceText : 0.0;
-
-        if ($trackCode === "" || $phoneNumber === "" || $shelf === "" || $priceText === "") {
-            $errors[] = "Бүх талбарыг бөглөнө үү.";
-        } else {
-            $existsResult = $conn->query(
-                "SELECT packageID FROM packages WHERE trackCode = '" . $trackCode . "' LIMIT 1"
-            );
-
-            if ($existsResult === false) {
-                $errors[] = $conn->error;
-            } elseif ($existsResult->fetch_assoc()) {
-                $errors[] = "Энэ track code бүртгэгдсэн байна.";
-            } else {
-                $insertResult = $conn->query(
-                    "INSERT INTO packages (
-                        trackCode, phoneNumber, shelf, createdBy, status, price, arrivedAt, createdAt, isDeleted
-                    ) VALUES (
-                        '" . $trackCode . "',
-                        '" . $phoneNumber . "',
-                        '" . $shelf . "',
-                        NULL,
-                        'Arrived',
-                        " . $price . ",
-                        NOW(),
-                        NOW(),
-                        0
-                    )"
-                );
-                if ($insertResult === false) {
-                    $errors[] = $conn->error;
-                } else {
-                    $success = "Илгээмж амжилттай хадгалагдлаа.";
-                }
-            }
-        }
+    if ($action === "login") {
+        $username = $_POST["username"] ?? "";
+        $password = $_POST["password"] ?? "";
         
-    } elseif ($action === "mark_picked") {
-        $packageId = (int)($_POST["packageID"] ?? 0);
-
-        if ($packageId > 0) {
-            $updateResult = $conn->query(
-                "UPDATE packages SET isDeleted = 1 WHERE packageID = " . $packageId . " AND isDeleted = 0"
-            );
-            if ($updateResult === false) {
-                $errors[] = $conn->error;
-            } else {
-                $success = "Илгээмжийг авагдсан гэж тэмдэглэлээ.";
-            }
+        if ($username === "admin" && $password === "admin") {
+            $_SESSION["auth"] = true;
+            $auth = true;
+            $success = "Login successful!";
         } else {
-            $errors[] = "Буруу package ID.";
+            $errors[] = "Invalid username or password";
         }
+    } elseif ($auth && $action === "add_package") {
+        $trackCode = $_POST["trackCode"] ?? "";
+        $phoneNumber = $_POST["phoneNumber"] ?? "";
+        $shelf = $_POST["shelf"] ?? "";
+        $price = $_POST["price"] ?? 0;
+
+        $conn->query(
+            "INSERT INTO packages (trackCode, phoneNumber, shelf, price, createdAt, isDeleted)
+             VALUES ('$trackCode', '$phoneNumber', '$shelf', $price, NOW(), 0)"
+        );
+        $success = "Илгээмж амжилттай хадгалагдлаа.";
         
-    } elseif ($action === "pickup_by_phone") {
-        $phone = trim((string)($_POST["pickupPhone"] ?? ""));
-
-        if ($phone === "") {
-            $errors[] = "Утасны дугаар заавал оруулна.";
-        } else {
-            $updateResult = $conn->query(
-                "UPDATE packages SET isDeleted = 1 WHERE phoneNumber = '" . $phone . "' AND isDeleted = 0"
-            );
-            if ($updateResult === false) {
-                $errors[] = $conn->error;
-            } else {
-                $success = "Нийт " . $conn->affected_rows . " илгээмжийг авагдсан (isDeleted=1) болголоо.";
-            }
-        }
+    } elseif ($auth && $action === "mark_picked") {
+        $packageId = $_POST["packageID"] ?? 0;
+        $conn->query("UPDATE packages SET isDeleted = 1 WHERE packageID = $packageId AND isDeleted = 0");
+        $success = "Илгээмжийг авагдсан гэж тэмдэглэлээ.";
         
-    } elseif ($action === "query_packages") {
-        $queryText = trim((string)($_POST["queryText"] ?? ""));
-
-        if ($queryText === "") {
-            $errors[] = "Хайх утгаа оруулна уу.";
+    } elseif ($auth && $action === "pickup_by_phone") {
+        $phone = $_POST["pickupPhone"] ?? "";
+        $conn->query("UPDATE packages SET isDeleted = 1 WHERE phoneNumber = '$phone' AND isDeleted = 0");
+        $success = "Нийт " . $conn->affected_rows . " илгээмжийг авагдсан (isDeleted=1) болголоо.";
+        
+    } elseif ($auth && $action === "query_packages") {
+        $queryText = $_POST["queryText"] ?? "";
+        $result = $conn->query(
+            "SELECT packageID, trackCode, phoneNumber, price, isDeleted, createdAt
+             FROM packages
+             WHERE trackCode LIKE '%$queryText%' OR phoneNumber LIKE '%$queryText%'
+             ORDER BY createdAt DESC
+             LIMIT 100"
+        );
+        if ($result === false) {
+            $errors[] = "Query error: " . $conn->error;
         } else {
-            $queryRows = [];
-            $result = $conn->query(
-                "SELECT packageID, trackCode, phoneNumber, price, status, isDeleted, COALESCE(arrivedAt, createdAt) AS arrivedTime
-                 FROM packages
-                 WHERE trackCode LIKE '%" . $queryText . "%' OR phoneNumber LIKE '%" . $queryText . "%'
-                 ORDER BY createdAt DESC
-                 LIMIT 100"
-            );
-
-            if ($result === false) {
-                $errors[] = $conn->error;
-            } elseif ($result instanceof mysqli_result) {
-                while ($row = $result->fetch_assoc()) {
-                    $queryRows[] = $row;
-                }
+            while ($row = $result->fetch_assoc()) {
+                $queryRows[] = $row;
             }
-
             if (!$queryRows) {
                 $success = "Хайлтанд тохирох илгээмж олдсонгүй.";
             }
         }
-    }
-}
-
-$result = $conn->query(
-    "SELECT packageID, trackCode, phoneNumber, price, status, isDeleted, COALESCE(arrivedAt, createdAt) AS arrivedTime
-     FROM packages
-     ORDER BY createdAt DESC
-     LIMIT 50"
-);
-
-if ($result === false) {
-    $errors[] = $conn->error;
-} elseif ($result instanceof mysqli_result) {
-    while ($row = $result->fetch_assoc()) {
-        $recentPackages[] = $row;
+    } elseif ($auth && $action === "sql_query") {
+        $queryText = $_POST["queryText"] ?? "";
+        try {
+            $result = $conn->query($queryText);
+            if ($result === false) {
+                $sqlError = "SQL Error: " . $conn->error;
+            } else {
+                if ($result instanceof mysqli_result) {
+                    $sqlOutput = "<table border='1' style='border-collapse: collapse;'>";
+                    $fields = $result->fetch_fields();
+                    $sqlOutput .= "<tr>";
+                    foreach ($fields as $field) {
+                        $sqlOutput .= "<th style='padding: 8px; background: #eee;'>" . $field->name . "</th>";
+                    }
+                    $sqlOutput .= "</tr>";
+                    while ($row = $result->fetch_assoc()) {
+                        $sqlOutput .= "<tr>";
+                        foreach ($row as $value) {
+                            $sqlOutput .= "<td style='padding: 8px;'>" . htmlspecialchars($value ?? 'NULL') . "</td>";
+                        }
+                        $sqlOutput .= "</tr>";
+                    }
+                    $sqlOutput .= "</table>";
+                } else {
+                    $sqlOutput = "Query successful. Affected rows: " . $conn->affected_rows;
+                }
+            }
+        } catch (Exception $e) {
+            $sqlError = "Error: " . $e->getMessage();
+        }
     }
 }
 ?>
@@ -163,8 +128,6 @@ if ($result === false) {
     </style>
 </head>
 <body>
-    <h1>Admin Dashboard</h1>
-
     <?php if ($success !== ""): ?>
         <p class="ok"><?= $success ?></p>
     <?php endif; ?>
@@ -172,6 +135,31 @@ if ($result === false) {
     <?php foreach ($errors as $error): ?>
         <p class="err"><?= $error ?></p>
     <?php endforeach; ?>
+
+    <!-- LOGIN DIV -->
+    <?php if (!$auth): ?>
+    <div id="login-div">
+        <h1>Admin Login</h1>
+        <fieldset>
+            <form method="post" action="admin.php">
+                <input type="hidden" name="action" value="login">
+
+                <label for="username">Username</label>
+                <input id="username" type="text" name="username" required>
+
+                <label for="password">Password</label>
+                <input id="password" type="password" name="password" required>
+
+                <button type="submit">Login</button>
+            </form>
+        </fieldset>
+    </div>
+    <?php endif; ?>
+
+    <!-- DASHBOARD DIV -->
+    <?php if ($auth): ?>
+    <div id="dashboard-div">
+        <h1>Admin Dashboard</h1>
 
     <fieldset>
         <legend>Add new cargo</legend>
@@ -225,27 +213,25 @@ if ($result === false) {
                         <th>Трек</th>
                         <th>Утас</th>
                         <th>Үнэ</th>
-                        <th>Төлөв</th>
                         <th>isDeleted</th>
-                        <th>Хугацаа</th>
+                        <th>Үүсгэсэн хугацаа</th>
                         <th>Үйлдэл</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($queryRows as $row): ?>
                         <tr>
-                            <td><?= (int)$row["packageID"] ?></td>
+                            <td><?= $row["packageID"] ?></td>
                             <td><?= $row["trackCode"] ?></td>
                             <td><?= $row["phoneNumber"] ?></td>
-                            <td><?= number_format((float)$row["price"], 2) ?></td>
-                            <td><?= statusMn((string)$row["status"]) ?></td>
-                            <td><?= (int)$row["isDeleted"] ?></td>
-                            <td><?= $row["arrivedTime"] ?></td>
+                            <td><?= number_format($row["price"], 2) ?></td>
+                            <td><?= $row["isDeleted"] ?></td>
+                            <td><?= $row["createdAt"] ?></td>
                             <td>
-                                <?php if ((int)$row["isDeleted"] === 0): ?>
+                                <?php if ($row["isDeleted"] == 0): ?>
                                     <form method="post" action="admin.php" class="inline-form">
                                         <input type="hidden" name="action" value="mark_picked">
-                                        <input type="hidden" name="packageID" value="<?= (int)$row["packageID"] ?>">
+                                        <input type="hidden" name="packageID" value="<?= $row["packageID"] ?>">
                                         <button type="submit">delete</button>
                                     </form>
                                 <?php else: ?>
@@ -260,49 +246,24 @@ if ($result === false) {
     </fieldset>
 
     <fieldset>
-        <legend>Сүүлийн 50 илгээмж</legend>
-        <?php if (!$recentPackages): ?>
-            <p>Илгээмж алга.</p>
-        <?php else: ?>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Трек</th>
-                        <th>Утас</th>
-                        <th>Үнэ</th>
-                        <th>Төлөв</th>
-                        <th>isDeleted</th>
-                        <th>Ирсэн/Үүсгэсэн хугацаа</th>
-                        <th>Үйлдэл</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($recentPackages as $package): ?>
-                        <tr>
-                            <td><?= (int)$package["packageID"] ?></td>
-                            <td><?= $package["trackCode"] ?></td>
-                            <td><?= $package["phoneNumber"] ?></td>
-                            <td><?= number_format((float)$package["price"], 2) ?></td>
-                            <td><?= statusMn((string)$package["status"]) ?></td>
-                            <td><?= (int)$package["isDeleted"] ?></td>
-                            <td><?= $package["arrivedTime"] ?></td>
-                            <td>
-                                <?php if ((int)$package["isDeleted"] === 0): ?>
-                                    <form method="post" action="admin.php" class="inline-form">
-                                        <input type="hidden" name="action" value="mark_picked">
-                                        <input type="hidden" name="packageID" value="<?= (int)$package["packageID"] ?>">
-                                        <button type="submit">delete</button>
-                                    </form>
-                                <?php else: ?>
-                                    <span class="muted">deleted</span>
-                                <?php endif; ?>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
+    	<form method="post" action="admin.php">
+    	            <input type="hidden" name="action" value="sql_query">
+    	    	
+    	            <label for="sql_query">query command</label>
+    	            <input id="queryText" type="text" name="queryText" value="<?= $queryText ?>" required>
+    	
+    	            <button type="submit">Хайх</button>
+    	        </form>
+
+        <?php if ($sqlError !== ""): ?>
+            <div style="margin-top: 16px; color: #b00020;"><?= $sqlError ?></div>
+        <?php endif; ?>
+
+        <?php if ($sqlOutput !== ""): ?>
+            <div style="margin-top: 16px;"><?= $sqlOutput ?></div>
         <?php endif; ?>
     </fieldset>
+    </div>
+    <?php endif; ?>
 </body>
 </html>
