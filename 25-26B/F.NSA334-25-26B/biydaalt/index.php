@@ -1,32 +1,21 @@
 <?php
-$conn = new mysqli("127.0.0.1", "guest", "pass123", "biydaalt");
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+require_once __DIR__ . "/includes/validation.php";
+require_once __DIR__ . "/includes/package.php";
 
 $query = $_GET["q"] ?? "";
+$query = clean_input($query);
 $message = "";
 $packages = [];
 $totalPrice = 0.0;
 
 if ($query !== "") {
-    $result = $conn->query(
-        "SELECT trackCode, phoneNumber, price, createdAt
-         FROM packages
-         WHERE isDeleted = 0
-           AND (trackCode LIKE '%$query%' OR phoneNumber LIKE '%$query%')
-         ORDER BY createdAt DESC"
-    );
-    
-    while ($row = $result->fetch_assoc()) {
-        $packages[] = $row;
-    }
+    $packages = public_search_packages($query);
 
     if (!$packages) {
         $message = "Илгээмж олдсонгүй.";
     } else {
         foreach ($packages as $package) {
-            $totalPrice += $package["price"];
+            $totalPrice += (float)$package["price"];
         }
         $message = count($packages) . " илгээмж олдсон.";
     }
@@ -54,10 +43,15 @@ if ($query !== "") {
 </head>
 <body>
     <h1>Карго илгээмж хайлт</h1>
-    <p><a href="admin.php">Ажилтны админ хэсэг</a></p>
+    <p>
+        <a href="employee.php">Ажилтны хэсэг</a> |
+        <a href="admin.php">DB Админ</a> |
+        <a href="login.php">Нэвтрэх</a> |
+        <a href="signup.php">Бүртгүүлэх</a>
+    </p>
 
     <form method="get" action="index.php">
-        <label for="q"><strong>Trackcode эсвэл Утасны дугаар</strong></label><br>
+        <label for="q"><strong>Trackcode</strong></label><br>
         <input id="q" type="text" name="q" value="<?= $query ?>">
         <button type="submit">Хайх</button>
     </form>
@@ -71,10 +65,8 @@ if ($query !== "") {
         <ol>
             <?php foreach ($packages as $package): ?>
                 <li>
-                    <div>Утас: <?= $package["phoneNumber"] ?></div>
-                    <div>>Үнэ: <?= number_format((float)$package["price"], 2) ?></div>
-                    <div>Үүсгэсэн хугацаа: <?= $package["createdAt"] ?></div>
-                    <small>Трек: <?= $package["trackCode"] ?></small>
+                    <div>Үнэ: <?= number_format((float)$package["price"], 2) ?></div>
+                    <small>Трек: <?= htmlspecialchars($package["trackCode"]) ?></small>
                 </li>
             <?php endforeach; ?>
         </ol>
