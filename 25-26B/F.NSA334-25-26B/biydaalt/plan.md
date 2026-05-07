@@ -14,6 +14,11 @@
 - Use plain PHP sessions only.
 - Keep the system focused on package registration, package lookup, and a simple customer dashboard.
 
+### Current Status
+- Implemented: public search, customer signup/login/dashboard, employee dashboard, DB admin dashboard.
+- Implemented: prepared statements and validation helpers.
+- Implemented: separate database users and grants in `db.sql`.
+
 ## 2) Main Business Flow
 1. Package arrives in Mongolia.
 2. Admin or employee registers the package in the web interface.
@@ -52,7 +57,6 @@
 ## 4) Database Design
 ### customers
 - customerID (PK)
-- fullName
 - username (unique)
 - email
 - phoneNumber
@@ -61,7 +65,6 @@
 
 ### employees
 - employeeID (PK)
-- fullName
 - username (unique)
 - phoneNumber
 - passwordHash
@@ -109,7 +112,8 @@
 - signup.php: customer signup
 - login.php: customer login
 - dashboard.php: customer dashboard showing only own packages
-- admin.php: package registration and pickup dashboard
+- employee.php: employee package dashboard
+- admin.php: DB admin dashboard (employee management + table views + SQL console)
 - includes/db.php: database connection
 - includes/auth.php: customer and staff login checks
 - includes/validation.php: basic validation helpers
@@ -144,7 +148,7 @@
 ### `index.php`
 - Fields: track code or phone number.
 - Purpose: public package lookup.
-- Output: track code, phone number, shelf, price, and picked-up state.
+- Output: track code, price (exact match, case-sensitive).
 
 ### `signup.php`
 - Fields: phone number, email, username, password.
@@ -160,12 +164,13 @@
 - Purpose: simple customer dashboard with own packages only.
 
 ### `admin.php`
+### `employee.php`
 - Package fields: track code, phone number, shelf, price.
-- Staff fields: full name, phone number, role, password.
-- Purpose: register packages and mark them picked up through the browser only.
-- `admin.php` is the shared staff page for both employees and admins.
-- `employee` role: can use package sections only.
-- `admin` role: can use package sections and user management sections.
+- Purpose: register packages, search, mark picked up, top-50 list.
+
+### `admin.php`
+- Purpose: DB admin login using db_admin credentials.
+- Can create employees, view top 50 tables, and run SQL commands.
 
 ### `admin.php` role-based sections
 - Employee sees:
@@ -180,14 +185,12 @@
 
 ## 10) `admin.php` Dashboard Plan
 ### Main sections
-- Login form.
-- Customer signup form.
-- Customer dashboard view.
-- Add package form.
-- Search package form.
-- Package list table.
-- Mark picked up action.
-- Role-based user management sections that appear only for admin.
+- DB admin login form.
+- Create employee form.
+- Employees table (top 50).
+- Customers table (top 50).
+- Packages table (top 50).
+- SQL console (manual queries).
 
 ### Main functions
 - `clean_input()`
@@ -240,8 +243,8 @@
 - `employee.php` handles staff login queries.
 - `index.php` only reads package data for public lookup.
 - `dashboard.php` reads only the logged-in customer's packages.
-- `admin.php` handles package registration and pickup actions for both employee and admin.
-- `admin.php` shows extra admin-only sections only when the logged-in role is `admin`.
+- `employee.php` handles package registration and pickup actions for staff.
+- `admin.php` is DB admin only.
 - All pages use the same helper functions and the same simple form style.
 
 ## 13) Security
@@ -267,6 +270,14 @@
 5. Build pickup marking flow.
 6. Add validation and security hardening.
 7. Test the package lifecycle end to end.
+
+### Current Progress
+- Done: schema, DB users, and grants in `db.sql`.
+- Done: public search (exact track code).
+- Done: customer signup/login/dashboard.
+- Done: employee dashboard with add/search/top50/pickup.
+- Done: admin dashboard with employee creation + table views + SQL console.
+- Missing: update plan.md to fully reflect file split (this section added).
 
 ## 16) Deliverables
 - Updated SQL schema.
