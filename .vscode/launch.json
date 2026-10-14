@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Shalgalt",
+            "request": "launch",
+            "mainClass": "Shalgalt",
+            "projectName": ""
+        },
+        {
+            "type": "java",
             "name": "KruskalVisualizer",
             "request": "launch",
             "mainClass": "biyDaalt3.KruskalVisualizer",
