@@ -294,31 +294,15 @@ export default function App() {
   return (
     <div className="app-shell">
       <style>{`.leaflet-routing-container { display: none !important; }`}</style>
-      <header className="app-header">
-        <div className="brand-lockup">
-          <div className="brand-mark" aria-hidden="true">N</div>
-          <div>
-            <strong className="brand-name">Mongolia Network Lab</strong>
-            <span className="brand-caption">Шилэн сүлжээний топологийн орчин</span>
-          </div>
-        </div>
-        <div className="header-status"><span className="status-dot" /><span>{TOPOLOGY_LABELS[topologyType]}</span></div>
-        <div className="header-actions">
-          <button className="mobile-panel-button" onClick={() => setControlsOpen(value => !value)} aria-expanded={controlsOpen}>
-            {controlsOpen ? 'Удирдлагыг хаах' : 'Удирдлага'}
-          </button>
-        </div>
-      </header>
 
       <main className="workspace">
         <aside className={`control-rail${controlsOpen ? ' open' : ''}`}>
           <div className="rail-heading">
-            <span className="eyebrow">Сүлжээний төлөвлөлт</span>
-            <h1>Топологийн удирдлага</h1>
+            <h1>Topology control</h1>
           </div>
 
           <section className="rail-section">
-            <h2 className="section-title">Граф харах</h2>
+            <h2 className="section-title">GRAPH</h2>
             <div className="topology-list">
               {Object.entries(TOPOLOGY_LABELS).map(([type, label]) => (
                 <button
@@ -335,44 +319,42 @@ export default function App() {
           </section>
 
           <section className="rail-section">
-            <h2 className="section-title">Газрын зураг</h2>
+            <h2 className="section-title">map</h2>
             <label className="toggle-row">
               <input type="checkbox" checked={useRoads} onChange={(event) => setUseRoads(event.target.checked)} />
-              Бодит замын трасс харуулах
+              showRoad
             </label>
-            <p className="message">Нэг удаа ачаалсны дараа замын трассыг локал хадгалалтаас ашиглана.</p>
           </section>
 
           <section className="rail-section">
-            <h2 className="section-title">Гэмтэл симуляцлах</h2>
+            <h2 className="section-title">simulateCut</h2>
             <form className="form-stack" onSubmit={simulateCut}>
-              <input value={originCity} onChange={(event) => setOriginCity(event.target.value)} placeholder="Эхлэх хот" disabled={topologyType !== 'two_edge' || cutting} />
-              <input value={destinationCity} onChange={(event) => setDestinationCity(event.target.value)} placeholder="Төгсгөлийн хот" disabled={topologyType !== 'two_edge' || cutting} />
-              <button className="primary-button" type="submit" disabled={topologyType !== 'two_edge' || cutting}>{cutting ? 'Тасалж байна...' : 'Сонгосон ирмэгийг таслах'}</button>
+              <input value={originCity} onChange={(event) => setOriginCity(event.target.value)} placeholder="origin" disabled={topologyType !== 'two_edge' || cutting} />
+              <input value={destinationCity} onChange={(event) => setDestinationCity(event.target.value)} placeholder="destination" disabled={topologyType !== 'two_edge' || cutting} />
+              <button className="primary-button" type="submit" disabled={topologyType !== 'two_edge' || cutting}>{cutting ? 'cutting...' : 'cut'}</button>
             </form>
-            {topologyType !== 'two_edge' && <p className="message">Зөвхөн 2-edge-connected графыг харж байх үед ашиглана.</p>}
-            {cutMessage && <p className="message">{cutMessage}</p>}
+            {topologyType !== 'two_edge' && <p className="message">two-edge-graphp only.</p>}
+            {cutMessage && <p className="mes1age">{cutMessage}</p>}
           </section>
 
           <section className="rail-section">
-            <h2 className="section-title">Граф засварлагч</h2>
+            <h2 className="section-title">add edge</h2>
             <div className="form-stack">
               <select value={editGraph} onChange={(event) => setEditGraph(event.target.value)} aria-label="Graph to edit">
                 <option value="mesh">Full mesh</option>
                 <option value="two_edge">2-edge-connected</option>
                 <option value="mst">MST</option>
               </select>
-              <p className="message">Node нэмэх боломжгүй. Хотын жагсаалт болон координат тогтмол өгөгдлөөс уншигдана.</p>
               <form className="form-stack" onSubmit={submitEdgeChange}>
-                <span className="field-label">Edge өөрчлөлт</span>
+                <span className="field-label">change edge</span>
                 <select value={edgeAction} onChange={(event) => setEdgeAction(event.target.value)} aria-label="Edge action">
-                  <option value="POST">Нэмэх</option><option value="PUT">Засах</option><option value="DELETE">Устгах</option>
+                  <option value="POST">ADD</option>
                 </select>
                 <div className="form-grid">
-                  <input value={edgeSource} onChange={(event) => setEdgeSource(event.target.value)} placeholder="Эхлэх хот" required />
-                   <input value={edgeTarget} onChange={(event) => setEdgeTarget(event.target.value)} placeholder="Хүрэх хот" required />
+                  <input value={edgeSource} onChange={(event) => setEdgeSource(event.target.value)} placeholder="origin" required />
+                   <input value={edgeTarget} onChange={(event) => setEdgeTarget(event.target.value)} placeholder="destination" required />
                 </div>
-                <button className="primary-button" type="submit">Edge өөрчлөлт хэрэгжүүлэх</button>
+                <button className="primary-button" type="submit">add edge</button>
               </form>
             </div>
             {editMessage && <p className="message">{editMessage}</p>}
@@ -381,7 +363,7 @@ export default function App() {
 
         <section className="map-stage" aria-label="Interactive network map">
           <div className="map-badge" style={{ '--topology-color': activeColor }}><span />{TOPOLOGY_LABELS[topologyType]}</div>
-          {loading && <div className="loading-overlay">Топологи ачаалж байна...</div>}
+          {loading && <div className="loading-overlay">loading...</div>}
           {error && <div className="loading-overlay">{error}</div>}
           <MapContainer center={[46.8625, 103.8467]} zoom={5}>
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
@@ -394,7 +376,7 @@ export default function App() {
               const sourceCoords = coordinatesFor(link.source);
               const targetCoords = coordinatesFor(link.target);
               if (!sourceCoords || !targetCoords) return null;
-              const edgePopup = <Popup>{link.source} - {link.target}<br />Жин: {link.weight ?? 'байхгүй'} km</Popup>;
+              const edgePopup = <Popup>{link.source} - {link.target}<br />Weight: {link.weight ?? 'байхгүй'} km</Popup>;
               if (useRoads) {
                 if (!roadCacheLoaded) return null;
                 const roadKey = `${link.source}->${link.target}`;
@@ -408,20 +390,20 @@ export default function App() {
         </section>
 
         <aside className="insight-rail">
-          <div className="rail-heading"><span className="eyebrow">Шууд шинжилгээ</span><h2 className="panel-title">Сүлжээний төлөв</h2></div>
+          <div className="rail-heading"><span className="eyebrow">PANEL</span></div>
           <div className="metric-stack">
-            <div className="metric-card"><span className="metric-label">Нийт трассын урт</span><strong className="metric-value">{loading ? '...' : `${stats.totalLength} km`}</strong></div>
-            <div className="metric-card"><span className="metric-label">Критик холбоос (Bridge)</span><strong className="metric-value">{loading ? '...' : stats.criticalLinks}</strong></div>
-            <div className="metric-card"><span className="metric-label">Алдааны тэсвэрлэл</span><strong className={`metric-value small ${isSafe ? 'safe' : 'unsafe'}`}>{loading ? '...' : stats.safetyState}</strong></div>
+            <div className="metric-card"><span className="metric-label">Нийт урт</span><strong className="metric-value">{loading ? '...' : `${stats.totalLength} km`}</strong></div>
+            <div className="metric-card"><span className="metric-label">Bridge</span><strong className="metric-value">{loading ? '...' : stats.criticalLinks}</strong></div>
+            <div className="metric-card"><span className="metric-label">Fault tolerance</span><strong className={`metric-value small ${isSafe ? 'safe' : 'unsafe'}`}>{loading ? '...' : stats.safetyState}</strong></div>
           </div>
           <section className="rail-section">
-            <h2 className="section-title">Графын мэдээлэл</h2>
+            <h2 className="section-title">Graph info</h2>
             <div className="metric-row"><span>Nodes</span><strong>{stats.nodeCount ?? graphData.nodes.length}</strong></div>
             <div className="metric-row"><span>Edges</span><strong>{stats.edgeCount ?? graphData.links.length}</strong></div>
             <div className="metric-row"><span>Холбогдсон эсэх</span><strong>{stats.isConnected === false ? 'Үгүй' : 'Тийм'}</strong></div>
           </section>
           <section className="rail-section">
-            <h2 className="section-title">Bridge тайлан</h2>
+            <h2 className="section-title">bridge info</h2>
             {stats.bridges?.length ? <ul className="bridge-list">{stats.bridges.map((bridge, index) => <li key={`${bridge.source}-${bridge.target}-${index}`}>{bridge.source} - {bridge.target} ({bridge.weight} km)</li>)}</ul> : <p className="empty-state">Энэ графт Bridge илэрсэнгүй.</p>}
           </section>
             {cutAnalysis && <section className="rail-section"><h2 className="section-title">Сүүлийн таслалтын нөлөө</h2><div className="metric-row"><span>Холбогдсон эсэх</span><strong>{cutAnalysis.isConnected ? 'Тийм' : 'Үгүй'}</strong></div>{cutAnalysis.impactedNodes?.length ? <ul className="impact-list">{cutAnalysis.impactedNodes.map(city => <li key={city}>{city}</li>)}</ul> : <p className="empty-state">Тусгаарлагдсан хот алга.</p>}</section>}

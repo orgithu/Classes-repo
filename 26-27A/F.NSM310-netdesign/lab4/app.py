@@ -21,7 +21,7 @@ with open('distance_matrix.csv', newline='', encoding='utf-8') as f:
     for row in csv.DictReader(f):
         city = row['']
         DISTANCES[city] = {name: float(value) for name, value in row.items() if name and value}
-
+print(DISTANCES)
 GRAPHS = {
     'mesh': cities_graph,
     'two_edge': two_edge_connected_graph,
@@ -80,7 +80,7 @@ def get_graph_mst():
     mst_dict = graph_response(mst_graph)
     return jsonify(mst_dict)
 
-@app.route('/api/network/graphs/<graph_name>/edges', methods=['POST', 'PUT', 'DELETE'])
+@app.route('/api/network/graphs/<graph_name>/edges', methods=['POST'])
 def manage_edges(graph_name):
     try:
         graph = get_graph(graph_name)
@@ -91,7 +91,7 @@ def manage_edges(graph_name):
     source = data.get('source') or data.get('a')
     target = data.get('target') or data.get('b')
     if not source or not target or source == target:
-        return error_response('Ялгаатай эхлэх болон хүрэх хот шаардлагатай.', 400)
+        return error_response('Same input.', 400)
 
     weight = DISTANCES.get(source, {}).get(target)
     if weight is None:
@@ -103,14 +103,8 @@ def manage_edges(graph_name):
         if graph.has_edge(source, target):
             return error_response('Энэ Edge аль хэдийн байна.', 409)
         graph.add_edge(source, target, weight=weight)
-    elif request.method == 'PUT':
-        if not graph.has_edge(source, target):
-            return error_response('Энэ Edge байхгүй байна.', 404)
-        graph[source][target]['weight'] = weight
-    elif not graph.has_edge(source, target):
-        return error_response('Энэ Edge байхгүй байна.', 404)
     else:
-        graph.remove_edge(source, target)
+        return error_response('Error', 404)
 
     return jsonify(graph_response(graph))
     
