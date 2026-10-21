@@ -4,15 +4,17 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-routing-machine';
 
-// FIX FOR VITE/REACT-LEAFLET MISSING ICONS
-import iconMarker from 'leaflet/dist/images/marker-icon.png';
-import iconRetina from 'leaflet/dist/images/marker-icon-2x.png';
-import iconShadow from 'leaflet/dist/images/marker-shadow.png';
-
 L.Icon.Default.mergeOptions({
-  iconRetinaUrl: iconRetina,
-  iconUrl: iconMarker,
-  shadowUrl: iconShadow,
+  iconUrl: '/marker-icon.png',
+  iconRetinaUrl: '/marker-icon.png',
+  shadowUrl: '/marker-shadow.png',
+
+  iconSize: [18, 30],
+  iconAnchor: [9, 30],
+  popupAnchor: [0, -30],
+
+  shadowSize: [59, 59],
+  shadowAnchor: [18, 59],
 });
 
 // CITY COORDINATES
